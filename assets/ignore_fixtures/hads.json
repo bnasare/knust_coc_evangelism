@@ -1,0 +1,310 @@
+[
+    {
+        "question": "I feel tense or 'wound up",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Most of the time",
+                "score": "3"
+            },
+            {
+                "option": "A lot of the time",
+                "score": "2"
+            },
+            {
+                "option": "Occasionally",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I still enjoy the things I used to enjoy",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Hardly at all",
+                "score": "3"
+            },
+            {
+                "option": "Only a little",
+                "score": "2"
+            },
+            {
+                "option": "Not quite so much",
+                "score": "1"
+            },
+            {
+                "option": "Definitely as much",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I get a sort of frightened feeling as if something awful is about to happen",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Very definitely & quite badly",
+                "score": "3"
+            },
+            {
+                "option": "Yes, but not too badly",
+                "score": "2"
+            },
+            {
+                "option": "A little, but it doesn't worry me",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I can laugh and see the funny side of things",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Not at all",
+                "score": "3"
+            },
+            {
+                "option": "Definitely not so much now",
+                "score": "2"
+            },
+            {
+                "option": "Not quite so much now",
+                "score": "1"
+            },
+            {
+                "option": "As much as always",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "Worrying thoughts go through my mind",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "A great deal of the time",
+                "score": "3"
+            },
+            {
+                "option": "A lot of the time",
+                "score": "2"
+            },
+            {
+                "option": "Not too often",
+                "score": "1"
+            },
+            {
+                "option": "Very little",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I feel cheerful",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Never",
+                "score": "3"
+            },
+            {
+                "option": "Not often",
+                "score": "2"
+            },
+            {
+                "option": "Sometimes",
+                "score": "1"
+            },
+            {
+                "option": "Most of the time",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I can sit at ease and feel relaxed",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Not at all",
+                "score": "3"
+            },
+            {
+                "option": "Not often",
+                "score": "2"
+            },
+            {
+                "option": "Usually",
+                "score": "1"
+            },
+            {
+                "option": "Definitely",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I feel as if I am slowed down",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Nearly all the time",
+                "score": "3"
+            },
+            {
+                "option": "Very often",
+                "score": "2"
+            },
+            {
+                "option": "Sometimes",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I get a sort of frightened feeling like ‘butterflies' in the stomach",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Very often",
+                "score": "3"
+            },
+            {
+                "option": "Quite often",
+                "score": "2"
+            },
+            {
+                "option": "Occasionally",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I have lost interest in my appearance",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Definitely",
+                "score": "3"
+            },
+            {
+                "option": "I don't take as much care as I should",
+                "score": "2"
+            },
+            {
+                "option": "I may not take as much care",
+                "score": "1"
+            },
+            {
+                "option": " take just as much care as ever",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I feel restless as if I have to be on the move",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Very much indeed",
+                "score": "3"
+            },
+            {
+                "option": "Quite a lot",
+                "score": "2"
+            },
+            {
+                "option": "Not very much",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I look forward to enjoyment to things",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Hardly at all",
+                "score": "3"
+            },
+            {
+                "option": "Definitely less than I used to",
+                "score": "2"
+            },
+            {
+                "option": "Rather less than I used to",
+                "score": "1"
+            },
+            {
+                "option": "As much as I ever did",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": "I get sudden feelings of panic",
+        "type": "Anxiety",
+        "options": [
+            {
+                "option": "Very often indeed",
+                "score": "3"
+            },
+            {
+                "option": "Quite often",
+                "score": "2"
+            },
+            {
+                "option": "Not very often",
+                "score": "1"
+            },
+            {
+                "option": "Not at all",
+                "score": "0"
+            }
+        ]
+    },
+    {
+        "question": " I can enjoy a good book or radio or TV programme",
+        "type": "Depression",
+        "options": [
+            {
+                "option": "Very seldom",
+                "score": "3"
+            },
+            {
+                "option": "Not often",
+                "score": "2"
+            },
+            {
+                "option": "Sometimes",
+                "score": "1"
+            },
+            {
+                "option": "Often",
+                "score": "0"
+            }
+        ]
+    }
+]

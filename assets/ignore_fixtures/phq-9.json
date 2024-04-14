@@ -1,0 +1,222 @@
+[
+    {
+        "questions": [
+            {
+                "question": "Little interest or pleasure in doing things",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Feeling down, depressed, or hopeless",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Trouble falling or staying asleep, or sleeping too much",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Feeling tired or having little energy",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Poor appetite or overeating",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Feeling bad about yourself – or that you are a failure or have let yourself or your family down",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Trouble concentrating on things, such as reading the newspaper or watching television",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Moving or speaking so slowly that other people could have noticed? Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            },
+            {
+                "question": "Thoughts that you would be better off dead or of hurting yourself in some way",
+                "options": [
+                    {
+                        "option": "Nearly everyday",
+                        "score": "3"
+                    },
+                    {
+                        "option": "More than half the days",
+                        "score": "2"
+                    },
+                    {
+                        "option": "Several days",
+                        "score": "1"
+                    },
+                    {
+                        "option": "Not at all",
+                        "score": "0"
+                    }
+                ]
+            }
+        ],
+        "guides": [
+            {
+                "score": "0 - 4",
+                "depression severity": "None Minimal",
+                "action": "Patient may not need depression treatment."
+            },
+            {
+                "score": "5 - 9",
+                "depression severity": "Mild",
+                "action": "Use clinical judgment about treatment, based on patient’s duration of symptoms and functional impairment"
+            },
+            {
+                "score": "10 - 14",
+                "depression severity": "Moderate",
+                "action": "Use clinical judgment about treatment, based on patient’s duration of symptoms and functional impairment."
+            },
+            {
+                "score": "15 - 19",
+                "depression severity": "Moderately Severe",
+                "action": "Treat using antidepressants, psychotherapy or a combination of treatment"
+            },
+            {
+                "score": "20 - 27",
+                "depression severity": "Severe",
+                "action": "Treat using antidepressants with or without psychotherapy."
+            }
+        ]
+    }
+]
