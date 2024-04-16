@@ -3,4 +3,5 @@ class ImageAssets {
   static const String error = 'assets/image/error.png';
   static const String success = 'assets/image/success.png';
   static const String info = 'assets/image/info.png';
+  static const String illustration = 'assets/image/illustration.png';
 }

@@ -7,11 +7,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'shared/platform/network_info.dart';
 import 'shared/platform/push_notification.dart';
 import 'src/authentication/auth_injection.dart';
+import 'src/onboarding/onboarding_injection.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   initAuth();
+  initOnboarding();
 
   sl
     ..registerLazySingleton(http.Client.new)
