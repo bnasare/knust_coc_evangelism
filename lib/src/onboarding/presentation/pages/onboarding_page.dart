@@ -1,5 +1,6 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/shared/data/image_assets.dart';
+import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:evangelism_admin/shared/utils/navigation.dart';
 import 'package:evangelism_admin/src/authentication/presentation/interface/pages/login.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ColorfulSafeArea(
-        color: Theme.of(context).primaryColor,
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -26,11 +26,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 const Spacer(),
                 Image.asset(
-                  ImageAssets.illustration,
+                  ImageAssets.jesus,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 const Text(
-                  "Gather Insights, Enrich Outreach",
+                  "Elevate Evangelism: Capture Leads, Build Relationships",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 26,
@@ -38,17 +38,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
-                  "Connect with prospects during evangelism & follow up later.",
+                Text(
+                  "Seamlessly collect and manage prospect information during your vacation evangelism activities.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 16,
+                    color: ExtraColors.grey.withOpacity(0.8),
+                    fontSize: 17,
                   ),
                 ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 30),
+                  padding: const EdgeInsets.only(bottom: 20),
                   child: SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(
@@ -58,14 +58,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             context, LoginPage());
                       },
                       style: ElevatedButton.styleFrom(
-                        elevation: 0,
+                        elevation: 4,
+                        fixedSize: const Size(double.maxFinite, 55),
                         shape: const StadiumBorder(),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 15,
-                          horizontal: 8.0,
-                        ),
                       ),
-                      child: const Text("Get Started"),
+                      child: Text(
+                        "Get Started",
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: ExtraColors.white, letterSpacing: 2),
+                      ),
                     ),
                   ),
                 )

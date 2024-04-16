@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1005590198130",
+    "project_id": "coc-mgmt-system",
+    "storage_bucket": "coc-mgmt-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005590198130:android:37ffe1c9d0067c60a20feb",
+        "android_client_info": {
+          "package_name": "com.example.evangelism_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn6PK6PmTO3JSQmQso8tbfwXWoE9ejLwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

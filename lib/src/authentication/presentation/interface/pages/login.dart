@@ -33,31 +33,44 @@ class _LoginPageState extends State<LoginPage> {
   void _submitFormOnLogin() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-    setState(() {
-      isLoading = true;
-    });
     if (isValid) {
+      setState(() {
+        isLoading = true;
+      });
       _formKey.currentState!.save();
+      await widget.loginUser(
+        context: context,
+        email: emailTextController.text,
+        password: passwordTextController.text,
+      );
+      setState(() {
+        isLoading = false;
+      });
     }
-    await widget.loginUser(
-      context: context,
-      email: emailTextController.text,
-      password: passwordTextController.text,
-    );
-    setState(() {
-      isLoading = false;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ExtraColors.link,
       resizeToAvoidBottomInset: false,
       body: LoadingManager(
         isLoading: isLoading,
         child: Stack(children: [
+          // Container(
+          //   color: Colors.black.withOpacity(0.7),
+          // ),
           Container(
-            color: Colors.black.withOpacity(0.7),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(230, 15, 32, 39),
+                  Color.fromARGB(255, 51, 161, 251),
+                ],
+              ),
+            ),
           ),
           SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
@@ -70,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 120.0,
                 ),
                 const Text(
-                  'Welcome Back',
+                  'Hello, Ministry Member !',
                   style: TextStyle(
                       color: ExtraColors.white,
                       fontSize: 30,
@@ -80,14 +93,14 @@ class _LoginPageState extends State<LoginPage> {
                   height: 8,
                 ),
                 const Text(
-                  "Sign in to continue",
+                  "Sign in to manage outreach efforts.",
                   style: TextStyle(
                     color: ExtraColors.white,
                     fontSize: 18,
                   ),
                 ),
                 const SizedBox(
-                  height: 30.0,
+                  height: 25.0,
                 ),
                 Form(
                     key: _formKey,
@@ -100,11 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailTextController,
                           keyboardType: TextInputType.emailAddress,
                           validator: Validator.email,
-                          style: const TextStyle(color: ExtraColors.white),
+                          style: const TextStyle(color: ExtraColors.linkLight),
                           decoration: InputDecoration(
+                              filled: false,
                               hintText: 'Church mail',
-                              hintStyle:
-                                  const TextStyle(color: ExtraColors.white),
+                              hintStyle: TextStyle(
+                                  color: ExtraColors.white.withOpacity(0.7)),
                               enabledBorder: const UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: ExtraColors.white)),
@@ -135,8 +149,9 @@ class _LoginPageState extends State<LoginPage> {
                           obscureText: _obscureText,
                           keyboardType: TextInputType.visiblePassword,
                           validator: Validator.password,
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(color: ExtraColors.linkLight),
                           decoration: InputDecoration(
+                              filled: false,
                               suffixIcon: GestureDetector(
                                   onTap: () {
                                     setState(() {
@@ -147,11 +162,11 @@ class _LoginPageState extends State<LoginPage> {
                                     _obscureText
                                         ? Icons.visibility
                                         : Icons.visibility_off,
-                                    color: ExtraColors.white,
+                                    color: ExtraColors.white.withOpacity(0.7),
                                   )),
                               hintText: 'Password',
-                              hintStyle:
-                                  const TextStyle(color: ExtraColors.white),
+                              hintStyle: TextStyle(
+                                  color: ExtraColors.white.withOpacity(0.7)),
                               contentPadding:
                                   const EdgeInsets.only(top: 10, left: 10),
                               enabledBorder: const UnderlineInputBorder(
@@ -170,32 +185,45 @@ class _LoginPageState extends State<LoginPage> {
                                           .colorScheme
                                           .error))),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 25),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Checkbox(
-                              value: _isAgreedToTerms,
-                              onChanged: (value) {
-                                setState(() {
-                                  _isAgreedToTerms = value!;
-                                });
-                              },
+                            Transform.translate(
+                              offset: const Offset(-15.0, 0.0),
+                              child: Checkbox(
+                                value: _isAgreedToTerms,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isAgreedToTerms = value!;
+                                  });
+                                },
+                              ),
                             ),
-                            const Text(
-                                'I acknowledge that this app is only available to Ministry members, or that I have permission from a Ministry member to access it.',
-                                style: TextStyle(
-                                    color: ExtraColors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600)),
+                            Flexible(
+                              child: Transform.translate(
+                                offset: const Offset(-10.0, 0.0),
+                                child: const Text(
+                                    'I affirm Ministry membership or permission to access this app.',
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        color: ExtraColors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                            ),
                           ],
                         )
                       ],
                     )),
-                const SizedBox(height: 20),
+                const SizedBox(height: 25),
                 ElevatedButton(
                   onPressed: _isAgreedToTerms ? _submitFormOnLogin : null,
                   style: ButtonStyle(
+                    fixedSize: MaterialStateProperty.all<Size>(
+                      const Size(double.maxFinite, 50),
+                    ),
+                    elevation: MaterialStateProperty.all(4),
                     backgroundColor: MaterialStateProperty.resolveWith<Color>(
                       (Set<MaterialState> states) {
                         if (states.contains(MaterialState.disabled)) {
@@ -204,13 +232,12 @@ class _LoginPageState extends State<LoginPage> {
                         return Theme.of(context).colorScheme.primary;
                       },
                     ),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
+                    shape: MaterialStateProperty.all(const StadiumBorder()),
                   ),
                   child: Text(
-                    'Log In',
+                    'Proceed',
                     style: TextStyle(
+                        letterSpacing: 2,
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: _isAgreedToTerms

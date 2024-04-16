@@ -101,7 +101,7 @@ ThemeData lightTheme = ThemeData(
     ),
     errorStyle: const TextStyle(
       color: Color(0xFFEF5350),
-      fontSize: 9.5,
+      fontSize: 14.5,
     ),
     filled: true,
     fillColor: lightColorScheme.surface,

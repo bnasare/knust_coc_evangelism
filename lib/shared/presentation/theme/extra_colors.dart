@@ -16,8 +16,8 @@ class ExtraColors {
   // Greys
   static const Color grey = Color(0xFF616161);
   static const Color lightGrey = Color(0XFFEEEEEE);
-  static Color darkGrey = const Color(0xFF959595);
+  static const Color darkGrey = Color(0xFF959595);
 
   // Others
-  static Color transparent = Colors.transparent;
+  static const Color transparent = Colors.transparent;
 }
