@@ -1,32 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../bottom_navbar.dart';
 import '../../../../injection_container.dart';
-import '../../../../shared/utils/navigation.dart';
-import '../../../../shared/widgets/snackbar.dart';
-import '../interface/pages/login.dart';
+import '../../../../shared/presentation/widgets/snackbar.dart';
 import 'auth_bloc.dart';
 
 mixin AuthMixin {
   final bloc = sl<AuthBloc>();
-
-  Future<void> signUpUser(
-      {required BuildContext context,
-      required String email,
-      required String name,
-      required String password}) async {
-    final result = await bloc.signUpUser(
-      email,
-      password,
-      name,
-    );
-    return result.fold(
-      (l) => SnackBarHelper.showErrorSnackBar(context, l.message),
-      (r) {
-        NavigationHelper.navigateToReplacement(context, LoginPage());
-      },
-    );
-  }
 
   Future<void> loginUser(
       {required BuildContext context,
@@ -37,9 +16,8 @@ mixin AuthMixin {
       password,
     );
     return result.fold(
-        (l) => SnackBarHelper.showErrorSnackBar(context, l.message),
-        (r) =>
-            NavigationHelper.navigateToAndRemoveUntil(context, const NavBar()));
+        (l) => SnackBarHelper.showErrorSnackBar(context, l.message), (r) => r);
+    // NavigationHelper.navigateToAndRemoveUntil(context, const NavBar()));
   }
 
   Future<void> logoutUser({required BuildContext context}) async {
@@ -47,14 +25,6 @@ mixin AuthMixin {
     return result.fold(
       (l) => l,
       (r) => r,
-    );
-  }
-
-  Future<void> googleSignIn({required BuildContext context}) async {
-    final result = await bloc.googleSignInUser();
-    return result.fold(
-      (l) => SnackBarHelper.showErrorSnackBar(context, l.message),
-      (r) => NavigationHelper.navigateToReplacement(context, const NavBar()),
     );
   }
 }

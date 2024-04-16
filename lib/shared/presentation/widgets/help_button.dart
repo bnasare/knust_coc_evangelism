@@ -11,7 +11,7 @@ class HelpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.help_outline),
+      icon: const Icon(Icons.help_outline),
       onPressed: onPressed,
     );
   }

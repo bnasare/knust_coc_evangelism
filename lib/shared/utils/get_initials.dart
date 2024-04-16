@@ -1,4 +1,4 @@
- class Initials {
+class Initials {
   static String getUserInitials(String firstName, String lastName) {
     // Ensure that both first name and last name are not empty
     if (firstName.isEmpty && lastName.isEmpty) {

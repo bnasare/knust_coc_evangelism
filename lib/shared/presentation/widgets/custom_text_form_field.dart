@@ -23,7 +23,7 @@ import 'package:flutter/services.dart';
 /// The `build` method returns a TextFormField widget with the passed parameters and additional styling.
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     this.validator,
     this.onChanged,
     this.controller,
@@ -39,7 +39,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffix,
     this.onTap,
     this.onEditingComplete,
-  }) : super(key: key);
+  });
 
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;

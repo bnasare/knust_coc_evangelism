@@ -1,15 +1,26 @@
 import 'package:dartz/dartz.dart';
-import '../../../../shared/usecase/usecase.dart';
+import 'package:equatable/equatable.dart';
+import 'package:evangelism_admin/core/leader/domain/entities/leader.dart';
 
-import '../../../../core/chef/domain/entities/chef.dart';
 import '../../../../shared/error/failure.dart';
+import '../../../../shared/usecase/usecase.dart';
 import '../repository/authentication_repository.dart';
 
-class Login implements UseCase<Chef, LoginParams> {
+class Login implements UseCase<Leader, LoginParams> {
   final AuthenticationRepository repository;
   Login(this.repository);
   @override
-  Future<Either<Failure, Chef>> call(LoginParams params) {
-    return repository.login(params.email, params.password);
+  Future<Either<Failure, Leader>> call(LoginParams params) async {
+    return await repository.login(params.email, params.password);
   }
+}
+
+class LoginParams extends Equatable {
+  final String email;
+  final String password;
+
+  const LoginParams({required this.email, required this.password});
+
+  @override
+  List<Object> get props => [email, password];
 }

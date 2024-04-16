@@ -81,6 +81,16 @@ class Validator {
     return null;
   }
 
+  static String? password(String? value) {
+    if (value!.isEmpty) {
+      return 'Please enter a password';
+    }
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters long';
+    }
+    return null;
+  }
+
   static String? dob(String? value) {
     if (value!.isEmpty) {
       return 'Please choose your date of birth';
