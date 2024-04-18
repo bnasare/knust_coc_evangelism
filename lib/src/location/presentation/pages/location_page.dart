@@ -1,3 +1,4 @@
+import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:flutter/material.dart';
 
 class LocationPage extends StatefulWidget {
@@ -10,8 +11,13 @@ class LocationPage extends StatefulWidget {
 class _LocationPage extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
+    return ColorfulSafeArea(
+      color: Theme.of(context).primaryColor,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Location'),
+        ),
+      ),
     );
   }
 }

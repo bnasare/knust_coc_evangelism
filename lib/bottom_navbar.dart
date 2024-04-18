@@ -26,18 +26,18 @@ class _NavBarState extends State<NavBar> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        textStyle: Theme.of(context).textTheme.labelLarge,
+        textStyle: Theme.of(context).textTheme.bodyLarge,
         icon: const Icon(IconlyLight.add_user),
         title: 'Register',
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: ExtraColors.darkGrey,
+        inactiveColorPrimary: ExtraColors.primaryText,
       ),
       PersistentBottomNavBarItem(
-        textStyle: Theme.of(context).textTheme.labelLarge,
+        textStyle: Theme.of(context).textTheme.bodyLarge,
         icon: const Icon(IconlyLight.location),
         title: 'Location',
         activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: ExtraColors.darkGrey,
+        inactiveColorPrimary: ExtraColors.primaryText,
       ),
     ];
   }
@@ -56,18 +56,18 @@ class _NavBarState extends State<NavBar> {
       children: [
         const Divider(
           height: 0,
-          color: ExtraColors.grey,
+          color: ExtraColors.white,
         ),
         Flexible(
           child: PersistentTabView(
             navBarHeight: 65,
             padding:
-                const NavBarPadding.only(left: 0, right: 0, bottom: 0, top: 0),
+                const NavBarPadding.only(left: 0, right: 0, bottom: 0, top: 20),
             context,
             screens: _buildScreens(),
             items: _navBarsItems(),
             confineInSafeArea: true,
-            backgroundColor: ExtraColors.white,
+            backgroundColor: ExtraColors.background,
             popAllScreensOnTapOfSelectedTab: true,
             popActionScreens: PopActionScreensType.all,
             itemAnimationProperties: const ItemAnimationProperties(
@@ -83,7 +83,7 @@ class _NavBarState extends State<NavBar> {
             handleAndroidBackButtonPress: true,
             resizeToAvoidBottomInset: false,
             decoration: const NavBarDecoration(
-              border: Border(top: BorderSide(color: ExtraColors.lightGrey)),
+              border: Border(top: BorderSide(color: ExtraColors.white)),
             ),
           ),
         ),

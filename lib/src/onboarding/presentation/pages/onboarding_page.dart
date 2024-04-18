@@ -26,7 +26,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
               children: [
                 const Spacer(),
                 Image.asset(
-                  ImageAssets.jesus,
+                  ImageAssets.jesusR,
                 ),
                 const SizedBox(height: 50),
                 const Text(

@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:evangelism_admin/bottom_navbar.dart';
 import 'package:evangelism_admin/firebase_options.dart';
 import 'package:evangelism_admin/injection_container.dart';
 import 'package:evangelism_admin/shared/platform/push_notification.dart';
@@ -53,7 +54,7 @@ class MyApp extends HookConsumerWidget with OnboardingMixin {
             ),
           );
         } else if (snapshot.data == true) {
-          return OnboardingPage();
+          return const NavBar();
         } else {
           return OnboardingPage();
         }

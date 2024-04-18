@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'extra_colors.dart';
 
 ColorScheme lightColorScheme = ColorScheme.fromSeed(
-  error: const Color(0xFFDD211F),
+  error: const Color(0xFFFF2A27),
   surface: const Color(0xFFF5F5F5),
   primary: const Color(0xFF0076B6),
   onSurface: const Color(0xFF8B8B8B),
@@ -50,7 +50,7 @@ ThemeData lightTheme = ThemeData(
     systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Color(0xD90076B6)),
     titleTextStyle: TextStyle(
       color: ExtraColors.primaryText,
-      fontSize: 16,
+      fontSize: 18,
       fontWeight: FontWeight.w600,
     ),
     color: Colors.transparent,
