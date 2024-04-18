@@ -38,11 +38,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Text(
+                const Text(
                   "Seamlessly collect and manage prospect information during your vacation evangelism activities.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: ExtraColors.grey.withOpacity(0.8),
+                    color: ExtraColors.secondaryText,
                     fontSize: 17,
                   ),
                 ),
@@ -65,7 +65,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       child: Text(
                         "Get Started",
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            color: ExtraColors.white, letterSpacing: 2),
+                            color: ExtraColors.primaryText, letterSpacing: 2),
                       ),
                     ),
                   ),

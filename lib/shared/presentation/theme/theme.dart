@@ -7,12 +7,12 @@ import 'extra_colors.dart';
 ColorScheme lightColorScheme = ColorScheme.fromSeed(
   error: const Color(0xFFDD211F),
   surface: const Color(0xFFF5F5F5),
-  primary: const Color(0xD90076B6),
+  primary: const Color(0xFF0076B6),
   onSurface: const Color(0xFF8B8B8B),
   seedColor: const Color(0xD90076B6),
   onPrimary: ExtraColors.white,
   brightness: Brightness.light,
-  background: ExtraColors.white,
+  background: ExtraColors.background,
   onBackground: ExtraColors.black,
 );
 
@@ -32,24 +32,24 @@ ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.w500,
       ),
       displayMedium: const TextStyle(
-        color: ExtraColors.black,
+        color: ExtraColors.primaryText,
         fontSize: 27.0,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.0,
       ),
       titleSmall: const TextStyle(
         fontWeight: FontWeight.bold,
-        color: ExtraColors.black,
+        color: ExtraColors.primaryText,
       ),
-      bodyMedium: const TextStyle(fontSize: 12, color: ExtraColors.black),
+      bodyMedium: const TextStyle(fontSize: 12, color: ExtraColors.primaryText),
       bodySmall: const TextStyle(
-        color: ExtraColors.black,
+        color: ExtraColors.primaryText,
         fontSize: 10.0,
       )),
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Color(0xD90076B6)),
     titleTextStyle: TextStyle(
-      color: ExtraColors.black,
+      color: ExtraColors.primaryText,
       fontSize: 16,
       fontWeight: FontWeight.w600,
     ),

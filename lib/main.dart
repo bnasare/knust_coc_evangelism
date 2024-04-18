@@ -1,11 +1,10 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:evangelism_admin/bottom_navbar.dart';
 import 'package:evangelism_admin/firebase_options.dart';
 import 'package:evangelism_admin/injection_container.dart';
 import 'package:evangelism_admin/shared/platform/push_notification.dart';
 import 'package:evangelism_admin/shared/presentation/theme/theme.dart';
-import 'package:evangelism_admin/src/authentication/presentation/interface/pages/wrapper.dart';
 import 'package:evangelism_admin/src/onboarding/presentation/bloc/onboarding_mixin.dart';
+import 'package:evangelism_admin/src/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -54,9 +53,9 @@ class MyApp extends HookConsumerWidget with OnboardingMixin {
             ),
           );
         } else if (snapshot.data == true) {
-          return const AuthWrapper();
+          return OnboardingPage();
         } else {
-          return const NavBar();
+          return OnboardingPage();
         }
       }(),
     );

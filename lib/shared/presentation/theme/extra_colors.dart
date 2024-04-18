@@ -18,6 +18,16 @@ class ExtraColors {
   static const Color lightGrey = Color(0XFFEEEEEE);
   static const Color darkGrey = Color(0xFF959595);
 
+  // Red
+  static const Color error = Color(0xFFDD211F);
+
+  // Background
+  static const Color background = Color(0xFF181818);
+
+  // Text Color
+  static const Color primaryText = Color(0xFFE0E0E0);
+  static const Color secondaryText = Color(0xFF9E9E9E);
+
   // Others
   static const Color transparent = Colors.transparent;
 }
