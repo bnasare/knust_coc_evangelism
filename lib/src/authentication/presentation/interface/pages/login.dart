@@ -66,8 +66,8 @@ class _LoginPageState extends State<LoginPage> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color.fromARGB(230, 15, 32, 39),
-                  Color.fromARGB(255, 51, 161, 251),
+                  Color(0xFF0F2027),
+                  ExtraColors.link,
                 ],
               ),
             ),
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailTextController,
                           keyboardType: TextInputType.emailAddress,
                           validator: Validator.email,
-                          style: const TextStyle(color: ExtraColors.linkLight),
+                          style: const TextStyle(color: ExtraColors.link),
                           decoration: InputDecoration(
                               filled: false,
                               hintText: 'Church mail',

@@ -59,8 +59,8 @@ ThemeData lightTheme = ThemeData(
     scrolledUnderElevation: 0.5,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    hintStyle: const TextStyle(fontSize: 14.0, color: ExtraColors.grey),
-    labelStyle: const TextStyle(fontSize: 14.0, color: ExtraColors.grey),
+    hintStyle: const TextStyle(fontSize: 15.0, color: ExtraColors.grey),
+    labelStyle: const TextStyle(fontSize: 15.0, color: ExtraColors.grey),
     focusColor: lightColorScheme.primary,
     errorMaxLines: 4,
     contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -104,7 +104,7 @@ ThemeData lightTheme = ThemeData(
       fontSize: 14.5,
     ),
     filled: true,
-    fillColor: lightColorScheme.surface,
+    fillColor: ExtraColors.primaryText,
     alignLabelWithHint: true,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(

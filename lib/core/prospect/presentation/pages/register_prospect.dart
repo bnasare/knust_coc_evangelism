@@ -23,6 +23,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final genderController = TextEditingController();
   final locationController = TextEditingController();
   final religiousBackgroundController = TextEditingController();
+  final evangelismGroundsController = TextEditingController();
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.addListener(_updateStepState);
     locationController.addListener(_updateStepState);
     religiousBackgroundController.addListener(_updateStepState);
+    evangelismGroundsController.addListener(_updateStepState);
   }
 
   @override
@@ -43,6 +45,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.removeListener(_updateStepState);
     locationController.removeListener(_updateStepState);
     religiousBackgroundController.removeListener(_updateStepState);
+    evangelismGroundsController.removeListener(_updateStepState);
 
     titleController.dispose();
     phoneController.dispose();
@@ -50,6 +53,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.dispose();
     locationController.dispose();
     religiousBackgroundController.dispose();
+    evangelismGroundsController.dispose();
     super.dispose();
   }
 
@@ -79,7 +83,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     return ColorfulSafeArea(
       color: Theme.of(context).primaryColor,
       child: Scaffold(
-        appBar: AppBar(title: const Text('Register Prospect')),
+        appBar: AppBar(title: const Text('Prospect Registration')),
         body: Stepper(
           physics: const BouncingScrollPhysics(),
           controlsBuilder: (BuildContext context, ControlsDetails details) {
@@ -208,45 +212,48 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 readOnly: true,
                 onTap: () {
                   showCupertinoModalPopup(
-                    barrierDismissible: false,
+                    barrierColor: ExtraColors.black.withOpacity(0.5),
+                    barrierDismissible: true,
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 30),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Material(
-                              child: ListTile(
-                                splashColor: ExtraColors.background,
-                                leading: SvgPicture.asset(SvgAssets.male),
-                                title: const Text('Male',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    genderController.text = 'Male';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 20),
+                              splashColor: ExtraColors.background,
+                              leading: CircleAvatar(
+                                  child: SvgPicture.asset(SvgAssets.male)),
+                              title: const Text('Male',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  genderController.text = 'Male';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: SvgPicture.asset(SvgAssets.female),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Female',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    genderController.text = 'Female';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  bottom: 30, left: 20, right: 20),
+                              leading: CircleAvatar(
+                                  child: SvgPicture.asset(SvgAssets.female)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Female',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  genderController.text = 'Female';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       );
                     },
                   );
@@ -265,7 +272,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                       : StepState.indexed,
               isActive:
                   religiousBackgroundController.text.isNotEmpty || _index == 4,
-              title: Text("Gender",
+              title: Text("Religious background",
                   style: _stepTitleStyle(religiousBackgroundController)),
               subtitle: Text("Required for identification.",
                   style: _stepSubtitleStyle(religiousBackgroundController)),
@@ -274,158 +281,228 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 readOnly: true,
                 onTap: () {
                   showCupertinoModalPopup(
-                    barrierDismissible: false,
+                    barrierColor: ExtraColors.black.withOpacity(0.5),
+                    barrierDismissible: true,
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
-                        padding: const EdgeInsets.only(
-                            left: 10, right: 10, bottom: 30),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.muslim),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Muslim',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Muslim';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.muslim)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Muslim',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text = 'Muslim';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.assemblies),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Assemblies Of God',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Assemblies Of God';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.assemblies)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Assemblies Of God',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Assemblies Of God';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.catholic),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Catholic',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Catholic';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.catholic)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Catholic',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Catholic';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.cac),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Christ Apostolic Church',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Christ Apostolic Church';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage: AssetImage(ImageAssets.cac)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Christ Apostolic Church',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Christ Apostolic Church';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.coc),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Church Of Christ',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Church Of Christ';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage: AssetImage(ImageAssets.coc)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Church Of Christ',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Church Of Christ';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.methodist),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Methodist',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Methodist';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.methodist)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Methodist',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Methodist';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.pent),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Pentecost',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Pentecost';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.pent)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Pentecost',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Pentecost';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.presby),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Presbyterian',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Presbyterian';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.presby)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Presbyterian',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Presbyterian';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                            Material(
-                              child: ListTile(
-                                leading: Image.asset(ImageAssets.orthodox),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Orthodox',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    religiousBackgroundController.text =
-                                        'Other Orthodox Churches';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  bottom: 10, left: 20, right: 20),
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.orthodox)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Other Orthodox Churches',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  religiousBackgroundController.text =
+                                      'Other Orthodox Churches';
+                                });
+                                Navigator.pop(context);
+                              },
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       );
                     },
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Gender type",
+                  hintText: "Religious background",
+                  filled: true,
+                ),
+              ),
+            ),
+            Step(
+              state: _index == 5
+                  ? StepState.editing
+                  : evangelismGroundsController.text.isNotEmpty
+                      ? StepState.complete
+                      : StepState.indexed,
+              isActive:
+                  evangelismGroundsController.text.isNotEmpty || _index == 5,
+              title: Text("Evangelism grounds",
+                  style: _stepTitleStyle(evangelismGroundsController)),
+              subtitle: Text("Required for registration.",
+                  style: _stepSubtitleStyle(evangelismGroundsController)),
+              content: TextField(
+                controller: evangelismGroundsController,
+                readOnly: true,
+                onTap: () {
+                  showCupertinoModalPopup(
+                    barrierColor: ExtraColors.black.withOpacity(0.5),
+                    barrierDismissible: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              leading: const CircleAvatar(
+                                  child:
+                                      Icon(CupertinoIcons.location, size: 20)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Asokore Mampong',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  evangelismGroundsController.text =
+                                      'Asokore Mampong';
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                decoration: const InputDecoration(
+                  hintText: "Evangelism grounds",
                   filled: true,
                 ),
               ),

@@ -29,15 +29,15 @@ class _NavBarState extends State<NavBar> {
         textStyle: Theme.of(context).textTheme.bodyLarge,
         icon: const Icon(IconlyLight.add_user),
         title: 'Register',
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: ExtraColors.primaryText,
+        activeColorPrimary: ExtraColors.link,
+        inactiveColorPrimary: ExtraColors.linkLight,
       ),
       PersistentBottomNavBarItem(
         textStyle: Theme.of(context).textTheme.bodyLarge,
         icon: const Icon(IconlyLight.location),
         title: 'Location',
-        activeColorPrimary: Theme.of(context).colorScheme.primary,
-        inactiveColorPrimary: ExtraColors.primaryText,
+        activeColorPrimary: ExtraColors.link,
+        inactiveColorPrimary: ExtraColors.linkLight,
       ),
     ];
   }

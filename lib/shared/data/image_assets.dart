@@ -16,5 +16,5 @@ class ImageAssets {
   static const String pent = 'assets/image/pent.gif';
   static const String muslim = 'assets/image/muslim.jpg';
   static const String coc = 'assets/image/coc.png';
-  static const String assemblies = 'assets/image/assemblies.png';
+  static const String assemblies = 'assets/image/asemblies.png';
 }
