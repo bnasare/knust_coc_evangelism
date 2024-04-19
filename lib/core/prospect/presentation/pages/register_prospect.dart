@@ -15,45 +15,49 @@ class RegisterProspectPage extends StatefulWidget {
 
 class _RegisterProspectPageState extends State<RegisterProspectPage> {
   int _index = 0;
-  final int _stepAmount = 5;
+  final int _stepAmount = 7;
 
-  final titleController = TextEditingController();
+  final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final landmarkController = TextEditingController();
   final genderController = TextEditingController();
   final locationController = TextEditingController();
   final religiousAffiliationController = TextEditingController();
   final baptismalStatusController = TextEditingController();
+  final lessonsController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    titleController.addListener(_updateStepState);
+    nameController.addListener(_updateStepState);
     phoneController.addListener(_updateStepState);
     landmarkController.addListener(_updateStepState);
     genderController.addListener(_updateStepState);
     locationController.addListener(_updateStepState);
     religiousAffiliationController.addListener(_updateStepState);
     baptismalStatusController.addListener(_updateStepState);
+    lessonsController.addListener(_updateStepState);
   }
 
   @override
   void dispose() {
-    titleController.removeListener(_updateStepState);
+    nameController.removeListener(_updateStepState);
     phoneController.removeListener(_updateStepState);
     landmarkController.removeListener(_updateStepState);
     genderController.removeListener(_updateStepState);
     locationController.removeListener(_updateStepState);
     religiousAffiliationController.removeListener(_updateStepState);
     baptismalStatusController.removeListener(_updateStepState);
+    baptismalStatusController.removeListener(_updateStepState);
 
-    titleController.dispose();
+    nameController.dispose();
     phoneController.dispose();
     landmarkController.dispose();
     genderController.dispose();
     locationController.dispose();
     religiousAffiliationController.dispose();
     baptismalStatusController.dispose();
+    lessonsController.dispose();
     super.dispose();
   }
 
@@ -119,7 +123,14 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
           onStepCancel: () {
             if (_index == 0) {
               setState(() {
-                null;
+                nameController.clear();
+                phoneController.clear();
+                landmarkController.clear();
+                genderController.clear();
+                locationController.clear();
+                religiousAffiliationController.clear();
+                baptismalStatusController.clear();
+                lessonsController.clear();
               });
             } else {
               setState(() {
@@ -140,20 +151,20 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
             Step(
               state: _index == 0
                   ? StepState.editing
-                  : titleController.text.isNotEmpty
+                  : nameController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
               isActive:
-                  titleController.text.isNotEmpty || _index == 0 ? true : false,
+                  nameController.text.isNotEmpty || _index == 0 ? true : false,
               title: Text("Name the prospect",
-                  style: _stepTitleStyle(titleController)),
+                  style: _stepTitleStyle(nameController)),
               subtitle: Text("Required for identification.",
-                  style: _stepSubtitleStyle(titleController)),
+                  style: _stepSubtitleStyle(nameController)),
               content: TextField(
                 textInputAction: TextInputAction.done,
-                controller: titleController,
+                controller: nameController,
                 decoration:
-                    const InputDecoration(hintText: "Title", filled: true),
+                    const InputDecoration(hintText: "Name", filled: true),
               ),
             ),
             Step(
@@ -194,7 +205,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 controller: landmarkController,
                 keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
-                    hintText: "Popular Landmark around", filled: true),
+                    hintText: "Popular landmark around", filled: true),
               ),
             ),
             Step(
@@ -449,7 +460,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Religious background",
+                  hintText: "Religious affiliation",
                   filled: true,
                 ),
               ),
@@ -520,9 +531,29 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Baptismal Status",
+                  hintText: "Baptismal status",
                   filled: true,
                 ),
+              ),
+            ),
+            Step(
+              state: _index == 6
+                  ? StepState.editing
+                  : lessonsController.text.isNotEmpty
+                      ? StepState.complete
+                      : StepState.indexed,
+              isActive: lessonsController.text.isNotEmpty || _index == 6
+                  ? true
+                  : false,
+              title: Text("Lessons Taught",
+                  style: _stepTitleStyle(lessonsController)),
+              subtitle: Text("Required for registration.",
+                  style: _stepSubtitleStyle(lessonsController)),
+              content: TextField(
+                textInputAction: TextInputAction.done,
+                controller: lessonsController,
+                decoration: const InputDecoration(
+                    hintText: "Lesson taught", filled: true),
               ),
             ),
           ],

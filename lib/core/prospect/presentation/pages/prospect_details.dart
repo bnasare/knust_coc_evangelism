@@ -88,7 +88,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('LESSONS DISCUSSED',
+            title: Text('LESSONS TAUGHT',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text(
                 'Baptism, Christ\'s Confirmation, The Lord\'s Supper',
