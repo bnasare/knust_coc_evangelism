@@ -23,7 +23,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final genderController = TextEditingController();
   final locationController = TextEditingController();
   final religiousAffiliationController = TextEditingController();
-  final evangelismGroundsController = TextEditingController();
+  final baptismalStatusController = TextEditingController();
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.addListener(_updateStepState);
     locationController.addListener(_updateStepState);
     religiousAffiliationController.addListener(_updateStepState);
-    evangelismGroundsController.addListener(_updateStepState);
+    baptismalStatusController.addListener(_updateStepState);
   }
 
   @override
@@ -45,7 +45,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.removeListener(_updateStepState);
     locationController.removeListener(_updateStepState);
     religiousAffiliationController.removeListener(_updateStepState);
-    evangelismGroundsController.removeListener(_updateStepState);
+    baptismalStatusController.removeListener(_updateStepState);
 
     titleController.dispose();
     phoneController.dispose();
@@ -53,7 +53,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     genderController.dispose();
     locationController.dispose();
     religiousAffiliationController.dispose();
-    evangelismGroundsController.dispose();
+    baptismalStatusController.dispose();
     super.dispose();
   }
 
@@ -272,7 +272,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                       : StepState.indexed,
               isActive:
                   religiousAffiliationController.text.isNotEmpty || _index == 4,
-              title: Text("Religious affiliation",
+              title: Text("Religious Affiliation",
                   style: _stepTitleStyle(religiousAffiliationController)),
               subtitle: Text("Required for identification.",
                   style: _stepSubtitleStyle(religiousAffiliationController)),
@@ -457,17 +457,17 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
             Step(
               state: _index == 5
                   ? StepState.editing
-                  : evangelismGroundsController.text.isNotEmpty
+                  : baptismalStatusController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
               isActive:
-                  evangelismGroundsController.text.isNotEmpty || _index == 5,
-              title: Text("Evangelism grounds",
-                  style: _stepTitleStyle(evangelismGroundsController)),
+                  baptismalStatusController.text.isNotEmpty || _index == 5,
+              title: Text("Baptismal Status",
+                  style: _stepTitleStyle(baptismalStatusController)),
               subtitle: Text("Required for registration.",
-                  style: _stepSubtitleStyle(evangelismGroundsController)),
+                  style: _stepSubtitleStyle(baptismalStatusController)),
               content: TextField(
-                controller: evangelismGroundsController,
+                controller: baptismalStatusController,
                 readOnly: true,
                 onTap: () {
                   showCupertinoModalPopup(
@@ -483,15 +483,32 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                               contentPadding: const EdgeInsets.only(
                                   top: 10, left: 20, right: 20),
                               leading: const CircleAvatar(
-                                  child:
-                                      Icon(CupertinoIcons.location, size: 20)),
+                                  child: Icon(CupertinoIcons.check_mark_circled,
+                                      size: 20)),
                               splashColor: ExtraColors.background,
-                              title: const Text('Asokore Mampong',
+                              title: const Text('Yes',
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  evangelismGroundsController.text =
-                                      'Asokore Mampong';
+                                  baptismalStatusController.text = 'Yes';
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              leading: const CircleAvatar(
+                                  child: Icon(CupertinoIcons.clear_circled,
+                                      size: 20)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('No',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  baptismalStatusController.text = 'No';
                                 });
                                 Navigator.pop(context);
                               },
@@ -503,7 +520,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Evangelism grounds",
+                  hintText: "Baptismal Status",
                   filled: true,
                 ),
               ),

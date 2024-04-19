@@ -22,7 +22,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Name',
+            title: Text('NAME',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('Dennis Osei',
                 style: TextStyle(
@@ -33,7 +33,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Mobile',
+            title: Text('MOBILE',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('0269865678',
                 style: TextStyle(
@@ -44,7 +44,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Landmark',
+            title: Text('LANDMARK',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('Behind the chief\'s house',
                 style: TextStyle(
@@ -55,7 +55,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Gender',
+            title: Text('GENDER',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('Male',
                 style: TextStyle(
@@ -66,7 +66,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Religious Affiliation',
+            title: Text('RELIGIOUS AFFILATION',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('Church Of Christ',
                 style: TextStyle(
@@ -77,9 +77,32 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
           ListTile(
             contentPadding: EdgeInsets.zero,
             onTap: null,
-            title: Text('Baptismal Status',
+            title: Text('BAPTISMAL STATUS',
                 style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
             subtitle: Text('Yes',
+                style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontSize: 16,
+                    color: ExtraColors.secondaryText)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            onTap: null,
+            title: Text('LESSONS DISCUSSED',
+                style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
+            subtitle: Text(
+                'Baptism, Christ\'s Confirmation, The Lord\'s Supper',
+                style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontSize: 16,
+                    color: ExtraColors.secondaryText)),
+          ),
+          ListTile(
+            contentPadding: EdgeInsets.zero,
+            onTap: null,
+            title: Text('GROUP',
+                style: TextStyle(fontSize: 18, color: ExtraColors.primaryText)),
+            subtitle: Text('12',
                 style: TextStyle(
                     letterSpacing: 1.5,
                     fontSize: 16,
