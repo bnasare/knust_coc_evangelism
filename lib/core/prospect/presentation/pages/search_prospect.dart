@@ -3,8 +3,6 @@ import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/utils/navigation.dart';
-
 class SearchProspectPage extends StatefulWidget {
   const SearchProspectPage({super.key});
 
@@ -18,7 +16,7 @@ class _SearchProspectPage extends State<SearchProspectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Locate Prospects'),
+        title: const Text('Locate Prospect'),
       ),
       body: Column(
         children: [
@@ -47,8 +45,13 @@ class _SearchProspectPage extends State<SearchProspectPage> {
                   return ListTile(
                     splashColor: ExtraColors.background,
                     onTap: () {
-                      NavigationHelper.navigateTo(
-                          context, const ProspectDetailsPage());
+                      Navigator.of(context, rootNavigator: true).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return const ProspectDetailsPage();
+                          },
+                        ),
+                      );
                     },
                     contentPadding: const EdgeInsets.all(0),
                     leading: const Icon(CupertinoIcons.person_alt_circle,

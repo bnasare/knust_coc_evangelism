@@ -1,7 +1,6 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/core/prospect/presentation/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
-import 'package:evangelism_admin/shared/utils/navigation.dart';
 import 'package:flutter/material.dart';
 
 class LocationPage extends StatefulWidget {
@@ -24,8 +23,13 @@ class _LocationPage extends State<LocationPage> {
                 return ListTile(
                   splashColor: ExtraColors.background,
                   onTap: () {
-                    NavigationHelper.navigateTo(
-                        context, const SearchProspectPage());
+                    Navigator.of(context, rootNavigator: true).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const SearchProspectPage();
+                        },
+                      ),
+                    );
                   },
                   tileColor: ExtraColors.primaryText,
                   shape: const BeveledRectangleBorder(
