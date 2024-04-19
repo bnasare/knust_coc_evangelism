@@ -1,6 +1,9 @@
+import 'package:evangelism_admin/core/prospect/presentation/pages/prospect_details.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../shared/utils/navigation.dart';
 
 class SearchProspectPage extends StatefulWidget {
   const SearchProspectPage({super.key});
@@ -41,16 +44,21 @@ class _SearchProspectPage extends State<SearchProspectPage> {
                 padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
                 shrinkWrap: true,
                 itemBuilder: (__, _) {
-                  return const ListTile(
-                    contentPadding: EdgeInsets.all(0),
-                    leading: Icon(CupertinoIcons.person_alt_circle,
+                  return ListTile(
+                    splashColor: ExtraColors.background,
+                    onTap: () {
+                      NavigationHelper.navigateTo(
+                          context, const ProspectDetailsPage());
+                    },
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: const Icon(CupertinoIcons.person_alt_circle,
                         color: ExtraColors.secondaryText, size: 50),
-                    title: Text('Dennis Osei',
+                    title: const Text('Dennis Osei',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                             color: ExtraColors.primaryText)),
-                    subtitle: Text('0269865678',
+                    subtitle: const Text('0269865678',
                         style: TextStyle(
                             letterSpacing: 1.5,
                             fontWeight: FontWeight.bold,

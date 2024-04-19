@@ -22,6 +22,7 @@ class _LocationPage extends State<LocationPage> {
               padding: const EdgeInsets.all(10),
               itemBuilder: (_, __) {
                 return ListTile(
+                  splashColor: ExtraColors.background,
                   onTap: () {
                     NavigationHelper.navigateTo(
                         context, const SearchProspectPage());

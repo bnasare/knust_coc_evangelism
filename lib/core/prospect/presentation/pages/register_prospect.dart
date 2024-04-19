@@ -19,10 +19,10 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
 
   final titleController = TextEditingController();
   final phoneController = TextEditingController();
-  final residenceController = TextEditingController();
+  final landmarkController = TextEditingController();
   final genderController = TextEditingController();
   final locationController = TextEditingController();
-  final religiousBackgroundController = TextEditingController();
+  final religiousAffiliationController = TextEditingController();
   final evangelismGroundsController = TextEditingController();
 
   @override
@@ -30,10 +30,10 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     super.initState();
     titleController.addListener(_updateStepState);
     phoneController.addListener(_updateStepState);
-    residenceController.addListener(_updateStepState);
+    landmarkController.addListener(_updateStepState);
     genderController.addListener(_updateStepState);
     locationController.addListener(_updateStepState);
-    religiousBackgroundController.addListener(_updateStepState);
+    religiousAffiliationController.addListener(_updateStepState);
     evangelismGroundsController.addListener(_updateStepState);
   }
 
@@ -41,18 +41,18 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   void dispose() {
     titleController.removeListener(_updateStepState);
     phoneController.removeListener(_updateStepState);
-    residenceController.removeListener(_updateStepState);
+    landmarkController.removeListener(_updateStepState);
     genderController.removeListener(_updateStepState);
     locationController.removeListener(_updateStepState);
-    religiousBackgroundController.removeListener(_updateStepState);
+    religiousAffiliationController.removeListener(_updateStepState);
     evangelismGroundsController.removeListener(_updateStepState);
 
     titleController.dispose();
     phoneController.dispose();
-    residenceController.dispose();
+    landmarkController.dispose();
     genderController.dispose();
     locationController.dispose();
-    religiousBackgroundController.dispose();
+    religiousAffiliationController.dispose();
     evangelismGroundsController.dispose();
     super.dispose();
   }
@@ -179,22 +179,22 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
             Step(
               state: _index == 2
                   ? StepState.editing
-                  : residenceController.text.isNotEmpty
+                  : landmarkController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive: residenceController.text.isNotEmpty || _index == 2
+              isActive: landmarkController.text.isNotEmpty || _index == 2
                   ? true
                   : false,
-              title: Text("Residence",
-                  style: _stepTitleStyle(residenceController)),
+              title:
+                  Text("Landmark", style: _stepTitleStyle(landmarkController)),
               subtitle: Text("Required for contact purposes.",
-                  style: _stepSubtitleStyle(residenceController)),
+                  style: _stepSubtitleStyle(landmarkController)),
               content: TextField(
                 textInputAction: TextInputAction.done,
-                controller: residenceController,
+                controller: landmarkController,
                 keyboardType: TextInputType.phone,
-                decoration:
-                    const InputDecoration(hintText: "Residence", filled: true),
+                decoration: const InputDecoration(
+                    hintText: "Popular Landmark around", filled: true),
               ),
             ),
             Step(
@@ -267,17 +267,17 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
             Step(
               state: _index == 4
                   ? StepState.editing
-                  : religiousBackgroundController.text.isNotEmpty
+                  : religiousAffiliationController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
               isActive:
-                  religiousBackgroundController.text.isNotEmpty || _index == 4,
-              title: Text("Religious background",
-                  style: _stepTitleStyle(religiousBackgroundController)),
+                  religiousAffiliationController.text.isNotEmpty || _index == 4,
+              title: Text("Religious affiliation",
+                  style: _stepTitleStyle(religiousAffiliationController)),
               subtitle: Text("Required for identification.",
-                  style: _stepSubtitleStyle(religiousBackgroundController)),
+                  style: _stepSubtitleStyle(religiousAffiliationController)),
               content: TextField(
-                controller: religiousBackgroundController,
+                controller: religiousAffiliationController,
                 readOnly: true,
                 onTap: () {
                   showCupertinoModalPopup(
@@ -300,7 +300,8 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text = 'Muslim';
+                                  religiousAffiliationController.text =
+                                      'Muslim';
                                 });
                                 Navigator.pop(context);
                               },
@@ -316,7 +317,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Assemblies Of God';
                                 });
                                 Navigator.pop(context);
@@ -333,7 +334,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Catholic';
                                 });
                                 Navigator.pop(context);
@@ -349,7 +350,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Christ Apostolic Church';
                                 });
                                 Navigator.pop(context);
@@ -365,7 +366,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Church Of Christ';
                                 });
                                 Navigator.pop(context);
@@ -382,7 +383,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Methodist';
                                 });
                                 Navigator.pop(context);
@@ -399,7 +400,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Pentecost';
                                 });
                                 Navigator.pop(context);
@@ -416,7 +417,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Presbyterian';
                                 });
                                 Navigator.pop(context);
@@ -435,7 +436,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousBackgroundController.text =
+                                  religiousAffiliationController.text =
                                       'Other Orthodox Churches';
                                 });
                                 Navigator.pop(context);
