@@ -87,6 +87,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     return ColorfulSafeArea(
       color: Theme.of(context).primaryColor,
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(title: const Text('Prospect Registration')),
         body: Stepper(
           physics: const BouncingScrollPhysics(),

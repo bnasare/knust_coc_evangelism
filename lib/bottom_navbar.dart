@@ -35,7 +35,7 @@ class _NavBarState extends State<NavBar> {
       PersistentBottomNavBarItem(
         textStyle: Theme.of(context).textTheme.bodyLarge,
         icon: const Icon(IconlyLight.location),
-        title: 'Location',
+        title: 'Locale',
         activeColorPrimary: ExtraColors.link,
         inactiveColorPrimary: ExtraColors.linkLight,
       ),

@@ -17,7 +17,7 @@ class _ProspectDetailsPageState extends State<ProspectDetailsPage> {
         title: const Text('Prospect Details'),
       ),
       body: ListView(
-        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 16),
         children: const [
           ListTile(
             contentPadding: EdgeInsets.zero,

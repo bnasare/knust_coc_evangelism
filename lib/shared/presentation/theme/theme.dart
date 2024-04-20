@@ -49,10 +49,10 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Color(0xD90076B6)),
     titleTextStyle: TextStyle(
-      color: ExtraColors.primaryText,
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
-    ),
+        color: ExtraColors.primaryText,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 2),
     color: Colors.transparent,
     elevation: 0,
     centerTitle: true,
