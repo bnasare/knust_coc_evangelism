@@ -91,7 +91,7 @@ class _LocationPage extends State<LocationPage> {
                   );
                 },
                 separatorBuilder: (_, __) => const SizedBox(height: 20),
-                itemCount: 16),
+                itemCount: 3),
           ),
         ],
       )),
