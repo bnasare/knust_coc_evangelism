@@ -5,20 +5,14 @@ import 'package:evangelism_admin/shared/error/failure.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
 
 class ListProspects
-    implements StreamUseCase<List<Prospect>, ListProspectsParams> {
+    implements StreamUseCase<List<Prospect>, ObjectParams<List<String>>> {
   final ProspectRepository repository;
 
   ListProspects(this.repository);
 
   @override
-  Stream<Either<Failure, List<Prospect>>> call(ListProspectsParams params) {
-    return repository.listProspects(params.documentID);
+  Stream<Either<Failure, List<Prospect>>> call(
+      ObjectParams<List<String>> params) async* {
+    yield* repository.listProspects(params.value);
   }
-}
-
-class ListProspectsParams extends ObjectParams<List<String>> {
-  const ListProspectsParams({required List<String> documentID})
-      : super(documentID);
-
-  List<String> get documentID => value;
 }

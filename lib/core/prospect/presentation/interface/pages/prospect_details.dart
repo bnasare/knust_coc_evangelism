@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/presentation/theme/extra_colors.dart';
 
 class ProspectDetailsPage extends StatefulWidget {
   const ProspectDetailsPage({super.key});

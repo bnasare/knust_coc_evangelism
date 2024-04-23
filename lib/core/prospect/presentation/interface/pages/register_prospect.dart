@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../shared/data/register_dialog.dart';
+import '../../../../../shared/data/register_dialog.dart';
 
 class RegisterProspectPage extends StatefulWidget {
   const RegisterProspectPage({super.key});

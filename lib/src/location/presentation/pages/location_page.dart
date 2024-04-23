@@ -1,5 +1,5 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:evangelism_admin/core/prospect/presentation/pages/search_prospect.dart';
+import 'package:evangelism_admin/core/prospect/presentation/interface/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

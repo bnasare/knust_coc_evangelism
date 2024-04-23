@@ -1,4 +1,4 @@
-import 'package:evangelism_admin/core/prospect/presentation/pages/prospect_details.dart';
+import 'package:evangelism_admin/core/prospect/presentation/interface/pages/prospect_details.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

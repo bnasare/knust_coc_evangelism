@@ -1,4 +1,4 @@
-import 'package:evangelism_admin/core/prospect/presentation/pages/register_prospect.dart';
+import 'package:evangelism_admin/core/prospect/presentation/interface/pages/register_prospect.dart';
 import 'package:evangelism_admin/src/location/presentation/pages/location_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';

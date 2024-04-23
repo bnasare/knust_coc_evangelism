@@ -4,19 +4,13 @@ import 'package:evangelism_admin/core/prospect/domain/repositories/prospect_repo
 import 'package:evangelism_admin/shared/error/failure.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
 
-class GetProspect implements StreamUseCase<Prospect, GetProspectParams> {
+class GetProspect implements StreamUseCase<Prospect, ObjectParams<String>> {
   final ProspectRepository repository;
 
   GetProspect(this.repository);
 
   @override
-  Stream<Either<Failure, Prospect>> call(GetProspectParams params) {
-    return repository.getProspect(params.documentID);
+  Stream<Either<Failure, Prospect>> call(ObjectParams<String> params) {
+    return repository.getProspect(params.value);
   }
-}
-
-class GetProspectParams extends ObjectParams<String> {
-  const GetProspectParams({required String documentID}) : super(documentID);
-
-  String get documentID => value;
 }
