@@ -72,7 +72,7 @@ List<Map<String, dynamic>> baptismalStatusOptions = [
     "icon": CupertinoIcons.check_mark_circled
   },
   {
-    "status": "Baptized - Other forms",
+    "status": "Baptized - Other forms of Baptism",
     "icon": CupertinoIcons.check_mark_circled
   },
   {"status": "Not Baptized", "icon": CupertinoIcons.clear_circled},

@@ -1,6 +1,7 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/shared/data/image_assets.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
+import 'package:evangelism_admin/shared/utils/navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -28,6 +29,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final baptismalStatusController = TextEditingController();
   final lessonsController = TextEditingController();
   final localeController = TextEditingController();
+  final _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -229,30 +231,115 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 readOnly: true,
                 onTap: () {
                   showCupertinoModalPopup(
-                    barrierColor: ExtraColors.black.withOpacity(0.5),
-                    barrierDismissible: true,
                     context: context,
                     builder: (BuildContext context) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: groupNames.map((groupName) {
-                          return Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 20),
-                              splashColor: ExtraColors.background,
-                              title: Text(groupName,
-                                  style: const TextStyle(
-                                      color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  groupNumberController.text = groupName;
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          );
-                        }).toList(),
+                      return ColorfulSafeArea(
+                        color: ExtraColors.background,
+                        child: Container(
+                          color: ExtraColors.background,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: IconButton.filledTonal(
+                                    onPressed: () {
+                                      NavigationHelper.navigateBack(context);
+                                      _searchController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_fullscreen,
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 16.0, right: 16.0, bottom: 10),
+                                child: SearchBar(
+                                  keyboardType: TextInputType.phone,
+                                  controller: _searchController,
+                                  hintText: 'Search for your group',
+                                  textStyle: const MaterialStatePropertyAll(
+                                      TextStyle(color: ExtraColors.grey)),
+                                  onChanged: (String value) {
+                                    setState(() {});
+                                  },
+                                  padding: const MaterialStatePropertyAll(
+                                      EdgeInsets.symmetric(horizontal: 15)),
+                                  leading: const Icon(CupertinoIcons.search,
+                                      color: ExtraColors.grey),
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  )),
+                                ),
+                              ),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: groupNames
+                                            .where((groupName) {
+                                              // If the search term is empty, return all groups, else return the filtered list.
+                                              return _searchController
+                                                      .text.isEmpty ||
+                                                  groupName
+                                                      .toLowerCase()
+                                                      .contains(
+                                                          _searchController.text
+                                                              .toLowerCase());
+                                            })
+                                            .toList()
+                                            .isEmpty
+                                        ? [
+                                            // Display this when no group names match the search criteria
+                                            const Center(
+                                              child: Padding(
+                                                padding: EdgeInsets.all(50.0),
+                                                child:
+                                                    Text('Group not available',
+                                                        style: TextStyle(
+                                                          color: ExtraColors
+                                                              .primaryText,
+                                                          fontSize: 20.0,
+                                                        )),
+                                              ),
+                                            ),
+                                          ]
+                                        : groupNames.where((groupName) {
+                                            return _searchController
+                                                    .text.isEmpty ||
+                                                groupName
+                                                    .toLowerCase()
+                                                    .contains(_searchController
+                                                        .text
+                                                        .toLowerCase());
+                                          }).map((groupName) {
+                                            return Material(
+                                              child: ListTile(
+                                                splashColor:
+                                                    ExtraColors.background,
+                                                title: Text(groupName,
+                                                    style: const TextStyle(
+                                                        color:
+                                                            ExtraColors.white)),
+                                                onTap: () {
+                                                  setState(() {
+                                                    groupNumberController.text =
+                                                        groupName;
+                                                  });
+                                                  Navigator.pop(context);
+                                                  _searchController.clear();
+                                                },
+                                              ),
+                                            );
+                                          }).toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       );
                     },
                   );
@@ -350,8 +437,9 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                         children: genderOptions.map((option) {
                           return Material(
                             child: ListTile(
+                              splashColor: ExtraColors.background,
                               contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 20),
+                                  vertical: 0, horizontal: 20),
                               leading: CircleAvatar(
                                 child: SvgPicture.asset(option["icon"]),
                               ),
@@ -387,97 +475,97 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   religiousAffiliationController.text.isNotEmpty || _index == 6,
               title: Text("Religious Affiliation",
                   style: _stepTitleStyle(religiousAffiliationController)),
-              subtitle: Text("Required for identification.",
+              subtitle: Text("Helps understand their background.",
                   style: _stepSubtitleStyle(religiousAffiliationController)),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: religiousAffiliationController,
-                      readOnly: true,
-                      onTap: () {
-                        showCupertinoModalPopup(
-                          barrierColor: ExtraColors.black.withOpacity(0.5),
-                          barrierDismissible: true,
-                          context: context,
-                          builder: (BuildContext context) {
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Material(
-                                  child: ListTile(
-                                    contentPadding: const EdgeInsets.only(
-                                        bottom: 0, left: 17, right: 20),
-                                    leading: const CircleAvatar(
-                                      backgroundImage:
-                                          AssetImage(ImageAssets.orthodox),
-                                    ),
-                                    title: TextField(
-                                      style: const TextStyle(
-                                          color: ExtraColors.white),
-                                      onSubmitted: (value) {
-                                        if (value.trim().isNotEmpty) {
-                                          setState(() {
-                                            religiousAffiliationController
-                                                .text = value.trim();
-                                          });
-                                        }
-                                        Navigator.pop(context);
-                                      },
-                                      decoration: const InputDecoration(
-                                        contentPadding: EdgeInsets.all(0),
-                                        hintText: 'Enter church name',
-                                        hintStyle: TextStyle(
-                                          fontSize: 15.5,
+                  TextField(
+                    controller: religiousAffiliationController,
+                    readOnly: true,
+                    onTap: () {
+                      showCupertinoModalPopup(
+                        barrierColor: ExtraColors.black.withOpacity(0.5),
+                        barrierDismissible: true,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Material(
+                                child: ListTile(
+                                  splashColor: ExtraColors.background,
+                                  contentPadding: const EdgeInsets.only(
+                                      bottom: 0, left: 20, right: 20),
+                                  leading: const CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage(ImageAssets.orthodox),
+                                  ),
+                                  title: TextField(
+                                    style: const TextStyle(
+                                        color: ExtraColors.white),
+                                    onSubmitted: (value) {
+                                      if (value.trim().isNotEmpty) {
+                                        setState(() {
+                                          religiousAffiliationController.text =
+                                              value.trim();
+                                        });
+                                      }
+                                      Navigator.pop(context);
+                                    },
+                                    decoration: const InputDecoration(
+                                      contentPadding: EdgeInsets.all(0),
+                                      hintText: 'Enter church name',
+                                      hintStyle: TextStyle(
+                                        fontSize: 15.5,
+                                        color: ExtraColors.secondaryText,
+                                      ),
+                                      filled: false,
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
                                           color: ExtraColors.secondaryText,
                                         ),
-                                        filled: false,
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: ExtraColors.secondaryText,
-                                          ),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: ExtraColors.secondaryText,
-                                          ),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: ExtraColors.secondaryText,
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                                ...religiousAffiliations.map((affiliation) {
-                                  return Material(
-                                    child: ListTile(
-                                      contentPadding: const EdgeInsets.only(
-                                          bottom: 0, left: 17, right: 20),
-                                      leading: CircleAvatar(
-                                        backgroundImage:
-                                            AssetImage(affiliation["image"]),
-                                      ),
-                                      title: Text(affiliation["name"],
-                                          style: const TextStyle(
-                                              color: ExtraColors.white)),
-                                      onTap: () {
-                                        setState(() {
-                                          religiousAffiliationController.text =
-                                              affiliation["name"];
-                                        });
-                                        Navigator.pop(context);
-                                      },
+                              ),
+                              ...religiousAffiliations.map((affiliation) {
+                                return Material(
+                                  child: ListTile(
+                                    splashColor: ExtraColors.background,
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 20, right: 20),
+                                    leading: CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage(affiliation["image"]),
                                     ),
-                                  );
-                                }),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      decoration: const InputDecoration(
-                        hintText: "Select or enter religious affiliation",
-                        filled: true,
-                      ),
+                                    title: Text(affiliation["name"],
+                                        style: const TextStyle(
+                                            color: ExtraColors.white)),
+                                    onTap: () {
+                                      setState(() {
+                                        religiousAffiliationController.text =
+                                            affiliation["name"];
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                );
+                              }),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    decoration: const InputDecoration(
+                      hintText: "Select or enter religious affiliation",
+                      filled: true,
                     ),
                   ),
                 ],
@@ -493,7 +581,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   baptismalStatusController.text.isNotEmpty || _index == 7,
               title: Text("Baptismal Status",
                   style: _stepTitleStyle(baptismalStatusController)),
-              subtitle: Text("Helps understand their background.",
+              subtitle: Text("Provides context for spiritual journey.",
                   style: _stepSubtitleStyle(baptismalStatusController)),
               content: TextField(
                 controller: baptismalStatusController,
@@ -509,6 +597,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                         children: baptismalStatusOptions.map((option) {
                           return Material(
                             child: ListTile(
+                              splashColor: ExtraColors.background,
                               contentPadding: const EdgeInsets.only(
                                   top: 10, left: 20, right: 20),
                               leading: CircleAvatar(
