@@ -3,10 +3,14 @@ import 'package:equatable/equatable.dart';
 
 import '../error/failure.dart';
 
-
 abstract class UseCase<Type, Params> {
   /// Forward usecase classes to repositories
   Future<Either<Failure, Type>> call(Params params);
+}
+
+abstract class StreamUseCase<Type, Params> {
+  /// Forward usecase classes to repositories
+  Stream<Either<Failure, Type>> call(Params params);
 }
 
 /// Used when usecase doesn't take any parameters
@@ -14,7 +18,6 @@ class NoParams extends Equatable {
   @override
   List<Object> get props => [];
 }
-
 
 /// Generic params for all objects
 class ObjectParams<T> extends Equatable {
