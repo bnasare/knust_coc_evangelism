@@ -303,17 +303,52 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                           Material(
                             child: ListTile(
                               contentPadding: const EdgeInsets.only(
-                                  top: 10, left: 20, right: 20),
+                                  bottom: 0, left: 17, right: 20),
+                              leading: const CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage(ImageAssets.orthodox)),
+                              title: TextField(
+                                style:
+                                    const TextStyle(color: ExtraColors.white),
+                                onSubmitted: (value) {
+                                  if (value.trim().isNotEmpty) {
+                                    setState(() {
+                                      religiousAffiliationController.text =
+                                          value.trim();
+                                    });
+                                  }
+                                  Navigator.pop(context);
+                                },
+                                decoration: const InputDecoration(
+                                  contentPadding: EdgeInsets.all(0),
+                                  hintText: 'Enter church name',
+                                  hintStyle: TextStyle(
+                                      fontSize: 15.5,
+                                      color: ExtraColors.secondaryText),
+                                  filled: false,
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ExtraColors.secondaryText)),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: ExtraColors.secondaryText)),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  top: 0, left: 17, right: 20),
                               leading: const CircleAvatar(
                                   backgroundImage:
                                       AssetImage(ImageAssets.muslim)),
                               splashColor: ExtraColors.background,
-                              title: const Text('Muslim',
+                              title: const Text('Islam',
                                   style: TextStyle(color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  religiousAffiliationController.text =
-                                      'Muslim';
+                                  religiousAffiliationController.text = 'Islam';
                                 });
                                 Navigator.pop(context);
                               },
@@ -431,25 +466,6 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                 setState(() {
                                   religiousAffiliationController.text =
                                       'Presbyterian';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(
-                                  bottom: 10, left: 20, right: 20),
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.orthodox)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Other Orthodox Churches',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Other Orthodox Churches';
                                 });
                                 Navigator.pop(context);
                               },
