@@ -1,10 +1,11 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/shared/data/image_assets.dart';
-import 'package:evangelism_admin/shared/data/svg_assets.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../shared/data/register_dialog.dart';
 
 class RegisterProspectPage extends StatefulWidget {
   const RegisterProspectPage({super.key});
@@ -15,8 +16,9 @@ class RegisterProspectPage extends StatefulWidget {
 
 class _RegisterProspectPageState extends State<RegisterProspectPage> {
   int _index = 0;
-  final int _stepAmount = 7;
+  final int _stepAmount = 9;
 
+  final groupNumberController = TextEditingController();
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
   final landmarkController = TextEditingController();
@@ -25,10 +27,12 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final religiousAffiliationController = TextEditingController();
   final baptismalStatusController = TextEditingController();
   final lessonsController = TextEditingController();
+  final localeController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
+    groupNumberController.addListener(_updateStepState);
     nameController.addListener(_updateStepState);
     phoneController.addListener(_updateStepState);
     landmarkController.addListener(_updateStepState);
@@ -37,10 +41,13 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     religiousAffiliationController.addListener(_updateStepState);
     baptismalStatusController.addListener(_updateStepState);
     lessonsController.addListener(_updateStepState);
+    localeController.addListener(_updateStepState);
   }
 
   @override
   void dispose() {
+    groupNumberController.removeListener(_updateStepState);
+
     nameController.removeListener(_updateStepState);
     phoneController.removeListener(_updateStepState);
     landmarkController.removeListener(_updateStepState);
@@ -49,7 +56,9 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     religiousAffiliationController.removeListener(_updateStepState);
     baptismalStatusController.removeListener(_updateStepState);
     baptismalStatusController.removeListener(_updateStepState);
+    localeController.removeListener(_updateStepState);
 
+    groupNumberController.dispose();
     nameController.dispose();
     phoneController.dispose();
     landmarkController.dispose();
@@ -58,6 +67,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     religiousAffiliationController.dispose();
     baptismalStatusController.dispose();
     lessonsController.dispose();
+    localeController.dispose();
     super.dispose();
   }
 
@@ -124,6 +134,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
           onStepCancel: () {
             if (_index == 0) {
               setState(() {
+                groupNumberController.clear();
                 nameController.clear();
                 phoneController.clear();
                 landmarkController.clear();
@@ -132,6 +143,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 religiousAffiliationController.clear();
                 baptismalStatusController.clear();
                 lessonsController.clear();
+                localeController.clear();
               });
             } else {
               setState(() {
@@ -152,72 +164,177 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
             Step(
               state: _index == 0
                   ? StepState.editing
-                  : nameController.text.isNotEmpty
+                  : localeController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive:
-                  nameController.text.isNotEmpty || _index == 0 ? true : false,
-              title: Text("Name the prospect",
-                  style: _stepTitleStyle(nameController)),
-              subtitle: Text("Required for identification.",
-                  style: _stepSubtitleStyle(nameController)),
+              isActive: localeController.text.isNotEmpty || _index == 0,
+              title: Text("Evangelism Setting",
+                  style: _stepTitleStyle(localeController)),
+              subtitle: Text("Required for registration.",
+                  style: _stepSubtitleStyle(localeController)),
               content: TextField(
-                textInputAction: TextInputAction.done,
-                controller: nameController,
-                decoration:
-                    const InputDecoration(hintText: "Name", filled: true),
+                controller: localeController,
+                readOnly: true,
+                onTap: () {
+                  showCupertinoModalPopup(
+                    barrierColor: ExtraColors.black.withOpacity(0.5),
+                    barrierDismissible: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.only(
+                                  top: 10, left: 20, right: 20),
+                              leading: const CircleAvatar(
+                                  child:
+                                      Icon(CupertinoIcons.location, size: 20)),
+                              splashColor: ExtraColors.background,
+                              title: const Text('Asokore Mampong',
+                                  style: TextStyle(color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  localeController.text = 'Asokore Mampong';
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                decoration: const InputDecoration(
+                  hintText: "Select location",
+                  filled: true,
+                ),
               ),
             ),
             Step(
               state: _index == 1
                   ? StepState.editing
-                  : phoneController.text.isNotEmpty
+                  : groupNumberController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive:
-                  phoneController.text.isNotEmpty || _index == 1 ? true : false,
-              title: Text("Mobile number",
-                  style: _stepTitleStyle(phoneController)),
-              subtitle: Text("Required for contact purposes.",
-                  style: _stepSubtitleStyle(phoneController)),
+              isActive: groupNumberController.text.isNotEmpty || _index == 1,
+              title: Text("Initial Contact",
+                  style: _stepTitleStyle(groupNumberController)),
+              subtitle: Text("Group that approached the prospect",
+                  style: _stepSubtitleStyle(groupNumberController)),
               content: TextField(
-                textInputAction: TextInputAction.done,
-                controller: phoneController,
-                keyboardType: TextInputType.phone,
-                decoration:
-                    const InputDecoration(hintText: "Mobile", filled: true),
+                controller: groupNumberController,
+                readOnly: true,
+                onTap: () {
+                  showCupertinoModalPopup(
+                    barrierColor: ExtraColors.black.withOpacity(0.5),
+                    barrierDismissible: true,
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: groupNames.map((groupName) {
+                          return Material(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 20),
+                              splashColor: ExtraColors.background,
+                              title: Text(groupName,
+                                  style: const TextStyle(
+                                      color: ExtraColors.white)),
+                              onTap: () {
+                                setState(() {
+                                  groupNumberController.text = groupName;
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      );
+                    },
+                  );
+                },
+                decoration: const InputDecoration(
+                  hintText: "Select Group",
+                  filled: true,
+                ),
               ),
             ),
             Step(
               state: _index == 2
                   ? StepState.editing
+                  : nameController.text.isNotEmpty
+                      ? StepState.complete
+                      : StepState.indexed,
+              isActive:
+                  nameController.text.isNotEmpty || _index == 2 ? true : false,
+              title: Text("Name the prospect",
+                  style: _stepTitleStyle(nameController)),
+              subtitle: Text("Capture their full name for future reference.",
+                  style: _stepSubtitleStyle(nameController)),
+              content: TextField(
+                textInputAction: TextInputAction.done,
+                controller: nameController,
+                decoration: const InputDecoration(
+                    hintText: "Enter prospect's full name", filled: true),
+              ),
+            ),
+            Step(
+              state: _index == 3
+                  ? StepState.editing
+                  : phoneController.text.isNotEmpty
+                      ? StepState.complete
+                      : StepState.indexed,
+              isActive:
+                  phoneController.text.isNotEmpty || _index == 3 ? true : false,
+              title: Text("Mobile number",
+                  style: _stepTitleStyle(phoneController)),
+              subtitle: Text(
+                  "Enter a valid phone number for easy communication.",
+                  style: _stepSubtitleStyle(phoneController)),
+              content: TextField(
+                textInputAction: TextInputAction.done,
+                controller: phoneController,
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(
+                    hintText: "Enter prospect's mobile number(s)",
+                    filled: true),
+              ),
+            ),
+            Step(
+              state: _index == 4
+                  ? StepState.editing
                   : landmarkController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive: landmarkController.text.isNotEmpty || _index == 2
+              isActive: landmarkController.text.isNotEmpty || _index == 4
                   ? true
                   : false,
-              title:
-                  Text("Landmark", style: _stepTitleStyle(landmarkController)),
-              subtitle: Text("Required for contact purposes.",
+              title: Text("Demographics",
+                  style: _stepTitleStyle(landmarkController)),
+              subtitle: Text(
+                  "Provide general information about the prospect's location.",
                   style: _stepSubtitleStyle(landmarkController)),
               content: TextField(
                 textInputAction: TextInputAction.done,
                 controller: landmarkController,
                 keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(
-                    hintText: "Popular landmark around", filled: true),
+                    hintText: "Landmark (e.g., Near XYZ)", filled: true),
               ),
             ),
             Step(
-              state: _index == 3
+              state: _index == 5
                   ? StepState.editing
                   : genderController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive: genderController.text.isNotEmpty || _index == 3,
+              isActive: genderController.text.isNotEmpty || _index == 5,
               title: Text("Gender", style: _stepTitleStyle(genderController)),
-              subtitle: Text("Required for identification.",
+              subtitle: Text("Selecting a gender helps tailor communication.",
                   style: _stepSubtitleStyle(genderController)),
               content: TextField(
                 controller: genderController,
@@ -230,269 +347,153 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                     builder: (BuildContext context) {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Material(
+                        children: genderOptions.map((option) {
+                          return Material(
                             child: ListTile(
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 20, horizontal: 20),
-                              splashColor: ExtraColors.background,
                               leading: CircleAvatar(
-                                  child: SvgPicture.asset(SvgAssets.male)),
-                              title: const Text('Male',
-                                  style: TextStyle(color: ExtraColors.white)),
+                                child: SvgPicture.asset(option["icon"]),
+                              ),
+                              title: Text(option["gender"],
+                                  style: const TextStyle(
+                                      color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  genderController.text = 'Male';
+                                  genderController.text = option["gender"];
                                 });
                                 Navigator.pop(context);
                               },
                             ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(
-                                  bottom: 30, left: 20, right: 20),
-                              leading: CircleAvatar(
-                                  child: SvgPicture.asset(SvgAssets.female)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Female',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  genderController.text = 'Female';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
+                          );
+                        }).toList(),
                       );
                     },
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Gender type",
+                  hintText: "Select Gender",
                   filled: true,
                 ),
               ),
             ),
             Step(
-              state: _index == 4
+              state: _index == 6
                   ? StepState.editing
                   : religiousAffiliationController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
               isActive:
-                  religiousAffiliationController.text.isNotEmpty || _index == 4,
+                  religiousAffiliationController.text.isNotEmpty || _index == 6,
               title: Text("Religious Affiliation",
                   style: _stepTitleStyle(religiousAffiliationController)),
               subtitle: Text("Required for identification.",
                   style: _stepSubtitleStyle(religiousAffiliationController)),
-              content: TextField(
-                controller: religiousAffiliationController,
-                readOnly: true,
-                onTap: () {
-                  showCupertinoModalPopup(
-                    barrierColor: ExtraColors.black.withOpacity(0.5),
-                    barrierDismissible: true,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(
-                                  bottom: 0, left: 17, right: 20),
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.orthodox)),
-                              title: TextField(
-                                style:
-                                    const TextStyle(color: ExtraColors.white),
-                                onSubmitted: (value) {
-                                  if (value.trim().isNotEmpty) {
-                                    setState(() {
-                                      religiousAffiliationController.text =
-                                          value.trim();
-                                    });
-                                  }
-                                  Navigator.pop(context);
-                                },
-                                decoration: const InputDecoration(
-                                  contentPadding: EdgeInsets.all(0),
-                                  hintText: 'Enter church name',
-                                  hintStyle: TextStyle(
-                                      fontSize: 15.5,
-                                      color: ExtraColors.secondaryText),
-                                  filled: false,
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: ExtraColors.secondaryText)),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: ExtraColors.secondaryText)),
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: religiousAffiliationController,
+                      readOnly: true,
+                      onTap: () {
+                        showCupertinoModalPopup(
+                          barrierColor: ExtraColors.black.withOpacity(0.5),
+                          barrierDismissible: true,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Material(
+                                  child: ListTile(
+                                    contentPadding: const EdgeInsets.only(
+                                        bottom: 0, left: 17, right: 20),
+                                    leading: const CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage(ImageAssets.orthodox),
+                                    ),
+                                    title: TextField(
+                                      style: const TextStyle(
+                                          color: ExtraColors.white),
+                                      onSubmitted: (value) {
+                                        if (value.trim().isNotEmpty) {
+                                          setState(() {
+                                            religiousAffiliationController
+                                                .text = value.trim();
+                                          });
+                                        }
+                                        Navigator.pop(context);
+                                      },
+                                      decoration: const InputDecoration(
+                                        contentPadding: EdgeInsets.all(0),
+                                        hintText: 'Enter church name',
+                                        hintStyle: TextStyle(
+                                          fontSize: 15.5,
+                                          color: ExtraColors.secondaryText,
+                                        ),
+                                        filled: false,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: ExtraColors.secondaryText,
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: ExtraColors.secondaryText,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 0, left: 17, right: 20),
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.muslim)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Islam',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text = 'Islam';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.assemblies)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Assemblies Of God',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Assemblies Of God';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.catholic)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Catholic',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Catholic';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage: AssetImage(ImageAssets.cac)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Christ Apostolic Church',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Christ Apostolic Church';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage: AssetImage(ImageAssets.coc)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Church Of Christ',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Church Of Christ';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.methodist)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Methodist',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Methodist';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.pent)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Pentecost',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Pentecost';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              leading: const CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage(ImageAssets.presby)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Presbyterian',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  religiousAffiliationController.text =
-                                      'Presbyterian';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                decoration: const InputDecoration(
-                  hintText: "Religious affiliation",
-                  filled: true,
-                ),
+                                ...religiousAffiliations.map((affiliation) {
+                                  return Material(
+                                    child: ListTile(
+                                      contentPadding: const EdgeInsets.only(
+                                          bottom: 0, left: 17, right: 20),
+                                      leading: CircleAvatar(
+                                        backgroundImage:
+                                            AssetImage(affiliation["image"]),
+                                      ),
+                                      title: Text(affiliation["name"],
+                                          style: const TextStyle(
+                                              color: ExtraColors.white)),
+                                      onTap: () {
+                                        setState(() {
+                                          religiousAffiliationController.text =
+                                              affiliation["name"];
+                                        });
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  );
+                                }),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      decoration: const InputDecoration(
+                        hintText: "Select or enter religious affiliation",
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Step(
-              state: _index == 5
+              state: _index == 7
                   ? StepState.editing
                   : baptismalStatusController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
               isActive:
-                  baptismalStatusController.text.isNotEmpty || _index == 5,
+                  baptismalStatusController.text.isNotEmpty || _index == 7,
               title: Text("Baptismal Status",
                   style: _stepTitleStyle(baptismalStatusController)),
-              subtitle: Text("Required for registration.",
+              subtitle: Text("Helps understand their background.",
                   style: _stepSubtitleStyle(baptismalStatusController)),
               content: TextField(
                 controller: baptismalStatusController,
@@ -505,72 +506,57 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                     builder: (BuildContext context) {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Material(
+                        children: baptismalStatusOptions.map((option) {
+                          return Material(
                             child: ListTile(
                               contentPadding: const EdgeInsets.only(
                                   top: 10, left: 20, right: 20),
-                              leading: const CircleAvatar(
-                                  child: Icon(CupertinoIcons.check_mark_circled,
-                                      size: 20)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('Yes',
-                                  style: TextStyle(color: ExtraColors.white)),
+                              leading: CircleAvatar(
+                                child: Icon(option["icon"], size: 20),
+                              ),
+                              title: Text(option["status"],
+                                  style: const TextStyle(
+                                      color: ExtraColors.white)),
                               onTap: () {
                                 setState(() {
-                                  baptismalStatusController.text = 'Yes';
+                                  baptismalStatusController.text =
+                                      option["status"];
                                 });
                                 Navigator.pop(context);
                               },
                             ),
-                          ),
-                          Material(
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 10, left: 20, right: 20),
-                              leading: const CircleAvatar(
-                                  child: Icon(CupertinoIcons.clear_circled,
-                                      size: 20)),
-                              splashColor: ExtraColors.background,
-                              title: const Text('No',
-                                  style: TextStyle(color: ExtraColors.white)),
-                              onTap: () {
-                                setState(() {
-                                  baptismalStatusController.text = 'No';
-                                });
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ),
-                        ],
+                          );
+                        }).toList(),
                       );
                     },
                   );
                 },
                 decoration: const InputDecoration(
-                  hintText: "Baptismal status",
+                  hintText: "Select baptismal status",
                   filled: true,
                 ),
               ),
             ),
             Step(
-              state: _index == 6
+              state: _index == 8
                   ? StepState.editing
                   : lessonsController.text.isNotEmpty
                       ? StepState.complete
                       : StepState.indexed,
-              isActive: lessonsController.text.isNotEmpty || _index == 6
+              isActive: lessonsController.text.isNotEmpty || _index == 8
                   ? true
                   : false,
-              title: Text("Lessons Taught",
+              title: Text("Interaction Details",
                   style: _stepTitleStyle(lessonsController)),
-              subtitle: Text("Required for registration.",
+              subtitle: Text("Separate details with a comma.",
                   style: _stepSubtitleStyle(lessonsController)),
               content: TextField(
                 textInputAction: TextInputAction.done,
                 controller: lessonsController,
                 decoration: const InputDecoration(
-                    hintText: "Lesson taught", filled: true),
+                    hintText:
+                        "Enter details of lessons taught (e.g., Baptism, Faith)",
+                    filled: true),
               ),
             ),
           ],
