@@ -18,7 +18,9 @@ _$ProspectImpl _$$ProspectImplFromJson(Map<String, dynamic> json) =>
       baptismalStatus: json['baptismalStatus'] as String,
       interactionDetails: json['interactionDetails'] as String,
       id: json['id'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$ProspectImplToJson(_$ProspectImpl instance) =>
@@ -33,5 +35,5 @@ Map<String, dynamic> _$$ProspectImplToJson(_$ProspectImpl instance) =>
       'baptismalStatus': instance.baptismalStatus,
       'interactionDetails': instance.interactionDetails,
       'id': instance.id,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
     };

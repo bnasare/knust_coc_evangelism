@@ -30,7 +30,7 @@ mixin _$Prospect {
   String get baptismalStatus => throw _privateConstructorUsedError;
   String get interactionDetails => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,7 +54,7 @@ abstract class $ProspectCopyWith<$Res> {
       String baptismalStatus,
       String interactionDetails,
       String id,
-      DateTime createdAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -80,7 +80,7 @@ class _$ProspectCopyWithImpl<$Res, $Val extends Prospect>
     Object? baptismalStatus = null,
     Object? interactionDetails = null,
     Object? id = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       evangelismSetting: null == evangelismSetting
@@ -123,10 +123,10 @@ class _$ProspectCopyWithImpl<$Res, $Val extends Prospect>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -150,7 +150,7 @@ abstract class _$$ProspectImplCopyWith<$Res>
       String baptismalStatus,
       String interactionDetails,
       String id,
-      DateTime createdAt});
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -174,7 +174,7 @@ class __$$ProspectImplCopyWithImpl<$Res>
     Object? baptismalStatus = null,
     Object? interactionDetails = null,
     Object? id = null,
-    Object? createdAt = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$ProspectImpl(
       evangelismSetting: null == evangelismSetting
@@ -217,10 +217,10 @@ class __$$ProspectImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -239,7 +239,7 @@ class _$ProspectImpl implements _Prospect {
       required this.baptismalStatus,
       required this.interactionDetails,
       required this.id,
-      required this.createdAt});
+      this.createdAt});
 
   factory _$ProspectImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProspectImplFromJson(json);
@@ -265,7 +265,7 @@ class _$ProspectImpl implements _Prospect {
   @override
   final String id;
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   @override
   String toString() {
@@ -339,7 +339,7 @@ abstract class _Prospect implements Prospect {
       required final String baptismalStatus,
       required final String interactionDetails,
       required final String id,
-      required final DateTime createdAt}) = _$ProspectImpl;
+      final DateTime? createdAt}) = _$ProspectImpl;
 
   factory _Prospect.fromJson(Map<String, dynamic> json) =
       _$ProspectImpl.fromJson;
@@ -365,7 +365,7 @@ abstract class _Prospect implements Prospect {
   @override
   String get id;
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$ProspectImplCopyWith<_$ProspectImpl> get copyWith =>

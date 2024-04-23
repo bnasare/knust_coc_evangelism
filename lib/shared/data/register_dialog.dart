@@ -68,7 +68,7 @@ List<Map<String, dynamic>> religiousAffiliations = [
 
 List<Map<String, dynamic>> baptismalStatusOptions = [
   {
-    "status": "Baptized - Dipping Once",
+    "status": "Baptized - Dipped Once",
     "icon": CupertinoIcons.check_mark_circled
   },
   {

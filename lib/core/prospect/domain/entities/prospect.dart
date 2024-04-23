@@ -6,8 +6,8 @@ part 'prospect.g.dart';
 @freezed
 class Prospect with _$Prospect {
   const factory Prospect({
-    required String initialContact,
     required String evangelismSetting,
+    required String initialContact,
     required String name,
     required String mobile,
     required String demographics,
@@ -16,13 +16,13 @@ class Prospect with _$Prospect {
     required String baptismalStatus,
     required String interactionDetails,
     required String id,
-    required DateTime createdAt,
+    final DateTime? createdAt,
   }) = _Prospect;
 
   factory Prospect.fromJson(Map<String, dynamic> json) =>
       _$ProspectFromJson(json);
 
-  factory Prospect.initial() => Prospect(
+  factory Prospect.initial() => const Prospect(
         evangelismSetting: '',
         initialContact: '',
         name: '',
@@ -33,7 +33,6 @@ class Prospect with _$Prospect {
         baptismalStatus: '',
         interactionDetails: '',
         id: '',
-        createdAt: DateTime.fromMillisecondsSinceEpoch(
-            DateTime.now().millisecondsSinceEpoch),
+        createdAt: null,
       );
 }

@@ -31,5 +31,5 @@ class CreateProspectParams extends ObjectParams<Prospect> {
   String get baptismalStatus => prospect.baptismalStatus;
   String get interactionDetails => prospect.interactionDetails;
   String get id => prospect.id;
-  DateTime get createdAt => prospect.createdAt;
+  DateTime? get createdAt => prospect.createdAt;
 }

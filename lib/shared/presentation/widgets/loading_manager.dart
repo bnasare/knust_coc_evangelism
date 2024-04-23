@@ -16,12 +16,15 @@ class LoadingManager extends StatelessWidget {
         child,
         isLoading
             ? Container(
-                color: ExtraColors.black.withOpacity(0.9),
+                color: ExtraColors.black.withOpacity(0.85),
               )
             : Container(),
         isLoading
-            ? const Center(
-                child: SpinKitFadingCircle(color: ExtraColors.white),
+            ? Center(
+                child: SpinKitWaveSpinner(
+                    color: Theme.of(context).primaryColor,
+                    size: 70,
+                    waveColor: ExtraColors.link),
               )
             : Container()
       ],

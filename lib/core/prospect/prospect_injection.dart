@@ -12,10 +12,8 @@ void initProspect() {
 
   sl.registerLazySingleton<ProspectRemoteDatabase>(
       () => ProspectRemoteDatabaseImpl());
-  sl.registerLazySingleton<ProspectRepository>(() => ProspectRepositoryImpl(
-        networkInfo: sl(),
-        remoteDatabase: sl(),
-      ));
+  sl.registerLazySingleton<ProspectRepository>(
+      () => ProspectRepositoryImpl(networkInfo: sl(), remoteDatabase: sl()));
 
   sl.registerFactory(() => ProspectBloc(
       createProspect: sl(), getProspect: sl(), listProspects: sl()));

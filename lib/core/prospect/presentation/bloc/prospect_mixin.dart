@@ -13,7 +13,7 @@ mixin ProspectMixin {
     final result = await bloc.createAProspect(prospect);
     return result.fold(
         (l) => SnackBarHelper.showErrorSnackBar(context, l.message),
-        (r) => SnackBarHelper.showSuccessSnackBar(
-            context, '${r.name} added to the list successfully'));
+        (r) => SnackBarHelper.showSuccessSnackBar(context,
+            "${r.name} has been successfully added to the prospect list! 🎉"));
   }
 }

@@ -18,7 +18,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   List<Widget> _buildScreens() {
     return [
-      const RegisterProspectPage(),
+      RegisterProspectPage(),
       const LocationPage(),
     ];
   }

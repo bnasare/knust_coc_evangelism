@@ -13,8 +13,8 @@ class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
   @override
   Future<Prospect> createProspect(Prospect prospect) async {
     final Prospect createdProspect = Prospect(
-      initialContact: prospect.initialContact,
       evangelismSetting: prospect.evangelismSetting,
+      initialContact: prospect.initialContact,
       name: prospect.name,
       mobile: prospect.mobile,
       demographics: prospect.demographics,
