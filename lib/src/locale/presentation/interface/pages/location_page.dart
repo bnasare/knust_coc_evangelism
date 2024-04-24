@@ -1,11 +1,12 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/core/prospect/presentation/interface/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
+import 'package:evangelism_admin/src/locale/presentation/bloc/locale_mixin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class LocationPage extends StatefulWidget {
-  const LocationPage({super.key});
+class LocationPage extends StatefulWidget with LocaleMixin {
+  LocationPage({super.key});
 
   @override
   createState() => _LocationPage();

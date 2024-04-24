@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:evangelism_admin/shared/error/failure.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
-import 'package:evangelism_admin/src/location/domain/entities/locale.dart';
-import 'package:evangelism_admin/src/location/domain/usecases/get.dart';
-import 'package:evangelism_admin/src/location/domain/usecases/list.dart';
+import 'package:evangelism_admin/src/locale/domain/entities/locale.dart';
+import 'package:evangelism_admin/src/locale/domain/usecases/get.dart';
+import 'package:evangelism_admin/src/locale/domain/usecases/list.dart';
 
 class LocaleBloc {
   GetLocale getLocale;

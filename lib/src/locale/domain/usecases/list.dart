@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
-import 'package:evangelism_admin/src/location/domain/entities/locale.dart';
-import 'package:evangelism_admin/src/location/domain/repositories/locale_repository.dart';
+import 'package:evangelism_admin/src/locale/domain/entities/locale.dart';
+import 'package:evangelism_admin/src/locale/domain/repositories/locale_repository.dart';
 
 import '../../../../shared/error/failure.dart';
 

@@ -1,6 +1,6 @@
 import 'package:evangelism_admin/injection_container.dart';
-import 'package:evangelism_admin/src/location/domain/entities/locale.dart';
-import 'package:evangelism_admin/src/location/presentation/bloc/locale_bloc.dart';
+import 'package:evangelism_admin/src/locale/domain/entities/locale.dart';
+import 'package:evangelism_admin/src/locale/presentation/bloc/locale_bloc.dart';
 import 'package:flutter/material.dart';
 
 mixin LocaleMixin {

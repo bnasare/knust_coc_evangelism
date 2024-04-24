@@ -1,6 +1,6 @@
 import 'package:evangelism_admin/shared/data/collection_ids.dart';
 import 'package:evangelism_admin/shared/data/firestore_service.dart';
-import 'package:evangelism_admin/src/location/domain/entities/locale.dart';
+import 'package:evangelism_admin/src/locale/domain/entities/locale.dart';
 
 abstract class LocaleRemoteDatabase {
   Stream<Locale> getLocale(String documentID);
