@@ -1,10 +1,12 @@
+import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_mixin.dart';
 import 'package:evangelism_admin/core/prospect/presentation/interface/pages/prospect_details.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SearchProspectPage extends StatefulWidget {
-  const SearchProspectPage({super.key});
+class SearchProspectPage extends StatefulWidget with ProspectMixin {
+  final String localeID;
+  SearchProspectPage({super.key, required this.localeID});
 
   @override
   createState() => _SearchProspectPage();
@@ -37,40 +39,46 @@ class _SearchProspectPage extends State<SearchProspectPage> {
               ),
             ),
             Expanded(
-              child: ListView.separated(
-                  padding:
-                      const EdgeInsets.only(bottom: 0, left: 16, right: 16),
-                  shrinkWrap: true,
-                  itemBuilder: (__, _) {
-                    return ListTile(
-                      splashColor: ExtraColors.background,
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return const ProspectDetailsPage();
+              child: StreamBuilder(
+                  stream: widget.listAllProspects(documentID: widget.localeID),
+                  builder: (context, snapshot) {
+                    return ListView.separated(
+                        padding: const EdgeInsets.only(
+                            bottom: 0, left: 16, right: 16),
+                        shrinkWrap: true,
+                        itemBuilder: (__, _) {
+                          return ListTile(
+                            splashColor: ExtraColors.background,
+                            onTap: () {
+                              Navigator.of(context, rootNavigator: true).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return const ProspectDetailsPage();
+                                  },
+                                ),
+                              );
                             },
-                          ),
-                        );
-                      },
-                      contentPadding: const EdgeInsets.all(0),
-                      leading: const Icon(CupertinoIcons.person_alt_circle,
-                          color: ExtraColors.secondaryText, size: 50),
-                      title: const Text('Dennis Osei',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: ExtraColors.primaryText)),
-                      subtitle: const Text('0269865678',
-                          style: TextStyle(
-                              letterSpacing: 1.5,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: ExtraColors.secondaryText)),
-                    );
-                  },
-                  separatorBuilder: (__, _) => const Divider(),
-                  itemCount: 8),
+                            contentPadding: const EdgeInsets.all(0),
+                            leading: const Icon(
+                                CupertinoIcons.person_alt_circle,
+                                color: ExtraColors.secondaryText,
+                                size: 50),
+                            title: const Text('Dennis Osei',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: ExtraColors.primaryText)),
+                            subtitle: const Text('0269865678',
+                                style: TextStyle(
+                                    letterSpacing: 1.5,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    color: ExtraColors.secondaryText)),
+                          );
+                        },
+                        separatorBuilder: (__, _) => const Divider(),
+                        itemCount: 8);
+                  }),
             )
           ],
         ),

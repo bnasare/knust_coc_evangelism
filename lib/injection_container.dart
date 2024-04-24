@@ -1,4 +1,5 @@
 import 'package:evangelism_admin/core/prospect/prospect_injection.dart';
+import 'package:evangelism_admin/src/locales/locale_injection.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
@@ -16,6 +17,7 @@ Future<void> init() async {
   initAuth();
   initOnboarding();
   initProspect();
+  initLocale();
 
   sl
     ..registerLazySingleton(http.Client.new)

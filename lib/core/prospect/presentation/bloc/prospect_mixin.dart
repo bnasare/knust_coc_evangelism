@@ -16,4 +16,20 @@ mixin ProspectMixin {
         (r) => SnackBarHelper.showSuccessSnackBar(context,
             "${r.name} has been successfully added to the prospect list! 🎉"));
   }
+
+  Stream<Prospect> getAProspect({required String documentID}) async* {
+    final result = await bloc.getAProspect(documentID).first;
+    yield result.fold(
+      (l) => Prospect.initial(),
+      (r) => r,
+    );
+  }
+
+  Stream<List<Prospect>> listAllProspects({required String documentID}) async* {
+    final result = await bloc.listAllProspects(documentID).first;
+    yield result.fold(
+      (l) => List<Prospect>.empty(),
+      (r) => r,
+    );
+  }
 }

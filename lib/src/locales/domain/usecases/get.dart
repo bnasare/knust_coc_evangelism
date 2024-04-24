@@ -2,16 +2,16 @@ import 'package:dartz/dartz.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
 
 import '../../../../shared/error/failure.dart';
-import '../entities/locale.dart';
+import '../entities/locales.dart';
 import '../repositories/locale_repository.dart';
 
-class GetLocale implements StreamUseCase<Locale, ObjectParams<String>> {
+class GetLocale implements StreamUseCase<Locales, ObjectParams<String>> {
   final LocaleRepository repository;
 
   GetLocale(this.repository);
 
   @override
-  Stream<Either<Failure, Locale>> call(ObjectParams<String> params) async* {
+  Stream<Either<Failure, Locales>> call(ObjectParams<String> params) async* {
     yield* repository.getLocale(params.value);
   }
 }
