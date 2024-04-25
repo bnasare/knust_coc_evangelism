@@ -16,6 +16,7 @@ class Prospect with _$Prospect {
     required String baptismalStatus,
     required String interactionDetails,
     required String id,
+    String? localeID,
     final DateTime? createdAt,
   }) = _Prospect;
 
@@ -33,6 +34,7 @@ class Prospect with _$Prospect {
         baptismalStatus: '',
         interactionDetails: '',
         id: '',
+        localeID: '',
         createdAt: null,
       );
 }

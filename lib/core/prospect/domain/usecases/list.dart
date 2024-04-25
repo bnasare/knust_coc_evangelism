@@ -12,7 +12,7 @@ class ListProspects
 
   @override
   Stream<Either<Failure, List<Prospect>>> call(
-      ObjectParams<List<String>> params) async* {
-    yield* repository.listProspects(params.value);
+      ObjectParams<List<String>> params){
+    return repository.listProspects(params.value);
   }
 }

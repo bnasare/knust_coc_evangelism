@@ -28,6 +28,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final int _stepAmount = 9;
   bool isLoading = false;
   String? localeName;
+  String? localeID;
   StreamSubscription<Locales>? _subscription;
 
   final groupNumberController = TextEditingController();
@@ -48,6 +49,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     _subscription = widget.getALocale().listen((locale) {
       setState(() {
         localeName = locale.name;
+        localeID = locale.id;
         localeController.text = localeName ?? '';
       });
     }, onError: (error) {
@@ -218,6 +220,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                         baptismalStatus: baptismalStatusController.text,
                         interactionDetails: lessonsController.text,
                         id: const Uuid().v4(),
+                        localeID: localeID,
                         createdAt: DateTime.fromMillisecondsSinceEpoch(
                             DateTime.now().millisecondsSinceEpoch),
                       ));
@@ -254,9 +257,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   readOnly: true,
                   onTap: null,
                   decoration: const InputDecoration(
-                    hintText: "Select location",
-                    filled: true,
-                  ),
+                      hintText: "Select location", filled: true),
                 ),
               ),
               Step(

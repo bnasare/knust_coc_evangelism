@@ -30,6 +30,7 @@ mixin _$Prospect {
   String get baptismalStatus => throw _privateConstructorUsedError;
   String get interactionDetails => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  String? get localeID => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,6 +55,7 @@ abstract class $ProspectCopyWith<$Res> {
       String baptismalStatus,
       String interactionDetails,
       String id,
+      String? localeID,
       DateTime? createdAt});
 }
 
@@ -80,6 +82,7 @@ class _$ProspectCopyWithImpl<$Res, $Val extends Prospect>
     Object? baptismalStatus = null,
     Object? interactionDetails = null,
     Object? id = null,
+    Object? localeID = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -123,6 +126,10 @@ class _$ProspectCopyWithImpl<$Res, $Val extends Prospect>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      localeID: freezed == localeID
+          ? _value.localeID
+          : localeID // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -150,6 +157,7 @@ abstract class _$$ProspectImplCopyWith<$Res>
       String baptismalStatus,
       String interactionDetails,
       String id,
+      String? localeID,
       DateTime? createdAt});
 }
 
@@ -174,6 +182,7 @@ class __$$ProspectImplCopyWithImpl<$Res>
     Object? baptismalStatus = null,
     Object? interactionDetails = null,
     Object? id = null,
+    Object? localeID = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(_$ProspectImpl(
@@ -217,6 +226,10 @@ class __$$ProspectImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      localeID: freezed == localeID
+          ? _value.localeID
+          : localeID // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -239,6 +252,7 @@ class _$ProspectImpl implements _Prospect {
       required this.baptismalStatus,
       required this.interactionDetails,
       required this.id,
+      this.localeID,
       this.createdAt});
 
   factory _$ProspectImpl.fromJson(Map<String, dynamic> json) =>
@@ -265,11 +279,13 @@ class _$ProspectImpl implements _Prospect {
   @override
   final String id;
   @override
+  final String? localeID;
+  @override
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Prospect(evangelismSetting: $evangelismSetting, initialContact: $initialContact, name: $name, mobile: $mobile, demographics: $demographics, gender: $gender, religiousAffiliation: $religiousAffiliation, baptismalStatus: $baptismalStatus, interactionDetails: $interactionDetails, id: $id, createdAt: $createdAt)';
+    return 'Prospect(evangelismSetting: $evangelismSetting, initialContact: $initialContact, name: $name, mobile: $mobile, demographics: $demographics, gender: $gender, religiousAffiliation: $religiousAffiliation, baptismalStatus: $baptismalStatus, interactionDetails: $interactionDetails, id: $id, localeID: $localeID, createdAt: $createdAt)';
   }
 
   @override
@@ -293,6 +309,8 @@ class _$ProspectImpl implements _Prospect {
             (identical(other.interactionDetails, interactionDetails) ||
                 other.interactionDetails == interactionDetails) &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.localeID, localeID) ||
+                other.localeID == localeID) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -311,6 +329,7 @@ class _$ProspectImpl implements _Prospect {
       baptismalStatus,
       interactionDetails,
       id,
+      localeID,
       createdAt);
 
   @JsonKey(ignore: true)
@@ -339,6 +358,7 @@ abstract class _Prospect implements Prospect {
       required final String baptismalStatus,
       required final String interactionDetails,
       required final String id,
+      final String? localeID,
       final DateTime? createdAt}) = _$ProspectImpl;
 
   factory _Prospect.fromJson(Map<String, dynamic> json) =
@@ -364,6 +384,8 @@ abstract class _Prospect implements Prospect {
   String get interactionDetails;
   @override
   String get id;
+  @override
+  String? get localeID;
   @override
   DateTime? get createdAt;
   @override

@@ -37,41 +37,51 @@ class ProspectRepositoryImpl implements ProspectRepository {
   }
 
   @override
-  Stream<Either<Failure, Prospect>> getProspect(String documentID) async* {
+  Stream<Either<Failure, Prospect>> getProspect(String documentID) {
     try {
-      await networkInfo.hasInternet();
-      final results = await remoteDatabase.getProspect(documentID).first;
-      yield Right(results);
+      networkInfo.hasInternet();
+      final results = remoteDatabase.getProspect(documentID);
+      return results.map((prospect) => Right(prospect));
     } on FirebaseAuthException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      yield Left(Failure(error.message));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      yield const Left(Failure('Something went wrong... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(
+          const Left(Failure('Something went wrong... Please try again')));
     }
   }
 
   @override
   Stream<Either<Failure, List<Prospect>>> listProspects(
-      List<String> documentID) async* {
+      List<String> documentID) {
     try {
-      await networkInfo.hasInternet();
-      final results = await remoteDatabase.listProspects(documentID).first;
-      yield Right(results);
+      networkInfo.hasInternet();
+      final results = remoteDatabase.listProspects(documentID);
+      return results.map((prospects) => Right(prospects));
     } on FirebaseAuthException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      yield Left(Failure(error.message));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      yield const Left(Failure('Something went wrong... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(
+          const Left(Failure('Something went wrong... Please try again')));
     }
   }
 }

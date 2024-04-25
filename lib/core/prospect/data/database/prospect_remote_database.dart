@@ -23,6 +23,7 @@ class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
       baptismalStatus: prospect.baptismalStatus,
       interactionDetails: prospect.interactionDetails,
       id: prospect.id,
+      localeID: prospect.localeID,
       createdAt: prospect.createdAt,
     );
 
@@ -35,23 +36,23 @@ class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
   }
 
   @override
-  Stream<Prospect> getProspect(String documentID) async* {
+  Stream<Prospect> getProspect(String documentID){
     final prospect = FirestoreService.instance
         .collection(DatabaseCollections.prospects)
         .doc(documentID)
         .snapshots()
         .map((event) => Prospect.fromJson(event.data()!));
-    yield* prospect;
+    return prospect;
   }
 
   @override
-  Stream<List<Prospect>> listProspects(List<String> documentID) async* {
+  Stream<List<Prospect>> listProspects(List<String> documentID)  {
     final prospect = FirestoreService.instance
         .collection(DatabaseCollections.prospects)
         .where(FieldPath.documentId, whereIn: documentID)
         .snapshots()
         .map((event) =>
             event.docs.map((e) => Prospect.fromJson(e.data())).toList());
-    yield* prospect;
+    return prospect;
   }
 }

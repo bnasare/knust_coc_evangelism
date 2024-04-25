@@ -22,20 +22,28 @@ mixin ProspectMixin {
             "${r.name} has been successfully added to the prospect list! 🎉"));
   }
 
-  Stream<Prospect> getAProspect({required String documentID}) async* {
-    final result = await bloc.getAProspect(documentID).first;
-    yield result.fold(
-      (l) => Prospect.initial(),
-      (r) => r,
-    );
+  Stream<Prospect> getAProspect({required String documentID}) {
+    final result = bloc.getAProspect(documentID);
+    return result.map((either) {
+      return either.fold((failure) {
+        log('Failed to fetch locales: $failure');
+        return Prospect.initial();
+      }, (prospect) {
+        return prospect;
+      });
+    });
   }
 
-  Stream<List<Prospect>> listAllProspects({required String documentID}) async* {
-    final result = await bloc.listAllProspects(documentID).first;
-    yield result.fold(
-      (l) => List<Prospect>.empty(),
-      (r) => r,
-    );
+  Stream<List<Prospect>> listAllProspects({required String documentID}) {
+    final result = bloc.listAllProspects(documentID);
+    return result.map((either) {
+      return either.fold((failure) {
+        log('Failed to fetch locales: $failure');
+        return [];
+      }, (prospects) {
+        return prospects;
+      });
+    });
   }
 
   Stream<Locales> getALocale() {

@@ -10,7 +10,7 @@ class GetProspect implements StreamUseCase<Prospect, ObjectParams<String>> {
   GetProspect(this.repository);
 
   @override
-  Stream<Either<Failure, Prospect>> call(ObjectParams<String> params) async* {
-    yield* repository.getProspect(params.value);
+  Stream<Either<Failure, Prospect>> call(ObjectParams<String> params)  {
+    return repository.getProspect(params.value);
   }
 }

@@ -21,12 +21,12 @@ class ProspectBloc {
     return await createProspect(CreateProspectParams(prospect: prospect));
   }
 
-  Stream<Either<Failure, Prospect>> getAProspect(String documentID) async* {
-    yield* getProspect(ObjectParams<String>(documentID));
+  Stream<Either<Failure, Prospect>> getAProspect(String documentID) {
+    return getProspect(ObjectParams<String>(documentID));
   }
 
   Stream<Either<Failure, List<Prospect>>> listAllProspects(
-      String documentID) async* {
-    yield* listProspects(ObjectParams<List<String>>([documentID]));
+      String documentID)  {
+    return listProspects(ObjectParams<List<String>>([documentID]));
   }
 }
