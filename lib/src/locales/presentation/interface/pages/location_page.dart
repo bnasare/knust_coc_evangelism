@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/core/prospect/presentation/interface/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
@@ -84,6 +86,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                                   },
                                 ),
                               );
+                              log(locale.id);
                             },
                             tileColor: ExtraColors.primaryText,
                             shape: const BeveledRectangleBorder(

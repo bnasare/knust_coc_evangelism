@@ -62,7 +62,7 @@ class ProspectRepositoryImpl implements ProspectRepository {
 
   @override
   Stream<Either<Failure, List<Prospect>>> listProspects(
-      List<String> documentID) {
+      String documentID) {
     try {
       networkInfo.hasInternet();
       final results = remoteDatabase.listProspects(documentID);

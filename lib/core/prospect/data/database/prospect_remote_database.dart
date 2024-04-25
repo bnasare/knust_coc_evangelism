@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
 import 'package:evangelism_admin/shared/data/collection_ids.dart';
 import 'package:evangelism_admin/shared/data/firestore_service.dart';
@@ -6,7 +5,7 @@ import 'package:evangelism_admin/shared/data/firestore_service.dart';
 abstract class ProspectRemoteDatabase {
   Future<Prospect> createProspect(Prospect prospect);
   Stream<Prospect> getProspect(String documentID);
-  Stream<List<Prospect>> listProspects(List<String> documentIDs);
+  Stream<List<Prospect>> listProspects(String documentID);
 }
 
 class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
@@ -36,7 +35,7 @@ class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
   }
 
   @override
-  Stream<Prospect> getProspect(String documentID){
+  Stream<Prospect> getProspect(String documentID) {
     final prospect = FirestoreService.instance
         .collection(DatabaseCollections.prospects)
         .doc(documentID)
@@ -46,13 +45,21 @@ class ProspectRemoteDatabaseImpl implements ProspectRemoteDatabase {
   }
 
   @override
-  Stream<List<Prospect>> listProspects(List<String> documentID)  {
+  Stream<List<Prospect>> listProspects(String documentID) {
     final prospect = FirestoreService.instance
         .collection(DatabaseCollections.prospects)
-        .where(FieldPath.documentId, whereIn: documentID)
+        .where('localeID', isEqualTo: documentID)
+        .orderBy('createdAt', descending: true)
         .snapshots()
-        .map((event) =>
-            event.docs.map((e) => Prospect.fromJson(e.data())).toList());
+        .map((event) {
+      if (event.docs.isEmpty) {
+        throw Exception("No documents found");
+      }
+      final prospectsList = event.docs.map((e) {
+        return Prospect.fromJson(e.data());
+      }).toList();
+      return prospectsList;
+    });
     return prospect;
   }
 }

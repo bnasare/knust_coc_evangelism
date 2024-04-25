@@ -27,6 +27,6 @@ class ProspectBloc {
 
   Stream<Either<Failure, List<Prospect>>> listAllProspects(
       String documentID)  {
-    return listProspects(ObjectParams<List<String>>([documentID]));
+    return listProspects(ObjectParams<String>(documentID));
   }
 }

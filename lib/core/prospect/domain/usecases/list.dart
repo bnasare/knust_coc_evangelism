@@ -5,14 +5,14 @@ import 'package:evangelism_admin/shared/error/failure.dart';
 import 'package:evangelism_admin/shared/usecase/usecase.dart';
 
 class ListProspects
-    implements StreamUseCase<List<Prospect>, ObjectParams<List<String>>> {
+    implements StreamUseCase<List<Prospect>, ObjectParams<String>> {
   final ProspectRepository repository;
 
   ListProspects(this.repository);
 
   @override
   Stream<Either<Failure, List<Prospect>>> call(
-      ObjectParams<List<String>> params){
+      ObjectParams<String> params){
     return repository.listProspects(params.value);
   }
 }
