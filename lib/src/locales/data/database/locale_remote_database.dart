@@ -1,13 +1,10 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evangelism_admin/shared/data/collection_ids.dart';
 import 'package:evangelism_admin/shared/data/firestore_service.dart';
 import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 
 abstract class LocaleRemoteDatabase {
   Stream<Locales> getLocale(String documentID);
-  Future<List<Locales>> listLocales();
+  Stream<List<Locales>> listLocales();
 }
 
 class LocaleRemoteDatabaseImpl implements LocaleRemoteDatabase {
@@ -22,17 +19,12 @@ class LocaleRemoteDatabaseImpl implements LocaleRemoteDatabase {
   }
 
   @override
-Future<List<Locales>> listLocales() async {
-    final querySnapshot = await FirebaseFirestore.instance
+  Stream<List<Locales>> listLocales() {
+    final locales = FirestoreService.instance
         .collection(DatabaseCollections.locales)
-        .get();
-
-    log("Documents fetched: ${querySnapshot.docs.length}");
-
-    final localesList =
-        querySnapshot.docs.map((doc) => Locales.fromJson(doc.data())).toList();
-
-    return localesList;
+        .snapshots()
+        .map((event) =>
+            event.docs.map((e) => Locales.fromJson(e.data())).toList());
+    return locales;
   }
-
 }

@@ -5,13 +5,13 @@ import 'package:evangelism_admin/src/locales/domain/repositories/locale_reposito
 
 import '../../../../shared/error/failure.dart';
 
-class ListLocales implements UseCase<List<Locales>, NoParams> {
+class ListLocales implements StreamUseCase<List<Locales>, NoParams> {
   final LocaleRepository repository;
 
   ListLocales(this.repository);
 
   @override
-  Future<Either<Failure, List<Locales>>> call(NoParams params) async {
+  Stream<Either<Failure, List<Locales>>> call(NoParams params)  {
     return repository.listLocales();
   }
 }

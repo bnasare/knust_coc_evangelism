@@ -5,5 +5,5 @@ import '../entities/locales.dart';
 
 abstract class LocaleRepository {
   Stream<Either<Failure, Locales>> getLocale(String documentID);
-  Future<Either<Failure, List<Locales>>> listLocales();
+  Stream<Either<Failure, List<Locales>>> listLocales();
 }

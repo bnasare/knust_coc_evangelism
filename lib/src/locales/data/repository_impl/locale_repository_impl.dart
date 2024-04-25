@@ -17,23 +17,30 @@ class LocaleRepositoryImpl implements LocaleRepository {
   });
 
   @override
-  Future<Either<Failure, List<Locales>>> listLocales() async {
+Stream<Either<Failure, List<Locales>>> listLocales() {
     try {
-      await networkInfo.hasInternet();
-      final results = await remoteDatabase.listLocales();
-      return Right(results);
+      networkInfo.hasInternet();
+      final results = remoteDatabase.listLocales();
+      // Wrap the results in a Right value and return
+      return results.map((locales) => Right(locales));
     } on FirebaseAuthException catch (error) {
-      return Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      return Left(Failure(error.message));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      return Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      return const Left(Failure('Something went wrong... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(
+          const Left(Failure('Something went wrong... Please try again')));
     }
   }
+
 
   @override
   Stream<Either<Failure, Locales>> getLocale(String documentID) async* {

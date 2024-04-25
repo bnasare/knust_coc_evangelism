@@ -15,7 +15,7 @@ class LocaleBloc {
     yield* getLocale(ObjectParams<String>(documentID));
   }
 
-  Future<Either<Failure, List<Locales>>> listAllLocales() async {
+  Stream<Either<Failure, List<Locales>>> listAllLocales()  {
     return listLocales(NoParams());
   }
 }
