@@ -11,8 +11,8 @@ class LocaleBloc {
 
   LocaleBloc({required this.getLocale, required this.listLocales});
 
-  Stream<Either<Failure, Locales>> getALocale(String status) {
-    return getLocale(ObjectParams<String>(status));
+  Stream<Either<Failure, Locales>> getALocale() {
+    return getLocale(NoParams());
   }
 
   Stream<Either<Failure, List<Locales>>> listAllLocales() {

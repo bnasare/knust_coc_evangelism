@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_mixin.dart';
 import 'package:evangelism_admin/shared/data/image_assets.dart';
@@ -5,6 +7,7 @@ import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:evangelism_admin/shared/presentation/widgets/loading_manager.dart';
 import 'package:evangelism_admin/shared/presentation/widgets/warning_modal.dart';
 import 'package:evangelism_admin/shared/utils/navigation.dart';
+import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +27,8 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   int _index = 0;
   final int _stepAmount = 9;
   bool isLoading = false;
+  String? localeName;
+  StreamSubscription<Locales>? _subscription;
 
   final groupNumberController = TextEditingController();
   final nameController = TextEditingController();
@@ -39,6 +44,16 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   @override
   void initState() {
     super.initState();
+
+    _subscription = widget.getALocale().listen((locale) {
+      setState(() {
+        localeName = locale.name;
+        localeController.text = localeName ?? '';
+      });
+    }, onError: (error) {
+      debugPrint(error.toString());
+    });
+
     groupNumberController.addListener(_updateStepState);
     nameController.addListener(_updateStepState);
     phoneController.addListener(_updateStepState);
@@ -71,6 +86,8 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
     baptismalStatusController.dispose();
     lessonsController.dispose();
     localeController.dispose();
+    _searchController.dispose();
+    _subscription?.cancel();
     super.dispose();
   }
 
@@ -147,7 +164,6 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   religiousAffiliationController.clear();
                   baptismalStatusController.clear();
                   lessonsController.clear();
-                  localeController.clear();
                 });
               } else {
                 setState(() {
@@ -236,38 +252,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 content: TextField(
                   controller: localeController,
                   readOnly: true,
-                  onTap: () {
-                    showCupertinoModalPopup(
-                      barrierColor: ExtraColors.black.withOpacity(0.5),
-                      barrierDismissible: true,
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Material(
-                              child: ListTile(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 10, left: 20, right: 20),
-                                leading: const CircleAvatar(
-                                    child: Icon(CupertinoIcons.location,
-                                        size: 20)),
-                                splashColor: ExtraColors.background,
-                                title: const Text('Asokore Mampong',
-                                    style: TextStyle(color: ExtraColors.white)),
-                                onTap: () {
-                                  setState(() {
-                                    localeController.text = 'Asokore Mampong';
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
+                  onTap: null,
                   decoration: const InputDecoration(
                     hintText: "Select location",
                     filled: true,

@@ -42,10 +42,10 @@ class LocaleRepositoryImpl implements LocaleRepository {
   }
 
   @override
-  Stream<Either<Failure, Locales>> getLocale(String status) {
+  Stream<Either<Failure, Locales>> getLocale() {
     try {
       networkInfo.hasInternet();
-      final results = remoteDatabase.getLocale(status);
+      final results = remoteDatabase.getLocale();
       return results.map((locale) => Right(locale));
     } on FirebaseAuthException catch (error) {
       // Return a Left value with the appropriate Failure object

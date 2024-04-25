@@ -3,16 +3,16 @@ import 'package:evangelism_admin/shared/data/firestore_service.dart';
 import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 
 abstract class LocaleRemoteDatabase {
-  Stream<Locales> getLocale(String status);
+  Stream<Locales> getLocale();
   Stream<List<Locales>> listLocales();
 }
 
 class LocaleRemoteDatabaseImpl implements LocaleRemoteDatabase {
   @override
-  Stream<Locales> getLocale(String status) {
+  Stream<Locales> getLocale() {
     final locale = FirestoreService.instance
         .collection(DatabaseCollections.locales)
-        .where(status, isEqualTo: status)
+        .where('status', isEqualTo: 'active')
         .limit(1)
         .snapshots()
         .map((querySnapshot) {

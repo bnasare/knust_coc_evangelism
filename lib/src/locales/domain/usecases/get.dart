@@ -5,13 +5,13 @@ import '../../../../shared/error/failure.dart';
 import '../entities/locales.dart';
 import '../repositories/locale_repository.dart';
 
-class GetLocale implements StreamUseCase<Locales, ObjectParams<String>> {
+class GetLocale implements StreamUseCase<Locales, NoParams> {
   final LocaleRepository repository;
 
   GetLocale(this.repository);
 
   @override
-  Stream<Either<Failure, Locales>> call(ObjectParams<String> params) {
-    return repository.getLocale(params.value);
+  Stream<Either<Failure, Locales>> call(NoParams params) {
+    return repository.getLocale();
   }
 }
