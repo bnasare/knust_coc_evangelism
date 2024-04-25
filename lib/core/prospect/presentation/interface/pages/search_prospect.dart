@@ -78,7 +78,10 @@ class SearchProspectPage extends HookWidget with ProspectMixin {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                       color: ExtraColors.primaryText)),
-                              subtitle: Text(prospect.mobile,
+                              subtitle: Text(
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  '${prospect.mobile} - ${prospect.demographics}',
                                   style: const TextStyle(
                                       letterSpacing: 1.5,
                                       fontWeight: FontWeight.bold,
