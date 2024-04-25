@@ -11,7 +11,6 @@ mixin LocaleMixin {
 
   Stream<List<Locales>> listAllLocales({required BuildContext context}) {
     final result = bloc.listAllLocales();
-
     return result.map((either) {
       return either.fold(
         (failure) {
@@ -27,11 +26,15 @@ mixin LocaleMixin {
 
   Stream<Locales> getALocale({
     required String documentID,
-  }) async* {
-    final result = await bloc.getALocale(documentID).first;
-    yield result.fold(
-      (l) => Locales.initial(),
-      (r) => r,
-    );
+  }) {
+    final result = bloc.getALocale(documentID);
+    return result.map((either) {
+      return either.fold((failure) {
+        log('Failed to fetch locales: $failure');
+        return Locales.initial();
+      }, (locales) {
+        return locales;
+      });
+    });
   }
 }

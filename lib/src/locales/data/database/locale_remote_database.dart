@@ -9,13 +9,13 @@ abstract class LocaleRemoteDatabase {
 
 class LocaleRemoteDatabaseImpl implements LocaleRemoteDatabase {
   @override
-  Stream<Locales> getLocale(String documentID) async* {
+  Stream<Locales> getLocale(String documentID) {
     final locale = FirestoreService.instance
         .collection(DatabaseCollections.locales)
         .doc(documentID)
         .snapshots()
         .map((event) => Locales.fromJson(event.data()!));
-    yield* locale;
+    return locale;
   }
 
   @override

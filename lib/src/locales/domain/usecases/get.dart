@@ -11,7 +11,7 @@ class GetLocale implements StreamUseCase<Locales, ObjectParams<String>> {
   GetLocale(this.repository);
 
   @override
-  Stream<Either<Failure, Locales>> call(ObjectParams<String> params) async* {
-    yield* repository.getLocale(params.value);
+  Stream<Either<Failure, Locales>> call(ObjectParams<String> params) {
+    return repository.getLocale(params.value);
   }
 }

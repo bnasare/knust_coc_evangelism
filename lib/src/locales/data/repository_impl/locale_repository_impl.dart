@@ -17,7 +17,7 @@ class LocaleRepositoryImpl implements LocaleRepository {
   });
 
   @override
-Stream<Either<Failure, List<Locales>>> listLocales() {
+  Stream<Either<Failure, List<Locales>>> listLocales() {
     try {
       networkInfo.hasInternet();
       final results = remoteDatabase.listLocales();
@@ -41,23 +41,27 @@ Stream<Either<Failure, List<Locales>>> listLocales() {
     }
   }
 
-
   @override
-  Stream<Either<Failure, Locales>> getLocale(String documentID) async* {
+  Stream<Either<Failure, Locales>> getLocale(String documentID) {
     try {
-      await networkInfo.hasInternet();
-      final results = await remoteDatabase.getLocale(documentID).first;
-      yield Right(results);
+      networkInfo.hasInternet();
+      final results = remoteDatabase.getLocale(documentID);
+      return results.map((locale) => Right(locale));
     } on FirebaseAuthException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      yield Left(Failure(error.message));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      yield Left(Failure(
-          error.message ?? 'Unexpected error occurred... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(Left(Failure(
+          error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      yield const Left(Failure('Something went wrong... Please try again'));
+      // Return a Left value with the appropriate Failure object
+      return Stream.value(
+          const Left(Failure('Something went wrong... Please try again')));
     }
   }
 }

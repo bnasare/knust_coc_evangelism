@@ -11,11 +11,11 @@ class LocaleBloc {
 
   LocaleBloc({required this.getLocale, required this.listLocales});
 
-  Stream<Either<Failure, Locales>> getALocale(String documentID) async* {
-    yield* getLocale(ObjectParams<String>(documentID));
+  Stream<Either<Failure, Locales>> getALocale(String documentID) {
+    return getLocale(ObjectParams<String>(documentID));
   }
 
-  Stream<Either<Failure, List<Locales>>> listAllLocales()  {
+  Stream<Either<Failure, List<Locales>>> listAllLocales() {
     return listLocales(NoParams());
   }
 }
