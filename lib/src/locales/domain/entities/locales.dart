@@ -9,6 +9,8 @@ class Locales with _$Locales {
     required String name,
     required String timeframe,
     required String id,
+    required String status,
+    final DateTime? createdAt,
   }) = _Locales;
 
   factory Locales.fromJson(Map<String, dynamic> json) =>
@@ -18,5 +20,7 @@ class Locales with _$Locales {
         name: '',
         timeframe: '',
         id: '',
+        status: '',
+        createdAt: null,
       );
 }

@@ -25,9 +25,9 @@ mixin LocaleMixin {
   }
 
   Stream<Locales> getALocale({
-    required String documentID,
+    required String status,
   }) {
-    final result = bloc.getALocale(documentID);
+    final result = bloc.getALocale(status);
     return result.map((either) {
       return either.fold((failure) {
         log('Failed to fetch locales: $failure');

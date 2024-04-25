@@ -58,7 +58,7 @@ class LocationPage extends HookWidget with LocaleMixin {
             ),
             Expanded(
               child: StreamBuilder(
-                stream: listAllLocales(context: context),
+                stream: allLocales,
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const ErrorViewWidget();

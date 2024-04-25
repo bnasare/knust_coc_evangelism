@@ -23,6 +23,8 @@ mixin _$Locales {
   String get name => throw _privateConstructorUsedError;
   String get timeframe => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  String get status => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,12 @@ abstract class $LocalesCopyWith<$Res> {
   factory $LocalesCopyWith(Locales value, $Res Function(Locales) then) =
       _$LocalesCopyWithImpl<$Res, Locales>;
   @useResult
-  $Res call({String name, String timeframe, String id});
+  $Res call(
+      {String name,
+      String timeframe,
+      String id,
+      String status,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -53,6 +60,8 @@ class _$LocalesCopyWithImpl<$Res, $Val extends Locales>
     Object? name = null,
     Object? timeframe = null,
     Object? id = null,
+    Object? status = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -67,6 +76,14 @@ class _$LocalesCopyWithImpl<$Res, $Val extends Locales>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -78,7 +95,12 @@ abstract class _$$LocalesImplCopyWith<$Res> implements $LocalesCopyWith<$Res> {
       __$$LocalesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String timeframe, String id});
+  $Res call(
+      {String name,
+      String timeframe,
+      String id,
+      String status,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -95,6 +117,8 @@ class __$$LocalesImplCopyWithImpl<$Res>
     Object? name = null,
     Object? timeframe = null,
     Object? id = null,
+    Object? status = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$LocalesImpl(
       name: null == name
@@ -109,6 +133,14 @@ class __$$LocalesImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -117,7 +149,11 @@ class __$$LocalesImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LocalesImpl implements _Locales {
   const _$LocalesImpl(
-      {required this.name, required this.timeframe, required this.id});
+      {required this.name,
+      required this.timeframe,
+      required this.id,
+      required this.status,
+      this.createdAt});
 
   factory _$LocalesImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocalesImplFromJson(json);
@@ -128,10 +164,14 @@ class _$LocalesImpl implements _Locales {
   final String timeframe;
   @override
   final String id;
+  @override
+  final String status;
+  @override
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'Locales(name: $name, timeframe: $timeframe, id: $id)';
+    return 'Locales(name: $name, timeframe: $timeframe, id: $id, status: $status, createdAt: $createdAt)';
   }
 
   @override
@@ -142,12 +182,16 @@ class _$LocalesImpl implements _Locales {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.timeframe, timeframe) ||
                 other.timeframe == timeframe) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, timeframe, id);
+  int get hashCode =>
+      Object.hash(runtimeType, name, timeframe, id, status, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +211,9 @@ abstract class _Locales implements Locales {
   const factory _Locales(
       {required final String name,
       required final String timeframe,
-      required final String id}) = _$LocalesImpl;
+      required final String id,
+      required final String status,
+      final DateTime? createdAt}) = _$LocalesImpl;
 
   factory _Locales.fromJson(Map<String, dynamic> json) = _$LocalesImpl.fromJson;
 
@@ -177,6 +223,10 @@ abstract class _Locales implements Locales {
   String get timeframe;
   @override
   String get id;
+  @override
+  String get status;
+  @override
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$LocalesImplCopyWith<_$LocalesImpl> get copyWith =>

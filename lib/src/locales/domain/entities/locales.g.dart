@@ -11,6 +11,10 @@ _$LocalesImpl _$$LocalesImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String,
       timeframe: json['timeframe'] as String,
       id: json['id'] as String,
+      status: json['status'] as String,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$LocalesImplToJson(_$LocalesImpl instance) =>
@@ -18,4 +22,6 @@ Map<String, dynamic> _$$LocalesImplToJson(_$LocalesImpl instance) =>
       'name': instance.name,
       'timeframe': instance.timeframe,
       'id': instance.id,
+      'status': instance.status,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };
