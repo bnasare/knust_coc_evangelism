@@ -82,7 +82,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                                 MaterialPageRoute(
                                   builder: (BuildContext context) {
                                     return SearchProspectPage(
-                                        localeID: locale.id);
+                                        localeID: locale.id, locale: locale.name);
                                   },
                                 ),
                               );

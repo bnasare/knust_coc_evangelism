@@ -562,7 +562,8 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                       },
                                       decoration: const InputDecoration(
                                         contentPadding: EdgeInsets.all(0),
-                                        hintText: 'Enter church name',
+                                        hintText:
+                                            'Other affiliation (or "None" if not applicable)',
                                         hintStyle: TextStyle(
                                           fontSize: 15.5,
                                           color: ExtraColors.secondaryText,
