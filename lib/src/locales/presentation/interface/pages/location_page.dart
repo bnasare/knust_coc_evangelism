@@ -100,7 +100,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                           child: ErrorViewWidget(),
                         )
                       : LocationWidget(locales: searchResults.value!)
-                  : searchController.text.isEmpty
+                  : searchController.text.isEmpty|| searchResults.value == null
                       ? StreamBuilder(
                           stream: allLocales,
                           builder: (context, snapshot) {
