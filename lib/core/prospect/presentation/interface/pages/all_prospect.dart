@@ -75,6 +75,17 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
               padding: const EdgeInsets.only(
                   left: 16.0, right: 16.0, top: 16, bottom: 16),
               child: SearchBar(
+                trailing: [
+                  if (searchController.text.isNotEmpty)
+                    IconButton(
+                      onPressed: () {
+                        searchController.clear();
+                        searchResults.value = null;
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      },
+                      icon: const Icon(CupertinoIcons.clear_circled),
+                    ),
+                ].whereType<Widget>().toList(),
                 onChanged: (value) => handleSearchDebounced(value),
                 hintText: 'Find Prospects (Name,Affilitation,Initial Contact)',
                 textStyle: const MaterialStatePropertyAll(

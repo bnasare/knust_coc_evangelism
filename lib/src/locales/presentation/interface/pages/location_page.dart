@@ -74,6 +74,17 @@ class LocationPage extends HookWidget with LocaleMixin {
                     padding: const EdgeInsets.only(
                         left: 16.0, right: 16.0, top: 20, bottom: 0),
                     child: SearchBar(
+                      trailing: [
+                        if (searchController.text.isNotEmpty)
+                          IconButton(
+                            onPressed: () {
+                              searchController.clear();
+                              searchResults.value = null;
+                              FocusManager.instance.primaryFocus?.unfocus();
+                            },
+                            icon: const Icon(CupertinoIcons.clear_circled),
+                          ),
+                      ].whereType<Widget>().toList(),
                       onChanged: (value) => handleSearchDebounced(value),
                       hintText: 'Find locales available',
                       textStyle: const MaterialStatePropertyAll(
@@ -100,7 +111,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                           child: ErrorViewWidget(),
                         )
                       : LocationWidget(locales: searchResults.value!)
-                  : searchController.text.isEmpty|| searchResults.value == null
+                  : searchController.text.isEmpty || searchResults.value == null
                       ? StreamBuilder(
                           stream: allLocales,
                           builder: (context, snapshot) {
