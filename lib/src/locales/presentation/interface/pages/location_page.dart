@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:evangelism_admin/core/prospect/presentation/interface/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:evangelism_admin/shared/presentation/widgets/error_view.dart';
 import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 import 'package:evangelism_admin/src/locales/presentation/bloc/locale_mixin.dart';
+import 'package:evangelism_admin/src/locales/presentation/interface/widgets/location_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -100,44 +99,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                           padding: EdgeInsets.only(top: 80),
                           child: ErrorViewWidget(),
                         )
-                      : ListView.separated(
-                          shrinkWrap: true,
-                          padding: const EdgeInsets.all(10),
-                          itemBuilder: (_, index) {
-                            var locale = searchResults.value![index];
-                            return ListTile(
-                              splashColor: ExtraColors.background,
-                              onTap: () {
-                                Navigator.of(context, rootNavigator: true).push(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) {
-                                  return SearchProspectPage(
-                                      localeID: locale.id, locale: locale.name);
-                                }));
-                              },
-                              tileColor: ExtraColors.primaryText,
-                              shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                Radius.circular(8),
-                              )),
-                              title: Text(locale.name,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: ExtraColors.black)),
-                              subtitle: Text(locale.timeframe,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                      color: ExtraColors.grey)),
-                              trailing: const Icon(CupertinoIcons.placemark,
-                                  size: 27),
-                            );
-                          },
-                          separatorBuilder: (_, __) =>
-                              const SizedBox(height: 20),
-                          itemCount: searchResults.value?.length ?? 0,
-                        )
+                      : LocationWidget(locales: searchResults.value!)
                   : searchController.text.isEmpty
                       ? StreamBuilder(
                           stream: allLocales,
@@ -151,54 +113,11 @@ class LocationPage extends HookWidget with LocaleMixin {
                               return const ErrorViewWidget();
                             } else {
                               var locales = snapshot.data!;
-                              return ListView.separated(
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.all(10),
-                                  itemBuilder: (_, index) {
-                                    var locale = locales[index];
-                                    return ListTile(
-                                      splashColor: ExtraColors.background,
-                                      onTap: () {
-                                        Navigator.of(context,
-                                                rootNavigator: true)
-                                            .push(
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) {
-                                              return SearchProspectPage(
-                                                  localeID: locale.id,
-                                                  locale: locale.name);
-                                            },
-                                          ),
-                                        );
-                                        log(locale.id);
-                                      },
-                                      tileColor: ExtraColors.primaryText,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
-                                      ),
-                                      title: Text(locale.name,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              color: ExtraColors.black)),
-                                      subtitle: Text(locale.timeframe,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                              color: ExtraColors.grey)),
-                                      trailing: const Icon(
-                                          CupertinoIcons.placemark,
-                                          size: 27),
-                                    );
-                                  },
-                                  separatorBuilder: (_, __) =>
-                                      const SizedBox(height: 20),
-                                  itemCount: locales.length);
+                              return LocationWidget(locales: locales);
                             }
                           },
                         )
-                      : const Center(child: CircularProgressIndicator()),
+                      : const ErrorViewWidget(),
             ),
           ],
         ),
