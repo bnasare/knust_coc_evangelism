@@ -27,10 +27,7 @@ class SearchProspectPage extends HookWidget with ProspectMixin {
     final allProspects =
         useMemoized(() => listAllProspects(documentID: localeID));
     final searchController = useTextEditingController();
-    // ignore: unused_local_variable
-    var currentPage = 1;
     int rowNumber = 1;
-    const int maxRowsPerPage = 30;
 
     Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
       final path = (await getExternalStorageDirectory())?.path;
@@ -79,15 +76,6 @@ class SearchProspectPage extends HookWidget with ProspectMixin {
           PdfDocument document = PdfDocument();
           var page = document.pages.add();
 
-          final PdfFont titleFont = PdfStandardFont(PdfFontFamily.helvetica, 27,
-              style: PdfFontStyle.bold);
-          final String title = '$locale - ${allProspects.length} Prospects';
-
-          page.graphics.drawString(title, titleFont,
-              brush: PdfBrushes.black, bounds: const Rect.fromLTWH(0, 0, 0, 0));
-
-          final double titleHeight = titleFont.measureString(title).height;
-          const double spaceHeight = 30;
           PdfGrid grid = PdfGrid();
           grid.style = PdfGridStyle(
               font: PdfStandardFont(PdfFontFamily.helvetica, 20),
@@ -109,12 +97,6 @@ class SearchProspectPage extends HookWidget with ProspectMixin {
           }
 
           for (var prospect in allProspects) {
-            if (grid.rows.count >= maxRowsPerPage) {
-              currentPage++;
-              page = document.pages.add();
-              grid = PdfGrid();
-            }
-
             PdfGridRow row = grid.rows.add();
             row.cells[0].value =
                 '$rowNumber. ${prospect.name}- ${prospect.mobile}';
@@ -123,9 +105,27 @@ class SearchProspectPage extends HookWidget with ProspectMixin {
             row.cells[2].value = prospect.religiousAffiliation;
           }
 
-          grid.draw(
+          // Configure the layout format to paginate automatically
+          PdfLayoutFormat gridLayoutFormat =
+              PdfLayoutFormat(layoutType: PdfLayoutType.paginate);
+
+// Draw the grid and get the result to know where the grid ends
+          PdfLayoutResult? gridLayoutResult = grid.draw(
             page: page,
-            bounds: Rect.fromLTWH(0, titleHeight + spaceHeight, 0, 0),
+            bounds: Rect.fromLTWH(
+                0, 0, page.getClientSize().width, page.getClientSize().height),
+            format: gridLayoutFormat,
+          );
+
+          // Check if the grid did not fit on a single page and a new page was created
+          PdfPage lastPage = gridLayoutResult!.page;
+
+// Draw the red line on the last page of the grid
+          lastPage.graphics.drawLine(
+            PdfPen(PdfColor(255, 0, 0), width: 1),
+            Offset(0, gridLayoutResult.bounds.bottom + 10),
+            Offset(lastPage.getClientSize().width,
+                gridLayoutResult.bounds.bottom + 10),
           );
 
           List<int> bytes = await document.save();

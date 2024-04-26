@@ -209,21 +209,20 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   await widget.createAProspect(
                       context: context,
                       prospect: Prospect(
-                        evangelismSetting: localeController.text,
-                        initialContact: groupNumberController.text,
-                        name: nameController.text,
-                        mobile: phoneController.text,
-                        demographics: landmarkController.text,
-                        gender: genderController.text,
-                        religiousAffiliation:
-                            religiousAffiliationController.text,
-                        baptismalStatus: baptismalStatusController.text,
-                        interactionDetails: lessonsController.text,
-                        id: const Uuid().v4(),
-                        localeID: localeID,
-                        createdAt: DateTime.fromMillisecondsSinceEpoch(
-                            DateTime.now().millisecondsSinceEpoch),
-                      ));
+                          evangelismSetting: localeController.text,
+                          initialContact: groupNumberController.text,
+                          name: nameController.text,
+                          mobile: phoneController.text,
+                          demographics: landmarkController.text,
+                          gender: genderController.text,
+                          religiousAffiliation:
+                              religiousAffiliationController.text,
+                          baptismalStatus: baptismalStatusController.text,
+                          interactionDetails: lessonsController.text,
+                          id: const Uuid().v4(),
+                          localeID: localeID,
+                          createdAt: DateTime.fromMillisecondsSinceEpoch(
+                              DateTime.now().millisecondsSinceEpoch)));
                   groupNumberController.clear();
                   nameController.clear();
                   phoneController.clear();
