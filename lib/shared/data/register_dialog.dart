@@ -67,14 +67,6 @@ List<Map<String, dynamic>> religiousAffiliations = [
 ];
 
 List<Map<String, dynamic>> baptismalStatusOptions = [
-  {
-    "status": "Baptized - Dipped Once",
-    "icon": CupertinoIcons.check_mark_circled
-  },
-  {
-    "status": "Baptized - Other forms of Baptism",
-    "icon": CupertinoIcons.check_mark_circled
-  },
-  {"status": "Not Baptized", "icon": CupertinoIcons.clear_circled},
-  {"status": "N/A", "icon": CupertinoIcons.question_circle},
+  {"status": "Yes", "icon": CupertinoIcons.check_mark_circled},
+  {"status": "No", "icon": CupertinoIcons.check_mark_circled},
 ];
