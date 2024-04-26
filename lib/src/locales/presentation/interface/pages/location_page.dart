@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:colorful_safe_area/colorful_safe_area.dart';
 import 'package:evangelism_admin/core/prospect/presentation/interface/pages/search_prospect.dart';
 import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:evangelism_admin/shared/presentation/widgets/error_view.dart';
+import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 import 'package:evangelism_admin/src/locales/presentation/bloc/locale_mixin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,37 @@ class LocationPage extends HookWidget with LocaleMixin {
   Widget build(BuildContext context) {
     final allLocales = useMemoized(() => listAllLocales(context: context));
     final searchController = useTextEditingController();
+    final searchResults = useState<List<Locales>?>(null);
+
+    void handleSearch(String query) async {
+      if (query.isEmpty) {
+        searchResults.value = null;
+      } else {
+        List<Locales> allLocales = await listAllLocales(context: context).first;
+        List<Locales> filteredLocales = allLocales
+            .where((locale) =>
+                locale.name.toLowerCase().contains(query.toLowerCase()))
+            .toList();
+        searchResults.value = filteredLocales;
+      }
+    }
+
+    // Optional: Declare a Timer variable to store the debouncer timer
+    Timer? searchDebouncer;
+
+    void handleSearchDebounced(String value) async {
+      // Create a timer with a specific duration (e.g., 500 milliseconds)
+      Timer? timer = Timer(const Duration(milliseconds: 500), () {
+        // If the timer finishes and the search text hasn't changed, call handleSearch
+        if (value == searchController.text) {
+          handleSearch(value);
+        }
+      });
+
+      // Cancel any previous timers before starting a new one
+      searchDebouncer?.cancel();
+      searchDebouncer = timer;
+    }
 
     return ColorfulSafeArea(
       color: Theme.of(context).primaryColor,
@@ -42,6 +75,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                     padding: const EdgeInsets.only(
                         left: 16.0, right: 16.0, top: 20, bottom: 0),
                     child: SearchBar(
+                      onChanged: (value) => handleSearchDebounced(value),
                       hintText: 'Find locales available',
                       textStyle: const MaterialStatePropertyAll(
                           TextStyle(color: ExtraColors.grey)),
@@ -59,59 +93,112 @@ class LocationPage extends HookWidget with LocaleMixin {
               ),
             ),
             Expanded(
-              child: StreamBuilder(
-                stream: allLocales,
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const ErrorViewWidget();
-                  } else if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.data!.isEmpty) {
-                    return const ErrorViewWidget();
-                  } else {
-                    var locales = snapshot.data!;
-                    return ListView.separated(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.all(10),
-                        itemBuilder: (_, index) {
-                          var locale = locales[index];
-                          return ListTile(
-                            splashColor: ExtraColors.background,
-                            onTap: () {
-                              Navigator.of(context, rootNavigator: true).push(
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                    return SearchProspectPage(
-                                        localeID: locale.id, locale: locale.name);
+              child: searchResults.value != null &&
+                      searchController.text.isNotEmpty
+                  ? searchResults.value!.isEmpty
+                      ? const Padding(
+                          padding: EdgeInsets.only(top: 80),
+                          child: ErrorViewWidget(),
+                        )
+                      : ListView.separated(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(10),
+                          itemBuilder: (_, index) {
+                            var locale = searchResults.value![index];
+                            return ListTile(
+                              splashColor: ExtraColors.background,
+                              onTap: () {
+                                Navigator.of(context, rootNavigator: true).push(
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                  return SearchProspectPage(
+                                      localeID: locale.id, locale: locale.name);
+                                }));
+                              },
+                              tileColor: ExtraColors.primaryText,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              )),
+                              title: Text(locale.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: ExtraColors.black)),
+                              subtitle: Text(locale.timeframe,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: ExtraColors.grey)),
+                              trailing: const Icon(CupertinoIcons.placemark,
+                                  size: 27),
+                            );
+                          },
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 20),
+                          itemCount: searchResults.value?.length ?? 0,
+                        )
+                  : searchController.text.isEmpty
+                      ? StreamBuilder(
+                          stream: allLocales,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return const ErrorViewWidget();
+                            } else if (!snapshot.hasData) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.data!.isEmpty) {
+                              return const ErrorViewWidget();
+                            } else {
+                              var locales = snapshot.data!;
+                              return ListView.separated(
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.all(10),
+                                  itemBuilder: (_, index) {
+                                    var locale = locales[index];
+                                    return ListTile(
+                                      splashColor: ExtraColors.background,
+                                      onTap: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .push(
+                                          MaterialPageRoute(
+                                            builder: (BuildContext context) {
+                                              return SearchProspectPage(
+                                                  localeID: locale.id,
+                                                  locale: locale.name);
+                                            },
+                                          ),
+                                        );
+                                        log(locale.id);
+                                      },
+                                      tileColor: ExtraColors.primaryText,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                      ),
+                                      title: Text(locale.name,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              color: ExtraColors.black)),
+                                      subtitle: Text(locale.timeframe,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14,
+                                              color: ExtraColors.grey)),
+                                      trailing: const Icon(
+                                          CupertinoIcons.placemark,
+                                          size: 27),
+                                    );
                                   },
-                                ),
-                              );
-                              log(locale.id);
-                            },
-                            tileColor: ExtraColors.primaryText,
-                            shape: const BeveledRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                            ),
-                            title: Text(locale.name,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: ExtraColors.black)),
-                            subtitle: Text(locale.timeframe,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                    color: ExtraColors.grey)),
-                            trailing:
-                                const Icon(CupertinoIcons.placemark, size: 27),
-                          );
-                        },
-                        separatorBuilder: (_, __) => const SizedBox(height: 20),
-                        itemCount: locales.length);
-                  }
-                },
-              ),
+                                  separatorBuilder: (_, __) =>
+                                      const SizedBox(height: 20),
+                                  itemCount: locales.length);
+                            }
+                          },
+                        )
+                      : const Center(child: CircularProgressIndicator()),
             ),
           ],
         ),
