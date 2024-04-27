@@ -60,9 +60,9 @@ class _NavBarState extends State<NavBar> {
         ),
         Flexible(
           child: PersistentTabView(
-            navBarHeight: 65,
-            padding:
-                const NavBarPadding.only(left: 0, right: 0, bottom: 0, top: 20),
+            navBarHeight: 80,
+            padding: const NavBarPadding.only(
+                left: 0, right: 0, bottom: 10, top: 20),
             context,
             screens: _buildScreens(),
             items: _navBarsItems(),

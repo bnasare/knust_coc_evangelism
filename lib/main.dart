@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:evangelism_admin/bottom_navbar.dart';
 import 'package:evangelism_admin/firebase_options.dart';
 import 'package:evangelism_admin/injection_container.dart';
@@ -8,6 +7,7 @@ import 'package:evangelism_admin/src/onboarding/presentation/bloc/onboarding_mix
 import 'package:evangelism_admin/src/onboarding/presentation/interface/pages/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,16 +18,19 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await di.init();
   await sl<PushNotification>().initializeNotification();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(
-    ProviderScope(
-      child: DevicePreview(
-        enabled: false,
-        builder: (context) => MyApp(),
-      ),
-    ),
-  );
+  runApp(MyApp());
 }
+
+// runApp(
+//   ProviderScope(
+//     child: DevicePreview(
+//       enabled: true,
+//       builder: (context) => MyApp(),
+//     ),
+//   ),
+// );
 
 class MyApp extends HookConsumerWidget with OnboardingMixin {
   MyApp({super.key});
