@@ -5,7 +5,7 @@ import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
 import 'package:evangelism_admin/shared/utils/navigation.dart';
 import 'package:flutter/material.dart';
 
-import '../bloc/onboarding_mixin.dart';
+import '../../bloc/onboarding_mixin.dart';
 
 class OnboardingPage extends StatefulWidget with OnboardingMixin {
   OnboardingPage({super.key});
