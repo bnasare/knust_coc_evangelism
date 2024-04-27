@@ -56,7 +56,7 @@ class _NavBarState extends State<NavBar> {
       children: [
         const Divider(
           height: 0,
-          color: ExtraColors.white,
+          color: ExtraColors.primaryText,
         ),
         Flexible(
           child: PersistentTabView(

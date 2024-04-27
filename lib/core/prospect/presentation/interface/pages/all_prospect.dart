@@ -61,6 +61,7 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Locate Prospect'),
         actions: [

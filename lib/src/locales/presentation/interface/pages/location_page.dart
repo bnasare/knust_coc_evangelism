@@ -76,6 +76,7 @@ class LocationPage extends HookWidget with LocaleMixin {
               primaryButtonLabel: "OK",
               primaryAction: () {})
           : Scaffold(
+              resizeToAvoidBottomInset: false,
               body: Column(
                 children: [
                   Container(
