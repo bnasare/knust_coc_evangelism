@@ -100,14 +100,14 @@ class LocationPage extends HookWidget with LocaleMixin {
                           child: SearchBar(
                             trailing: [
                               if (searchController.text.isNotEmpty)
-                                IconButton(
-                                  onPressed: () {
+                                GestureDetector(
+                                  onTap: () {
                                     searchController.clear();
                                     searchResults.value = null;
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
                                   },
-                                  icon:
+                                  child:
                                       const Icon(CupertinoIcons.clear_circled),
                                 ),
                             ].whereType<Widget>().toList(),
