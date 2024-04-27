@@ -22,13 +22,17 @@ mixin ProspectMixin {
   final bloc = sl<ProspectBloc>();
   final localeBloc = sl<LocaleBloc>();
 
-  Future<void> createAProspect(
+  Future<bool> createAProspect(
       {required BuildContext context, required Prospect prospect}) async {
     final result = await bloc.createAProspect(prospect);
-    return result.fold(
-        (l) => SnackBarHelper.showErrorSnackBar(context, l.message),
-        (r) => SnackBarHelper.showSuccessSnackBar(context,
-            "${r.name} has been successfully added to the prospect list! 🎉"));
+    return result.fold((l) {
+      SnackBarHelper.showErrorSnackBar(context, l.message);
+      return false;
+    }, (r) {
+      SnackBarHelper.showSuccessSnackBar(context,
+          "${r.name} has been successfully added to the prospect list! 🎉");
+      return true;
+    });
   }
 
   Stream<Prospect> getAProspect({required String documentID}) {

@@ -226,34 +226,41 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   setState(() {
                     isLoading = true;
                   });
-                  await widget.createAProspect(
-                      context: context,
-                      prospect: Prospect(
-                          evangelismSetting: localeController.text,
-                          initialContact: groupNumberController.text,
-                          name: nameController.text,
-                          mobile: phoneController.text,
-                          demographics: landmarkController.text,
-                          gender: genderController.text,
-                          religiousAffiliation:
-                              religiousAffiliationController.text,
-                          baptismalStatus: baptismalStatusController.text,
-                          interactionDetails: lessonsController.text,
-                          id: const Uuid().v4(),
-                          localeID: localeID,
-                          createdAt: DateTime.fromMillisecondsSinceEpoch(
-                              DateTime.now().millisecondsSinceEpoch)));
-                  groupNumberController.clear();
-                  nameController.clear();
-                  phoneController.clear();
-                  landmarkController.clear();
-                  genderController.clear();
-                  religiousAffiliationController.clear();
-                  baptismalStatusController.clear();
-                  lessonsController.clear();
+                  final isSuccess = await widget.createAProspect(
+                    context: context,
+                    prospect: Prospect(
+                      evangelismSetting: localeController.text,
+                      initialContact: groupNumberController.text,
+                      name: nameController.text,
+                      mobile: phoneController.text,
+                      demographics: landmarkController.text,
+                      gender: genderController.text,
+                      religiousAffiliation: religiousAffiliationController.text,
+                      baptismalStatus: baptismalStatusController.text,
+                      interactionDetails: lessonsController.text,
+                      id: const Uuid().v4(),
+                      localeID: localeID,
+                      createdAt: DateTime.fromMillisecondsSinceEpoch(
+                          DateTime.now().millisecondsSinceEpoch),
+                    ),
+                  );
+
+                  if (isSuccess) {
+                    groupNumberController.clear();
+                    nameController.clear();
+                    phoneController.clear();
+                    landmarkController.clear();
+                    genderController.clear();
+                    religiousAffiliationController.clear();
+                    baptismalStatusController.clear();
+                    lessonsController.clear();
+                      setState(() {
+                      _index = 0;
+                    });
+                  }
+
                   setState(() {
                     isLoading = false;
-                    _index = 0;
                   });
                 }
               }
@@ -739,7 +746,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   controller: lessonsController,
                   decoration: const InputDecoration(
                       hintText:
-                          "Enter details of lessons taught (e.g., Baptism, Faith)",
+                          "Enter any lessons taught (e.g., Baptism, Faith)",
                       filled: true),
                 ),
               ),

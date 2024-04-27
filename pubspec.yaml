@@ -68,6 +68,7 @@ dependencies:
   syncfusion_flutter_pdf: ^25.1.41
   open_file: ^3.3.2
   rxdart: ^0.27.7
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -82,8 +83,19 @@ dev_dependencies:
   freezed: ^2.5.2
   json_serializable: ^6.7.1
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
+# dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#181818"
+  image: assets/image/launcher_icon.jpg
+  image_dark: assets/image/launcher_icon.jpg
 
+  android_12:
+    image: assets/image/launcher_icon.jpg
+    icon_background_color: "#181818"
+    image_dark: assets/image/launcher_icon.jpg
+    icon_background_color_dark: "#181818"
 
 # flutter pub run flutter_launcher_icons:main
 flutter_launcher_icons:
