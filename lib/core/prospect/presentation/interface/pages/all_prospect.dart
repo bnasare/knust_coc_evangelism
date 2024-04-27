@@ -61,13 +61,20 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Locate Prospect'), actions: [
-        IconButton(
-          onPressed: () => createPDF(localeID, context, Locale(locale)),
-          icon: const Icon(CupertinoIcons.doc_text_fill,
-              color: ExtraColors.linkLight),
-        )
-      ]),
+      appBar: AppBar(
+        title: const Text('Locate Prospect'),
+        actions: [
+          searchController.text.isEmpty ||
+                  searchResults.value != null && searchResults.value!.isNotEmpty
+              ? IconButton(
+                  onPressed: () => createPDF(
+                      localeID, context, Locale(locale), searchResults.value),
+                  icon: const Icon(CupertinoIcons.doc_text_fill,
+                      color: ExtraColors.linkLight),
+                )
+              : const SizedBox.shrink(),
+        ],
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -106,7 +113,9 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
                   ? searchResults.value!.isEmpty
                       ? const ErrorViewWidget()
                       : ProspectWidget(prospects: searchResults.value!)
-                  : searchController.text.isEmpty || searchResults.value == null
+                  : searchController.text.isEmpty ||
+                          searchResults.value != null &&
+                              searchResults.value!.isNotEmpty
                       ? StreamBuilder(
                           stream: allProspects,
                           builder: (context, snapshot) {
