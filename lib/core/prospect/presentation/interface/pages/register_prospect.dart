@@ -11,6 +11,7 @@ import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../shared/data/register_dialog.dart';
@@ -25,11 +26,12 @@ class RegisterProspectPage extends StatefulWidget with ProspectMixin {
 
 class _RegisterProspectPageState extends State<RegisterProspectPage> {
   int _index = 0;
-  final int _stepAmount = 9;
+  final int _stepAmount = 8;
   bool isLoading = false;
   String? localeName;
   String? localeID;
   StreamSubscription<Locales>? _subscription;
+  List<String> recentGroupPicks = [];
 
   final groupNumberController = TextEditingController();
   final nameController = TextEditingController();
@@ -42,9 +44,27 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final localeController = TextEditingController();
   final _searchController = TextEditingController();
 
+  // Load recent group picks from SharedPreferences
+  Future<List<String>> loadRecentGroupPicks() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('recentGroupPicks') ?? [];
+  }
+
+// Save recent group picks to SharedPreferences
+  Future<void> saveRecentGroupPicks(List<String> recentGroupPicks) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('recentGroupPicks', recentGroupPicks);
+  }
+
   @override
   void initState() {
     super.initState();
+
+    loadRecentGroupPicks().then((List<String> loadedRecentPicks) {
+      setState(() {
+        recentGroupPicks = loadedRecentPicks;
+      });
+    });
 
     _subscription = widget.getALocale().listen((locale) {
       setState(() {
@@ -179,15 +199,28 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   _index += 1;
                 });
               } else {
-                if (groupNumberController.text.isEmpty ||
+                if (localeController.text.isEmpty) {
+                  showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return WarningModal(
+                            title: "No locale available",
+                            content:
+                                "There is no ongoing evangelism at the moment.",
+                            primaryButtonLabel: "OK",
+                            primaryAction: () {
+                              Navigator.pop(context);
+                            });
+                      });
+                } else if (groupNumberController.text.isEmpty ||
                     nameController.text.isEmpty ||
                     phoneController.text.isEmpty ||
                     landmarkController.text.isEmpty ||
                     genderController.text.isEmpty ||
                     religiousAffiliationController.text.isEmpty ||
                     baptismalStatusController.text.isEmpty ||
-                    lessonsController.text.isEmpty ||
-                    localeController.text.isEmpty) {
+                    lessonsController.text.isEmpty) {
                   showDialog(
                     barrierDismissible: false,
                     context: context,
@@ -231,7 +264,6 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   religiousAffiliationController.clear();
                   baptismalStatusController.clear();
                   lessonsController.clear();
-                  localeController.clear();
                   setState(() {
                     isLoading = false;
                     _index = 0;
@@ -243,29 +275,10 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
               Step(
                 state: _index == 0
                     ? StepState.editing
-                    : localeController.text.isNotEmpty
-                        ? StepState.complete
-                        : StepState.indexed,
-                isActive: localeController.text.isNotEmpty || _index == 0,
-                title: Text("Evangelism Setting",
-                    style: _stepTitleStyle(localeController)),
-                subtitle: Text("Required for registration.",
-                    style: _stepSubtitleStyle(localeController)),
-                content: TextField(
-                  controller: localeController,
-                  readOnly: true,
-                  onTap: null,
-                  decoration: const InputDecoration(
-                      hintText: "Select location", filled: true),
-                ),
-              ),
-              Step(
-                state: _index == 1
-                    ? StepState.editing
                     : groupNumberController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: groupNumberController.text.isNotEmpty || _index == 1,
+                isActive: groupNumberController.text.isNotEmpty || _index == 0,
                 title: Text("Initial Contact",
                     style: _stepTitleStyle(groupNumberController)),
                 subtitle: Text("Group that approached the prospect",
@@ -296,92 +309,141 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                         Icons.close_fullscreen,
                                       )),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, right: 16.0, bottom: 10),
-                                  child: SearchBar(
-                                    keyboardType: TextInputType.phone,
-                                    controller: _searchController,
-                                    hintText: 'Search for your group',
-                                    textStyle: const MaterialStatePropertyAll(
-                                        TextStyle(color: ExtraColors.grey)),
-                                    onChanged: (String value) {
-                                      setState(() {});
-                                    },
-                                    padding: const MaterialStatePropertyAll(
-                                        EdgeInsets.symmetric(horizontal: 15)),
-                                    leading: const Icon(CupertinoIcons.search,
-                                        color: ExtraColors.grey),
-                                    shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    )),
-                                  ),
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(
+                                //       left: 16.0, right: 16.0, bottom: 10),
+                                //   child: SearchBar(
+                                //     keyboardType: TextInputType.phone,
+                                //     controller: _searchController,
+                                //     hintText: 'Search for your group',
+                                //     textStyle: const MaterialStatePropertyAll(
+                                //         TextStyle(color: ExtraColors.grey)),
+                                //     onChanged: (String value) {
+                                //       setState(() {});
+                                //     },
+                                //     padding: const MaterialStatePropertyAll(
+                                //         EdgeInsets.symmetric(horizontal: 15)),
+                                //     leading: const Icon(CupertinoIcons.search,
+                                //         color: ExtraColors.grey),
+                                //     shape: MaterialStatePropertyAll(
+                                //         RoundedRectangleBorder(
+                                //       borderRadius: BorderRadius.circular(10.0),
+                                //     )),
+                                //   ),
+                                // ),
                                 Expanded(
                                   child: SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      children: groupNames
-                                              .where((groupName) {
-                                                // If the search term is empty, return all groups, else return the filtered list.
-                                                return _searchController
-                                                        .text.isEmpty ||
-                                                    groupName
-                                                        .toLowerCase()
-                                                        .contains(
-                                                            _searchController
-                                                                .text
-                                                                .toLowerCase());
-                                              })
-                                              .toList()
-                                              .isEmpty
-                                          ? [
-                                              // Display this when no group names match the search criteria
-                                              const Center(
-                                                child: Padding(
-                                                  padding: EdgeInsets.all(50.0),
-                                                  child: Text(
-                                                      'Group not available',
-                                                      style: TextStyle(
-                                                        color: ExtraColors
-                                                            .primaryText,
-                                                        fontSize: 20.0,
-                                                      )),
-                                                ),
-                                              ),
-                                            ]
-                                          : groupNames.where((groupName) {
-                                              return _searchController
-                                                      .text.isEmpty ||
-                                                  groupName
-                                                      .toLowerCase()
-                                                      .contains(
-                                                          _searchController.text
-                                                              .toLowerCase());
-                                            }).map((groupName) {
-                                              return Material(
+                                      children: [
+                                        if (recentGroupPicks.isNotEmpty) ...[
+                                          const Material(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text('Recent Picks',
+                                                  style: TextStyle(
+                                                      color:
+                                                          ExtraColors.linkLight,
+                                                      fontSize: 18)),
+                                            ),
+                                          ),
+                                          ...recentGroupPicks.map((groupName) =>
+                                              Material(
                                                 child: ListTile(
-                                                  splashColor:
-                                                      ExtraColors.background,
                                                   title: Text(groupName,
                                                       style: const TextStyle(
                                                           color: ExtraColors
-                                                              .white)),
+                                                              .linkLight)),
                                                   onTap: () {
                                                     setState(() {
                                                       groupNumberController
                                                           .text = groupName;
+                                                      Navigator.pop(context);
                                                     });
-                                                    Navigator.pop(context);
-                                                    _searchController.clear();
                                                   },
                                                 ),
-                                              );
-                                            }).toList(),
+                                              )),
+                                        ],
+                                        if (_searchController.text.isEmpty ||
+                                            groupNames.any((groupName) =>
+                                                groupName
+                                                    .toLowerCase()
+                                                    .contains(_searchController
+                                                        .text
+                                                        .toLowerCase())))
+                                          const Material(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0),
+                                              child: Text('Current Groups',
+                                                  style: TextStyle(
+                                                      color: ExtraColors
+                                                          .primaryText,
+                                                      fontSize: 18)),
+                                            ),
+                                          ),
+                                        ...groupNames
+                                            .where((groupName) => groupName
+                                                .toLowerCase()
+                                                .contains(_searchController.text
+                                                    .toLowerCase()))
+                                            .map((groupName) => Material(
+                                                  child: ListTile(
+                                                    splashColor:
+                                                        ExtraColors.background,
+                                                    title: Text(groupName,
+                                                        style: const TextStyle(
+                                                            color: ExtraColors
+                                                                .white)),
+                                                    onTap: () {
+                                                      setState(() {
+                                                        groupNumberController
+                                                            .text = groupName;
+                                                        if (!recentGroupPicks
+                                                            .contains(
+                                                                groupName)) {
+                                                          recentGroupPicks
+                                                              .insert(
+                                                                  0, groupName);
+                                                          if (recentGroupPicks
+                                                                  .length >
+                                                              2) {
+                                                            recentGroupPicks
+                                                                .removeLast();
+                                                          }
+                                                          saveRecentGroupPicks(
+                                                              recentGroupPicks);
+                                                        }
+                                                      });
+                                                      Navigator.pop(context);
+                                                      _searchController.clear();
+                                                    },
+                                                  ),
+                                                )),
+                                        if (_searchController.text.isNotEmpty &&
+                                            groupNames
+                                                .where((groupName) => groupName
+                                                    .toLowerCase()
+                                                    .contains(_searchController
+                                                        .text
+                                                        .toLowerCase()))
+                                                .isEmpty)
+                                          const Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.all(50.0),
+                                              child: Text(
+                                                'Group not available',
+                                                style: TextStyle(
+                                                  color:
+                                                      ExtraColors.primaryText,
+                                                  fontSize: 20.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                      ],
                                     ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
@@ -396,12 +458,12 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 2
+                state: _index == 1
                     ? StepState.editing
                     : nameController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: nameController.text.isNotEmpty || _index == 2
+                isActive: nameController.text.isNotEmpty || _index == 1
                     ? true
                     : false,
                 title: Text("Name the prospect",
@@ -416,18 +478,17 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 3
+                state: _index == 2
                     ? StepState.editing
                     : phoneController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: phoneController.text.isNotEmpty || _index == 3
+                isActive: phoneController.text.isNotEmpty || _index == 2
                     ? true
                     : false,
                 title: Text("Mobile number",
                     style: _stepTitleStyle(phoneController)),
-                subtitle: Text(
-                    "Enter a valid phone number for easy communication.",
+                subtitle: Text("Enter number(s) for easy communication.",
                     style: _stepSubtitleStyle(phoneController)),
                 content: TextField(
                   textInputAction: TextInputAction.done,
@@ -439,18 +500,18 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 4
+                state: _index == 3
                     ? StepState.editing
                     : landmarkController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: landmarkController.text.isNotEmpty || _index == 4
+                isActive: landmarkController.text.isNotEmpty || _index == 3
                     ? true
                     : false,
                 title: Text("Demographics",
                     style: _stepTitleStyle(landmarkController)),
                 subtitle: Text(
-                    "Provide general information about the prospect's location.",
+                    "Provide information about the prospect's location.",
                     style: _stepSubtitleStyle(landmarkController)),
                 content: TextField(
                   textInputAction: TextInputAction.done,
@@ -460,12 +521,12 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 5
+                state: _index == 4
                     ? StepState.editing
                     : genderController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: genderController.text.isNotEmpty || _index == 5,
+                isActive: genderController.text.isNotEmpty || _index == 4,
                 title: Text("Gender", style: _stepTitleStyle(genderController)),
                 subtitle: Text("Selecting a gender helps tailor communication.",
                     style: _stepSubtitleStyle(genderController)),
@@ -512,13 +573,13 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 6
+                state: _index == 5
                     ? StepState.editing
                     : religiousAffiliationController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
                 isActive: religiousAffiliationController.text.isNotEmpty ||
-                    _index == 6,
+                    _index == 5,
                 title: Text("Religious Affiliation",
                     style: _stepTitleStyle(religiousAffiliationController)),
                 subtitle: Text("Helps understand their background.",
@@ -619,16 +680,16 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 7
+                state: _index == 6
                     ? StepState.editing
                     : baptismalStatusController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
                 isActive:
-                    baptismalStatusController.text.isNotEmpty || _index == 7,
+                    baptismalStatusController.text.isNotEmpty || _index == 6,
                 title: Text("Baptismal Status",
                     style: _stepTitleStyle(baptismalStatusController)),
-                subtitle: Text("Provides context for spiritual journey.",
+                subtitle: Text("Is the prospect baptized?",
                     style: _stepSubtitleStyle(baptismalStatusController)),
                 content: TextField(
                   controller: baptismalStatusController,
@@ -674,12 +735,12 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                 ),
               ),
               Step(
-                state: _index == 8
+                state: _index == 7
                     ? StepState.editing
                     : lessonsController.text.isNotEmpty
                         ? StepState.complete
                         : StepState.indexed,
-                isActive: lessonsController.text.isNotEmpty || _index == 8
+                isActive: lessonsController.text.isNotEmpty || _index == 7
                     ? true
                     : false,
                 title: Text("Interaction Details",

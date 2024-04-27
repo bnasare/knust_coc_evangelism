@@ -18,4 +18,5 @@ class ImageAssets {
   static const String muslim = 'assets/image/muslim.jpg';
   static const String coc = 'assets/image/coc.png';
   static const String assemblies = 'assets/image/asemblies.png';
+  static const String traditionalist = 'assets/image/traditionalist.png';
 }

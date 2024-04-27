@@ -64,6 +64,7 @@ List<Map<String, dynamic>> religiousAffiliations = [
   {"name": "Methodist", "image": ImageAssets.methodist},
   {"name": "Pentecost", "image": ImageAssets.pent},
   {"name": "Presbyterian", "image": ImageAssets.presby},
+  {"name": "Traditionalist", "image": ImageAssets.traditionalist},
 ];
 
 List<Map<String, dynamic>> baptismalStatusOptions = [

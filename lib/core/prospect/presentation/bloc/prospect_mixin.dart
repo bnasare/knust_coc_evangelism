@@ -12,6 +12,7 @@ import 'package:evangelism_admin/src/locales/presentation/bloc/locale_bloc.dart'
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../../../shared/presentation/widgets/snackbar.dart';
@@ -54,15 +55,22 @@ mixin ProspectMixin {
   }
 
   Stream<Locales> getALocale() {
+    final subject = BehaviorSubject<Locales>();
     final result = localeBloc.getALocale();
-    return result.map((either) {
-      return either.fold((failure) {
+
+    result.listen((either) {
+      final locales = either.fold((failure) {
         log('Failed to fetch locales: $failure');
         return Locales.initial();
       }, (locales) {
         return locales;
       });
+      subject.add(locales);
+    }, onError: (error) {
+      subject.addError(error);
     });
+
+    return subject.stream;
   }
 
   Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
