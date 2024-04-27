@@ -113,9 +113,7 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
                   ? searchResults.value!.isEmpty
                       ? const ErrorViewWidget()
                       : ProspectWidget(prospects: searchResults.value!)
-                  : searchController.text.isEmpty ||
-                          searchResults.value != null &&
-                              searchResults.value!.isNotEmpty
+                  : searchController.text.isEmpty || searchResults.value == null
                       ? StreamBuilder(
                           stream: allProspects,
                           builder: (context, snapshot) {
