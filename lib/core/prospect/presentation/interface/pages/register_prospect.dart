@@ -11,7 +11,6 @@ import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../../../shared/data/register_dialog.dart';
@@ -44,23 +43,11 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
   final localeController = TextEditingController();
   final _searchController = TextEditingController();
 
-  // Load recent group picks from SharedPreferences
-  Future<List<String>> loadRecentGroupPicks() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList('recentGroupPicks') ?? [];
-  }
-
-// Save recent group picks to SharedPreferences
-  Future<void> saveRecentGroupPicks(List<String> recentGroupPicks) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('recentGroupPicks', recentGroupPicks);
-  }
-
   @override
   void initState() {
     super.initState();
 
-    loadRecentGroupPicks().then((List<String> loadedRecentPicks) {
+    widget.loadRecentGroupPicks().then((List<String> loadedRecentPicks) {
       setState(() {
         recentGroupPicks = loadedRecentPicks;
       });
@@ -410,7 +397,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                                             recentGroupPicks
                                                                 .removeLast();
                                                           }
-                                                          saveRecentGroupPicks(
+                                                          widget.saveRecentGroupPicks(
                                                               recentGroupPicks);
                                                         }
                                                       });

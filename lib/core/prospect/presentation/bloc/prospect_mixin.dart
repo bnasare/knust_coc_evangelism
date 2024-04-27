@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../../../shared/presentation/widgets/snackbar.dart';
@@ -71,6 +72,16 @@ mixin ProspectMixin {
     });
 
     return subject.stream;
+  }
+
+  Future<List<String>> loadRecentGroupPicks() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getStringList('recentGroupPicks') ?? [];
+  }
+
+  Future<void> saveRecentGroupPicks(List<String> recentGroupPicks) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('recentGroupPicks', recentGroupPicks);
   }
 
   Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
