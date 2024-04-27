@@ -16,12 +16,8 @@ class LocaleRemoteDatabaseImpl implements LocaleRemoteDatabase {
         .limit(1)
         .snapshots()
         .map((querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        final doc = querySnapshot.docs.first;
-        return Locales.fromJson(doc.data());
-      } else {
-        throw Exception("Document not found");
-      }
+      final doc = querySnapshot.docs.first;
+      return Locales.fromJson(doc.data());
     });
     return locale;
   }

@@ -79,7 +79,7 @@ class _NavBarState extends State<NavBar> {
               curve: Curves.ease,
               duration: Duration(milliseconds: 700),
             ),
-            navBarStyle: NavBarStyle.style9,
+            navBarStyle: NavBarStyle.style8,
             handleAndroidBackButtonPress: true,
             resizeToAvoidBottomInset: false,
             decoration: const NavBarDecoration(
