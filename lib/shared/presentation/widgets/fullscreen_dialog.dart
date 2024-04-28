@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+
+// import 'package:loading_indicator/loading_indicator.dart';
 
 import '../../data/image_assets.dart';
 import '../theme/extra_colors.dart';
@@ -157,10 +158,11 @@ class FullscreenDialog extends HookWidget {
                   backgroundColor: retrieveColor(),
                 ),
                 child: primaryFutureLoading.value
-                    ? LoadingIndicator(
-                        indicatorType: Indicator.ballPulse,
-                        colors: [retrieveColor()],
-                      )
+                    ? const SizedBox.shrink()
+                    // ? LoadingIndicator(
+                    //     indicatorType: Indicator.ballPulse,
+                    //     colors: [retrieveColor()],
+                    //   )
                     : Text(primaryButtonLabel!),
               ),
             if (secondaryButtonLabel != null)
@@ -186,11 +188,15 @@ class FullscreenDialog extends HookWidget {
                           ? const SizedBox(
                               width: 30,
                               height: 15,
-                              child: LoadingIndicator(
-                                indicatorType: Indicator.ballPulse,
-                                colors: [ExtraColors.black],
-                              ),
-                            )
+                              child: CupertinoActivityIndicator(
+                                radius: 10,
+                                color: ExtraColors.black,
+                              )
+                              // child: LoadingIndicator(
+                              //   indicatorType: Indicator.ballPulse,
+                              //   colors: [ExtraColors.black],
+                              // ),
+                              )
                           : Text(
                               secondaryButtonLabel!,
                               style: TextStyle(
