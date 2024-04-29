@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:evangelism_admin/injection_container.dart';
-import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
-import 'package:evangelism_admin/src/locales/presentation/bloc/locale_bloc.dart';
+import '../../../../injection_container.dart';
+import '../../domain/entities/locales.dart';
+import 'locale_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

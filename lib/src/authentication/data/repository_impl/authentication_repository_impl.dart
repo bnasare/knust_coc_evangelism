@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/core/leader/domain/entities/leader.dart';
+import '../../../../core/leader/domain/entities/leader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../shared/error/exception.dart';

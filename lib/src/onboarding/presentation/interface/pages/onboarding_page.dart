@@ -1,8 +1,8 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:evangelism_admin/bottom_navbar.dart';
-import 'package:evangelism_admin/shared/data/image_assets.dart';
-import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
-import 'package:evangelism_admin/shared/utils/navigation.dart';
+import '../../../../../bottom_navbar.dart';
+import '../../../../../shared/data/image_assets.dart';
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/utils/navigation.dart';
 import 'package:flutter/material.dart';
 
 import '../../bloc/onboarding_mixin.dart';

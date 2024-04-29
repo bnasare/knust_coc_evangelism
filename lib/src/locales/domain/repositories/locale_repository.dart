@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/shared/error/failure.dart';
+import '../../../../shared/error/failure.dart';
 
 import '../entities/locales.dart';
 

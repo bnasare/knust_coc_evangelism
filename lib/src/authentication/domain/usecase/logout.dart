@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/core/leader/domain/entities/leader.dart';
+import '../../../../core/leader/domain/entities/leader.dart';
 
 import '../../../../shared/error/failure.dart';
 import '../../../../shared/usecase/usecase.dart';

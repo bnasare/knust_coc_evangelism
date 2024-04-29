@@ -1,10 +1,10 @@
-import 'package:evangelism_admin/bottom_navbar.dart';
-import 'package:evangelism_admin/firebase_options.dart';
-import 'package:evangelism_admin/injection_container.dart';
-import 'package:evangelism_admin/shared/platform/push_notification.dart';
-import 'package:evangelism_admin/shared/presentation/theme/theme.dart';
-import 'package:evangelism_admin/src/onboarding/presentation/bloc/onboarding_mixin.dart';
-import 'package:evangelism_admin/src/onboarding/presentation/interface/pages/onboarding_page.dart';
+import 'bottom_navbar.dart';
+import 'firebase_options.dart';
+import 'injection_container.dart';
+import 'shared/platform/push_notification.dart';
+import 'shared/presentation/theme/theme.dart';
+import 'src/onboarding/presentation/bloc/onboarding_mixin.dart';
+import 'src/onboarding/presentation/interface/pages/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

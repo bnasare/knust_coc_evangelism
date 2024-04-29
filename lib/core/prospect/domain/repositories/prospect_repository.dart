@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
-import 'package:evangelism_admin/shared/error/failure.dart';
+import '../entities/prospect.dart';
+import '../../../../shared/error/failure.dart';
 
 abstract class ProspectRepository {
   Future<Either<Failure, Prospect>> createProspect(Prospect prospect);

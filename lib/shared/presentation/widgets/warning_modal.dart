@@ -1,5 +1,5 @@
-import 'package:evangelism_admin/shared/data/image_assets.dart';
-import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
+import '../../data/image_assets.dart';
+import '../theme/extra_colors.dart';
 import 'package:flutter/material.dart';
 
 class WarningModal extends StatelessWidget {

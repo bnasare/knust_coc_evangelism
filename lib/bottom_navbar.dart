@@ -1,5 +1,5 @@
-import 'package:evangelism_admin/core/prospect/presentation/interface/pages/register_prospect.dart';
-import 'package:evangelism_admin/src/locales/presentation/interface/pages/location_page.dart';
+import 'core/prospect/presentation/interface/pages/register_prospect.dart';
+import 'src/locales/presentation/interface/pages/location_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';

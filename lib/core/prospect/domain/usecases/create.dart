@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/shared/error/failure.dart';
-import 'package:evangelism_admin/shared/usecase/usecase.dart';
+import '../../../../shared/error/failure.dart';
+import '../../../../shared/usecase/usecase.dart';
 
 import '../entities/prospect.dart';
 import '../repositories/prospect_repository.dart';

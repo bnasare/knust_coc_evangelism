@@ -4,11 +4,11 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
-import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_bloc.dart';
-import 'package:evangelism_admin/injection_container.dart';
-import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
-import 'package:evangelism_admin/src/locales/presentation/bloc/locale_bloc.dart';
+import '../../domain/entities/prospect.dart';
+import 'prospect_bloc.dart';
+import '../../../../injection_container.dart';
+import '../../../../src/locales/domain/entities/locales.dart';
+import '../../../../src/locales/presentation/bloc/locale_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';

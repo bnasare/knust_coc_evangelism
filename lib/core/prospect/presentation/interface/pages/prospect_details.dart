@@ -1,6 +1,6 @@
-import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
-import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_mixin.dart';
-import 'package:evangelism_admin/shared/presentation/widgets/error_view.dart';
+import '../../../domain/entities/prospect.dart';
+import '../../bloc/prospect_mixin.dart';
+import '../../../../../shared/presentation/widgets/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 

@@ -1,6 +1,6 @@
-import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
-import 'package:evangelism_admin/shared/data/collection_ids.dart';
-import 'package:evangelism_admin/shared/data/firestore_service.dart';
+import '../../domain/entities/prospect.dart';
+import '../../../../shared/data/collection_ids.dart';
+import '../../../../shared/data/firestore_service.dart';
 
 abstract class ProspectRemoteDatabase {
   Future<Prospect> createProspect(Prospect prospect);

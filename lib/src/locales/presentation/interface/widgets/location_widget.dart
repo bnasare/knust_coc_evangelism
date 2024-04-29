@@ -1,6 +1,6 @@
-import 'package:evangelism_admin/core/prospect/presentation/interface/pages/all_prospect.dart';
-import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
-import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
+import '../../../../../core/prospect/presentation/interface/pages/all_prospect.dart';
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:evangelism_admin/core/leader/domain/entities/leader.dart';
+import '../../../../core/leader/domain/entities/leader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthenticationRemoteDatabase {

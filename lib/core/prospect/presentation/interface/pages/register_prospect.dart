@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_mixin.dart';
-import 'package:evangelism_admin/shared/data/image_assets.dart';
-import 'package:evangelism_admin/shared/presentation/theme/extra_colors.dart';
-import 'package:evangelism_admin/shared/presentation/widgets/loading_manager.dart';
-import 'package:evangelism_admin/shared/presentation/widgets/warning_modal.dart';
-import 'package:evangelism_admin/shared/utils/navigation.dart';
-import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
+import '../../bloc/prospect_mixin.dart';
+import '../../../../../shared/data/image_assets.dart';
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/presentation/widgets/loading_manager.dart';
+import '../../../../../shared/presentation/widgets/warning_modal.dart';
+import '../../../../../shared/utils/navigation.dart';
+import '../../../../../src/locales/domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -1,10 +1,10 @@
-import 'package:evangelism_admin/core/prospect/data/database/prospect_remote_database.dart';
-import 'package:evangelism_admin/core/prospect/data/repository_impl/prospect_repository_impl.dart';
-import 'package:evangelism_admin/core/prospect/domain/repositories/prospect_repository.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/create.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/get.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/list.dart';
-import 'package:evangelism_admin/core/prospect/presentation/bloc/prospect_bloc.dart';
+import 'data/database/prospect_remote_database.dart';
+import 'data/repository_impl/prospect_repository_impl.dart';
+import 'domain/repositories/prospect_repository.dart';
+import 'domain/usecases/create.dart';
+import 'domain/usecases/get.dart';
+import 'domain/usecases/list.dart';
+import 'presentation/bloc/prospect_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void initProspect() {

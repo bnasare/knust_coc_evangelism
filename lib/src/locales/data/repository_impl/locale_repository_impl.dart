@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/shared/error/exception.dart';
-import 'package:evangelism_admin/shared/error/failure.dart';
-import 'package:evangelism_admin/shared/platform/network_info.dart';
-import 'package:evangelism_admin/src/locales/data/database/locale_remote_database.dart';
-import 'package:evangelism_admin/src/locales/domain/entities/locales.dart';
-import 'package:evangelism_admin/src/locales/domain/repositories/locale_repository.dart';
+import '../../../../shared/error/exception.dart';
+import '../../../../shared/error/failure.dart';
+import '../../../../shared/platform/network_info.dart';
+import '../database/locale_remote_database.dart';
+import '../../domain/entities/locales.dart';
+import '../../domain/repositories/locale_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LocaleRepositoryImpl implements LocaleRepository {

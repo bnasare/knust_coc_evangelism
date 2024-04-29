@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/core/prospect/data/database/prospect_remote_database.dart';
-import 'package:evangelism_admin/core/prospect/domain/entities/prospect.dart';
-import 'package:evangelism_admin/core/prospect/domain/repositories/prospect_repository.dart';
-import 'package:evangelism_admin/shared/error/exception.dart';
-import 'package:evangelism_admin/shared/platform/network_info.dart';
+import '../database/prospect_remote_database.dart';
+import '../../domain/entities/prospect.dart';
+import '../../domain/repositories/prospect_repository.dart';
+import '../../../../shared/error/exception.dart';
+import '../../../../shared/platform/network_info.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../../shared/error/failure.dart';

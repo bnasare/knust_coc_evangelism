@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/create.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/get.dart';
-import 'package:evangelism_admin/core/prospect/domain/usecases/list.dart';
-import 'package:evangelism_admin/shared/error/failure.dart';
-import 'package:evangelism_admin/shared/usecase/usecase.dart';
+import '../../domain/usecases/create.dart';
+import '../../domain/usecases/get.dart';
+import '../../domain/usecases/list.dart';
+import '../../../../shared/error/failure.dart';
+import '../../../../shared/usecase/usecase.dart';
 
 import '../../domain/entities/prospect.dart';
 
