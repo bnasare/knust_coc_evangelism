@@ -21,21 +21,16 @@ class LocaleRepositoryImpl implements LocaleRepository {
     try {
       networkInfo.hasInternet();
       final results = remoteDatabase.listLocales();
-      // Wrap the results in a Right value and return
       return results.map((locales) => Right(locales));
     } on FirebaseAuthException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(
           error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(
           error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(
           const Left(Failure('Something went wrong... Please try again')));
     }
@@ -48,18 +43,14 @@ class LocaleRepositoryImpl implements LocaleRepository {
       final results = remoteDatabase.getLocale();
       return results.map((locale) => Right(locale));
     } on FirebaseAuthException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(
           error.message ?? 'Unexpected error occurred... Please try again')));
     } on DeviceException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(error.message)));
     } on FirebaseException catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(Left(Failure(
           error.message ?? 'Unexpected error occurred... Please try again')));
     } catch (error) {
-      // Return a Left value with the appropriate Failure object
       return Stream.value(
           const Left(Failure('Something went wrong... Please try again')));
     }

@@ -1,20 +1,20 @@
 import 'dart:async';
 
 import 'package:colorful_safe_area/colorful_safe_area.dart';
-import '../../bloc/prospect_mixin.dart';
-import '../../../../../shared/data/image_assets.dart';
-import '../../../../../shared/presentation/theme/extra_colors.dart';
-import '../../../../../shared/presentation/widgets/loading_manager.dart';
-import '../../../../../shared/presentation/widgets/warning_modal.dart';
-import '../../../../../shared/utils/navigation.dart';
-import '../../../../../src/locales/domain/entities/locales.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../../shared/data/image_assets.dart';
 import '../../../../../shared/data/register_dialog.dart';
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/presentation/widgets/loading_manager.dart';
+import '../../../../../shared/presentation/widgets/warning_modal.dart';
+import '../../../../../shared/utils/navigation.dart';
+import '../../../../../src/locales/domain/entities/locales.dart';
 import '../../../domain/entities/prospect.dart';
+import '../../bloc/prospect_mixin.dart';
 
 class RegisterProspectPage extends StatefulWidget with ProspectMixin {
   RegisterProspectPage({super.key});
@@ -254,7 +254,7 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                     religiousAffiliationController.clear();
                     baptismalStatusController.clear();
                     lessonsController.clear();
-                      setState(() {
+                    setState(() {
                       _index = 0;
                     });
                   }
@@ -303,28 +303,6 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                                         Icons.close_fullscreen,
                                       )),
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //       left: 16.0, right: 16.0, bottom: 10),
-                                //   child: SearchBar(
-                                //     keyboardType: TextInputType.phone,
-                                //     controller: _searchController,
-                                //     hintText: 'Search for your group',
-                                //     textStyle: const MaterialStatePropertyAll(
-                                //         TextStyle(color: ExtraColors.grey)),
-                                //     onChanged: (String value) {
-                                //       setState(() {});
-                                //     },
-                                //     padding: const MaterialStatePropertyAll(
-                                //         EdgeInsets.symmetric(horizontal: 15)),
-                                //     leading: const Icon(CupertinoIcons.search,
-                                //         color: ExtraColors.grey),
-                                //     shape: MaterialStatePropertyAll(
-                                //         RoundedRectangleBorder(
-                                //       borderRadius: BorderRadius.circular(10.0),
-                                //     )),
-                                //   ),
-                                // ),
                                 Expanded(
                                   child: SingleChildScrollView(
                                     child: Column(
