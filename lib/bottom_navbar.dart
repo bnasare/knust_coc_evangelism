@@ -1,15 +1,13 @@
-import 'core/prospect/presentation/interface/pages/register_prospect.dart';
-import 'src/locales/presentation/interface/pages/location_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
+import 'core/prospect/presentation/interface/pages/register_prospect.dart';
 import 'shared/presentation/theme/extra_colors.dart';
+import 'src/locales/presentation/interface/pages/location_page.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({
-    super.key,
-  });
+  const NavBar({super.key});
 
   @override
   State<NavBar> createState() => _NavBarState();

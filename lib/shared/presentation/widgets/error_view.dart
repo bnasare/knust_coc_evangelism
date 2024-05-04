@@ -16,17 +16,6 @@ class ErrorViewWidget extends StatelessWidget {
             height: 400,
             width: double.infinity,
           ),
-          // const SizedBox(height: 30),
-          // Center(
-          //   child: Text(
-          //     'Nothing to show here...',
-          //     style: TextStyle(
-          //       fontSize: 21,
-          //       fontWeight: FontWeight.w600,
-          //       color: Theme.of(context).colorScheme.error,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
