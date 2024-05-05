@@ -4,11 +4,6 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
-import '../../domain/entities/prospect.dart';
-import 'prospect_bloc.dart';
-import '../../../../injection_container.dart';
-import '../../../../src/locales/domain/entities/locales.dart';
-import '../../../../src/locales/presentation/bloc/locale_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -16,7 +11,12 @@ import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
+import '../../../../injection_container.dart';
 import '../../../../shared/presentation/widgets/snackbar.dart';
+import '../../../../src/locales/domain/entities/locales.dart';
+import '../../../../src/locales/presentation/bloc/locale_bloc.dart';
+import '../../domain/entities/prospect.dart';
+import 'prospect_bloc.dart';
 
 mixin ProspectMixin {
   final bloc = sl<ProspectBloc>();
@@ -95,8 +95,8 @@ mixin ProspectMixin {
     OpenFile.open('$path/$fileName');
   }
 
-  Future<void> createPDF(String localeID, BuildContext context, Locale locale,
-      List<Prospect>? searchResults) async {
+  Future<void> createPDF(String localeID, BuildContext context, String locale,
+      List<Prospect>? searchResults, String title) async {
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -193,9 +193,11 @@ mixin ProspectMixin {
     List<int> bytes = await document.save();
     document.dispose();
 
+    String pdfTitle = title.isEmpty ? locale : title;
+
     // Save and launch the file
     await saveAndLaunchFile(
-        bytes, '$locale Prospects(${prospectsToGenerate.length}).pdf');
+        bytes, '$pdfTitle Prospects(${prospectsToGenerate.length}).pdf');
 
     Navigator.pop(context);
     // Complete the completer to indicate that the PDF creation is done

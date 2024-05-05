@@ -69,7 +69,12 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
                   searchResults.value != null && searchResults.value!.isNotEmpty
               ? IconButton(
                   onPressed: () => createPDF(
-                      localeID, context, Locale(locale), searchResults.value),
+                      localeID,
+                      context,
+                      locale,
+                      searchResults.value,
+                      searchController.text
+                      ),
                   icon: const Icon(CupertinoIcons.doc_text_fill,
                       color: ExtraColors.linkLight),
                 )
