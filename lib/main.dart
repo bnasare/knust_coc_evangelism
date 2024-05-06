@@ -1,23 +1,20 @@
-import 'bottom_navbar.dart';
-import 'firebase_options.dart';
-import 'injection_container.dart';
-import 'shared/platform/push_notification.dart';
-import 'shared/presentation/theme/theme.dart';
-import 'src/onboarding/presentation/bloc/onboarding_mixin.dart';
-import 'src/onboarding/presentation/interface/pages/onboarding_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import 'bottom_navbar.dart';
+import 'firebase_options.dart';
 import 'injection_container.dart' as di;
+import 'shared/presentation/theme/theme.dart';
+import 'src/onboarding/presentation/bloc/onboarding_mixin.dart';
+import 'src/onboarding/presentation/interface/pages/onboarding_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await di.init();
-  await sl<PushNotification>().initializeNotification();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());

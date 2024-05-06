@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'shared/platform/network_info.dart';
-import 'shared/platform/push_notification.dart';
 import 'src/authentication/auth_injection.dart';
 import 'src/onboarding/onboarding_injection.dart';
 
@@ -24,8 +23,7 @@ Future<void> init() async {
     ..registerLazySingleton<NetworkInfo>(NetworkInfoImpl.new)
     ..registerFactory<FirebaseMessaging>(() => FirebaseMessaging.instance)
     ..registerFactory<FlutterLocalNotificationsPlugin>(
-        FlutterLocalNotificationsPlugin.new)
-    ..registerLazySingleton<PushNotification>(() => PushNotificationImpl(sl()));
+        FlutterLocalNotificationsPlugin.new);
 
   sl.registerSingletonAsync<SharedPreferences>(
       () => SharedPreferences.getInstance());
