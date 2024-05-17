@@ -138,6 +138,20 @@ mixin ProspectMixin {
     PdfDocument document = PdfDocument();
     var page = document.pages.add();
 
+    // Define the title font and style
+    final PdfFont titleFont =
+        PdfStandardFont(PdfFontFamily.helvetica, 30, style: PdfFontStyle.bold);
+
+// Define the title
+    // String pdfTitle = title.isEmpty ? locale : title;
+
+// Draw the title on the PDF page
+    page.graphics.drawString(locale, titleFont,
+        bounds: Rect.fromLTWH(0, 0, page.getClientSize().width, 100));
+
+// Leave some space between title and the grid
+    double startY = 50;
+
     PdfGrid grid = PdfGrid();
     grid.style = PdfGridStyle(
         font: PdfStandardFont(PdfFontFamily.helvetica, 20),
@@ -175,7 +189,7 @@ mixin ProspectMixin {
     PdfLayoutResult? gridLayoutResult = grid.draw(
       page: page,
       bounds: Rect.fromLTWH(
-          0, 0, page.getClientSize().width, page.getClientSize().height),
+          0, startY, page.getClientSize().width, page.getClientSize().height),
       format: gridLayoutFormat,
     );
 
@@ -193,11 +207,9 @@ mixin ProspectMixin {
     List<int> bytes = await document.save();
     document.dispose();
 
-    String pdfTitle = title.isEmpty ? locale : title;
-
     // Save and launch the file
     await saveAndLaunchFile(
-        bytes, '$pdfTitle Prospects(${prospectsToGenerate.length}).pdf');
+        bytes, '$locale Prospects(${prospectsToGenerate.length}).pdf');
 
     Navigator.pop(context);
     // Complete the completer to indicate that the PDF creation is done

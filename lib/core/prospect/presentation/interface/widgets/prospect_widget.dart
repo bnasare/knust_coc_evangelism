@@ -40,7 +40,6 @@ class ProspectWidget extends StatelessWidget {
                 '${prospect.mobile} - ${prospect.demographics}',
                 style: const TextStyle(
                     letterSpacing: 1.3,
-                    fontWeight: FontWeight.bold,
                     fontSize: 13,
                     color: ExtraColors.secondaryText)),
           );

@@ -33,15 +33,20 @@ class LocationWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
             title: Text(locale.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: ExtraColors.black)),
-            subtitle: Text(locale.timeframe,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: ExtraColors.grey)),
+            subtitle: FittedBox(
+              child: Text(locale.timeframe,
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: ExtraColors.grey)),
+            ),
             trailing: const Icon(CupertinoIcons.placemark, size: 27),
           );
         },

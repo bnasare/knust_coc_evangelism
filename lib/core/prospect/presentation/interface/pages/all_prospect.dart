@@ -23,6 +23,7 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
         useMemoized(() => listAllProspects(documentID: localeID));
     final searchController = useTextEditingController();
     final searchResults = useState<List<Prospect>?>(null);
+    final totalProspects = useState<int?>(null);
 
     void handleSearch(String query) async {
       if (query.isEmpty) {
@@ -44,29 +45,36 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
       }
     }
 
-    // Optional: Declare a Timer variable to store the debouncer timer
     Timer? searchDebouncer;
-
     void handleSearchDebounced(String value) async {
-      // Create a timer with a specific duration (e.g., 500 milliseconds)
       Timer? timer = Timer(const Duration(milliseconds: 500), () {
-        // If the timer finishes and the search text hasn't changed, call handleSearch
         if (value == searchController.text) {
           handleSearch(value);
         }
       });
-
-      // Cancel any previous timers before starting a new one
       searchDebouncer?.cancel();
       searchDebouncer = timer;
     }
+
+    useEffect(() {
+      final StreamSubscription<List<Prospect>> subscription =
+          listAllProspects(documentID: localeID).listen(
+              (allProspectsAvailable) {
+        totalProspects.value = allProspectsAvailable.length;
+      }, onError: (error) {
+        debugPrint(error.toString());
+        totalProspects.value = 0;
+      });
+
+      return subscription.cancel;
+    }, []);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Locate Prospect'),
         actions: [
-          searchController.text.isEmpty ||
+          searchController.text.isEmpty && totalProspects.value != 0 ||
                   searchResults.value != null && searchResults.value!.isNotEmpty
               ? IconButton(
                   onPressed: () => createPDF(localeID, context, locale,
