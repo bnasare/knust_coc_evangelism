@@ -1,15 +1,16 @@
 import 'dart:async';
 
 import 'package:colorful_safe_area/colorful_safe_area.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 import '../../../../../shared/presentation/theme/extra_colors.dart';
 import '../../../../../shared/presentation/widgets/error_view.dart';
 import '../../../../../shared/presentation/widgets/warning_modal.dart';
 import '../../../domain/entities/locales.dart';
 import '../../bloc/locale_mixin.dart';
 import '../widgets/location_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 class LocationPage extends HookWidget with LocaleMixin {
   LocationPage({super.key});
@@ -97,7 +98,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 16.0, right: 16.0, top: 20, bottom: 0),
+                              left: 20.0, right: 20.0, top: 20, bottom: 0),
                           child: SearchBar(
                             trailing: [
                               if (searchController.text.isNotEmpty)
@@ -134,10 +135,7 @@ class LocationPage extends HookWidget with LocaleMixin {
                     child: searchResults.value != null &&
                             searchController.text.isNotEmpty
                         ? searchResults.value!.isEmpty
-                            ? const Padding(
-                                padding: EdgeInsets.only(top: 80),
-                                child: ErrorViewWidget(),
-                              )
+                            ? const ErrorViewWidget()
                             : LocationWidget(locales: searchResults.value!)
                         : searchController.text.isEmpty ||
                                 searchResults.value == null

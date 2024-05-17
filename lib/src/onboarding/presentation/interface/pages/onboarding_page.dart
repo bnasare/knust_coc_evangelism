@@ -1,10 +1,10 @@
 import 'package:colorful_safe_area/colorful_safe_area.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../../bottom_navbar.dart';
 import '../../../../../shared/data/image_assets.dart';
 import '../../../../../shared/presentation/theme/extra_colors.dart';
 import '../../../../../shared/utils/navigation.dart';
-import 'package:flutter/material.dart';
-
 import '../../bloc/onboarding_mixin.dart';
 
 class OnboardingPage extends StatefulWidget with OnboardingMixin {
@@ -48,7 +48,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
+                  padding:
+                      const EdgeInsets.only(bottom: 20, left: 10, right: 10),
                   child: SizedBox(
                     width: double.maxFinite,
                     child: ElevatedButton(

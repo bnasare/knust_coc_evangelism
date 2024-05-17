@@ -2,14 +2,15 @@
 
 import 'dart:async';
 
-import '../../../domain/entities/prospect.dart';
-import '../../bloc/prospect_mixin.dart';
-import '../widgets/prospect_widget.dart';
-import '../../../../../shared/presentation/theme/extra_colors.dart';
-import '../../../../../shared/presentation/widgets/error_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/presentation/widgets/error_view.dart';
+import '../../../domain/entities/prospect.dart';
+import '../../bloc/prospect_mixin.dart';
+import '../widgets/prospect_widget.dart';
 
 class AllProspectsPage extends HookWidget with ProspectMixin {
   final String localeID;
@@ -68,18 +69,20 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
           searchController.text.isEmpty ||
                   searchResults.value != null && searchResults.value!.isNotEmpty
               ? IconButton(
-                  onPressed: () => createPDF(
-                      localeID,
-                      context,
-                      locale,
-                      searchResults.value,
-                      searchController.text
-                      ),
+                  onPressed: () => createPDF(localeID, context, locale,
+                      searchResults.value, searchController.text),
                   icon: const Icon(CupertinoIcons.doc_text_fill,
-                      color: ExtraColors.linkLight),
+                      color: ExtraColors.linkLight, size: 18),
                 )
               : const SizedBox.shrink(),
         ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: ExtraColors.darkGrey.withOpacity(0.3),
+            height: 1.0,
+          ),
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -100,7 +103,7 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
                     ),
                 ].whereType<Widget>().toList(),
                 onChanged: (value) => handleSearchDebounced(value),
-                hintText: 'Filter by name,affilitation,initial contact',
+                hintText: 'Search by name,affilitation,initial contact',
                 textStyle: const MaterialStatePropertyAll(
                     TextStyle(color: ExtraColors.grey)),
                 controller: searchController,

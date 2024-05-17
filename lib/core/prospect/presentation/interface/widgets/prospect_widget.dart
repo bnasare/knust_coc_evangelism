@@ -1,8 +1,9 @@
-import '../../../domain/entities/prospect.dart';
-import '../pages/prospect_details.dart';
-import '../../../../../shared/presentation/theme/extra_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../domain/entities/prospect.dart';
+import '../pages/prospect_details.dart';
 
 class ProspectWidget extends StatelessWidget {
   final List<Prospect> prospects;
@@ -32,9 +33,7 @@ class ProspectWidget extends StatelessWidget {
             title: Text(prospect.name,
                 maxLines: 1,
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                    color: ExtraColors.primaryText)),
+                    fontSize: 16, color: ExtraColors.primaryText)),
             subtitle: Text(
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -42,11 +41,12 @@ class ProspectWidget extends StatelessWidget {
                 style: const TextStyle(
                     letterSpacing: 1.3,
                     fontWeight: FontWeight.bold,
-                    fontSize: 14,
+                    fontSize: 13,
                     color: ExtraColors.secondaryText)),
           );
         },
-        separatorBuilder: (__, _) => const Divider(),
+        separatorBuilder: (__, _) =>
+            Divider(color: ExtraColors.lightGrey.withOpacity(0.3)),
         itemCount: prospects.length);
   }
 }

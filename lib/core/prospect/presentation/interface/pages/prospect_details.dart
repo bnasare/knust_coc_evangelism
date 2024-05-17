@@ -1,10 +1,10 @@
-import '../../../domain/entities/prospect.dart';
-import '../../bloc/prospect_mixin.dart';
-import '../../../../../shared/presentation/widgets/error_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../shared/presentation/theme/extra_colors.dart';
+import '../../../../../shared/presentation/widgets/error_view.dart';
+import '../../../domain/entities/prospect.dart';
+import '../../bloc/prospect_mixin.dart';
 
 class ProspectDetailsPage extends HookWidget with ProspectMixin {
   final String documentID;
@@ -18,6 +18,13 @@ class ProspectDetailsPage extends HookWidget with ProspectMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Prospect Details'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1.0),
+          child: Container(
+            color: ExtraColors.darkGrey.withOpacity(0.3),
+            height: 1.0,
+          ),
+        ),
       ),
       body: StreamBuilder(
         stream: singleProspect,
@@ -31,7 +38,7 @@ class ProspectDetailsPage extends HookWidget with ProspectMixin {
           } else {
             var prospect = snapshot.data!;
             return ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               itemCount: _titles.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -39,11 +46,11 @@ class ProspectDetailsPage extends HookWidget with ProspectMixin {
                   onTap: null,
                   title: Text(_titles[index],
                       style: const TextStyle(
-                          fontSize: 18, color: ExtraColors.primaryText)),
+                          fontSize: 16, color: ExtraColors.primaryText)),
                   subtitle: Text(_getSubtitle(prospect, index),
                       style: const TextStyle(
                           letterSpacing: 1.5,
-                          fontSize: 16.5,
+                          fontSize: 14,
                           color: ExtraColors.secondaryText)),
                 );
               },

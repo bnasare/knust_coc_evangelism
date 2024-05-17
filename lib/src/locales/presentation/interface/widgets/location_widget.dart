@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import '../../../../../core/prospect/presentation/interface/pages/all_prospect.dart';
 import '../../../../../shared/presentation/theme/extra_colors.dart';
 import '../../../domain/entities/locales.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class LocationWidget extends StatelessWidget {
   final List<Locales> locales;
@@ -12,7 +13,7 @@ class LocationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         shrinkWrap: true,
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
         itemBuilder: (_, index) {
           var locale = locales[index];
           return ListTile(

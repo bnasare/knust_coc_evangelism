@@ -50,9 +50,9 @@ ThemeData lightTheme = ThemeData(
     systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Color(0xD90076B6)),
     titleTextStyle: TextStyle(
         color: ExtraColors.primaryText,
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.w600,
-        letterSpacing: 2),
+        letterSpacing: 1.5),
     color: Colors.transparent,
     elevation: 0,
     centerTitle: true,

@@ -129,7 +129,16 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
         color: Theme.of(context).primaryColor,
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: AppBar(title: const Text('Prospect Registration')),
+          appBar: AppBar(
+            title: const Text('Prospect Registration'),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1.0),
+              child: Container(
+                color: ExtraColors.darkGrey.withOpacity(0.3),
+                height: 1.0,
+              ),
+            ),
+          ),
           body: Stepper(
             physics: const BouncingScrollPhysics(),
             controlsBuilder: (BuildContext context, ControlsDetails details) {
@@ -678,8 +687,8 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                             return Material(
                               child: ListTile(
                                 splashColor: ExtraColors.background,
-                                contentPadding: const EdgeInsets.only(
-                                    top: 10, left: 20, right: 20),
+                                contentPadding:
+                                    const EdgeInsets.only(left: 20, right: 20),
                                 leading: CircleAvatar(
                                   child: Icon(option["icon"], size: 20),
                                 ),
