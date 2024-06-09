@@ -71,9 +71,9 @@ Receives data from the domain layer and presents it to the user.
 1. Error Handling: Implement robust error handling mechanisms to gracefully manage potential issues during data access or user interactions.
 2. Documentation: Maintain clear and up-to-date comments within the codebase to enhance understanding and future modifications.
 
-We welcome contributions from the community! If you'd like to get involved, kindly follow these steps:
+Contributions are welcome To contribute:
 
-Fork the repository.
-Create a new branch for your feature or bug fix.
-Implement your changes and ensure they adhere to coding conventions and quality standards.
-Submit a pull request for review and potential merge.
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes, ensuring adherence to coding conventions and quality standards.
+4. Submit a pull request for review and potential inclusion in the project.
