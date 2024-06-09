@@ -220,19 +220,19 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   onPressed: _isAgreedToTerms ? _submitFormOnLogin : null,
                   style: ButtonStyle(
-                    fixedSize: MaterialStateProperty.all<Size>(
+                    fixedSize: WidgetStateProperty.all<Size>(
                       const Size(double.maxFinite, 50),
                     ),
-                    elevation: MaterialStateProperty.all(4),
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.disabled)) {
+                    elevation: WidgetStateProperty.all(4),
+                    backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                        if (states.contains(WidgetState.disabled)) {
                           return Theme.of(context).colorScheme.primaryContainer;
                         }
                         return Theme.of(context).colorScheme.primary;
                       },
                     ),
-                    shape: MaterialStateProperty.all(const StadiumBorder()),
+                    shape: WidgetStateProperty.all(const StadiumBorder()),
                   ),
                   child: Text(
                     'Proceed',

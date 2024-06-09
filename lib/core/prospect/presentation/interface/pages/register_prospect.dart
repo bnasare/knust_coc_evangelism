@@ -148,9 +148,9 @@ class _RegisterProspectPageState extends State<RegisterProspectPage> {
                   children: <Widget>[
                     TextButton(
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor: WidgetStateProperty.all<Color>(
                               Theme.of(context).primaryColor),
-                          foregroundColor: MaterialStateProperty.all<Color>(
+                          foregroundColor: WidgetStateProperty.all<Color>(
                             Theme.of(context).scaffoldBackgroundColor,
                           )),
                       onPressed: details.onStepContinue,

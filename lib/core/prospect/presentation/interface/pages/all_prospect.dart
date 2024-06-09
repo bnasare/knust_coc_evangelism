@@ -112,14 +112,14 @@ class AllProspectsPage extends HookWidget with ProspectMixin {
                 ].whereType<Widget>().toList(),
                 onChanged: (value) => handleSearchDebounced(value),
                 hintText: 'Search by name,affilitation,initial contact',
-                textStyle: const MaterialStatePropertyAll(
+                textStyle: const WidgetStatePropertyAll(
                     TextStyle(color: ExtraColors.grey)),
                 controller: searchController,
-                padding: const MaterialStatePropertyAll(
+                padding: const WidgetStatePropertyAll(
                     EdgeInsets.symmetric(horizontal: 15)),
                 leading:
                     const Icon(CupertinoIcons.search, color: ExtraColors.grey),
-                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 )),
               ),

@@ -24,7 +24,7 @@ ThemeData lightTheme = ThemeData(
   fontFamily: GoogleFonts.urbanist().fontFamily,
   useMaterial3: true,
   primaryTextTheme: GoogleFonts.urbanistTextTheme(),
-  scaffoldBackgroundColor: lightColorScheme.background,
+  scaffoldBackgroundColor: lightColorScheme.surface,
   //
   textTheme: GoogleFonts.urbanistTextTheme().copyWith(
       headlineLarge: const TextStyle(

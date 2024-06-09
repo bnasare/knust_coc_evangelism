@@ -115,15 +115,15 @@ class LocationPage extends HookWidget with LocaleMixin {
                             ].whereType<Widget>().toList(),
                             onChanged: (value) => handleSearchDebounced(value),
                             hintText: 'Find locales available',
-                            textStyle: const MaterialStatePropertyAll(
+                            textStyle: const WidgetStatePropertyAll(
                                 TextStyle(color: ExtraColors.grey)),
                             controller: searchController,
-                            padding: const MaterialStatePropertyAll(
+                            padding: const WidgetStatePropertyAll(
                                 EdgeInsets.symmetric(horizontal: 15)),
                             leading: const Icon(CupertinoIcons.search,
                                 color: ExtraColors.grey),
                             shape:
-                                MaterialStatePropertyAll(RoundedRectangleBorder(
+                                WidgetStatePropertyAll(RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             )),
                           ),
